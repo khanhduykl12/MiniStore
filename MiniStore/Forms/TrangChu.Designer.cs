@@ -44,6 +44,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
             panel1 = new Panel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnExit = new Guna.UI2.WinForms.Guna2Button();
@@ -54,8 +55,9 @@
             pictureBox2 = new PictureBox();
             btnHome = new Guna.UI2.WinForms.Guna2Button();
             imgSlide = new PictureBox();
-            panel2 = new Panel();
+            panelContainer = new Panel();
             guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(components);
+            guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
             panel1.SuspendLayout();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -65,6 +67,7 @@
             // panel1
             // 
             panel1.Controls.Add(guna2CustomGradientPanel1);
+            guna2Transition1.SetDecoration(panel1, Guna.UI2.AnimatorNS.DecorationType.None);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -83,6 +86,7 @@
             guna2CustomGradientPanel1.Controls.Add(btnHome);
             guna2CustomGradientPanel1.Controls.Add(imgSlide);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges13;
+            guna2Transition1.SetDecoration(guna2CustomGradientPanel1, Guna.UI2.AnimatorNS.DecorationType.None);
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(53, 41, 123);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(53, 41, 123);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(53, 41, 123);
@@ -103,6 +107,7 @@
             btnExit.CheckedState.FillColor = Color.White;
             btnExit.CheckedState.Image = (Image)resources.GetObject("resource.Image");
             btnExit.CustomizableEdges = customizableEdges1;
+            guna2Transition1.SetDecoration(btnExit, Guna.UI2.AnimatorNS.DecorationType.None);
             btnExit.DisabledState.BorderColor = Color.DarkGray;
             btnExit.DisabledState.CustomBorderColor = Color.DarkGray;
             btnExit.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -130,6 +135,7 @@
             btnStaff.CheckedState.FillColor = Color.White;
             btnStaff.CheckedState.Image = (Image)resources.GetObject("resource.Image1");
             btnStaff.CustomizableEdges = customizableEdges3;
+            guna2Transition1.SetDecoration(btnStaff, Guna.UI2.AnimatorNS.DecorationType.None);
             btnStaff.DisabledState.BorderColor = Color.DarkGray;
             btnStaff.DisabledState.CustomBorderColor = Color.DarkGray;
             btnStaff.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -158,6 +164,7 @@
             btnRevenue.CheckedState.FillColor = Color.White;
             btnRevenue.CheckedState.Image = (Image)resources.GetObject("resource.Image2");
             btnRevenue.CustomizableEdges = customizableEdges5;
+            guna2Transition1.SetDecoration(btnRevenue, Guna.UI2.AnimatorNS.DecorationType.None);
             btnRevenue.DisabledState.BorderColor = Color.DarkGray;
             btnRevenue.DisabledState.CustomBorderColor = Color.DarkGray;
             btnRevenue.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -186,6 +193,7 @@
             btnBill.CheckedState.FillColor = Color.White;
             btnBill.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
             btnBill.CustomizableEdges = customizableEdges7;
+            guna2Transition1.SetDecoration(btnBill, Guna.UI2.AnimatorNS.DecorationType.None);
             btnBill.DisabledState.BorderColor = Color.DarkGray;
             btnBill.DisabledState.CustomBorderColor = Color.DarkGray;
             btnBill.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -214,6 +222,7 @@
             btnProduct.CheckedState.FillColor = Color.White;
             btnProduct.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
             btnProduct.CustomizableEdges = customizableEdges9;
+            guna2Transition1.SetDecoration(btnProduct, Guna.UI2.AnimatorNS.DecorationType.None);
             btnProduct.DisabledState.BorderColor = Color.DarkGray;
             btnProduct.DisabledState.CustomBorderColor = Color.DarkGray;
             btnProduct.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -230,10 +239,12 @@
             btnProduct.TabIndex = 3;
             btnProduct.UseTransparentBackground = true;
             btnProduct.CheckedChanged += btnHome_CheckedChanged;
+            btnProduct.Click += btnProduct_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.FromArgb(53, 41, 123);
+            guna2Transition1.SetDecoration(pictureBox2, Guna.UI2.AnimatorNS.DecorationType.None);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(28, 30);
             pictureBox2.Name = "pictureBox2";
@@ -254,6 +265,7 @@
             btnHome.CheckedState.FillColor = Color.White;
             btnHome.CheckedState.Image = (Image)resources.GetObject("resource.Image5");
             btnHome.CustomizableEdges = customizableEdges11;
+            guna2Transition1.SetDecoration(btnHome, Guna.UI2.AnimatorNS.DecorationType.None);
             btnHome.DisabledState.BorderColor = Color.DarkGray;
             btnHome.DisabledState.CustomBorderColor = Color.DarkGray;
             btnHome.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -270,29 +282,52 @@
             btnHome.TabIndex = 0;
             btnHome.UseTransparentBackground = true;
             btnHome.CheckedChanged += btnHome_CheckedChanged;
+            btnHome.Click += btnHome_Click;
             // 
             // imgSlide
             // 
+            guna2Transition1.SetDecoration(imgSlide, Guna.UI2.AnimatorNS.DecorationType.None);
             imgSlide.Image = (Image)resources.GetObject("imgSlide.Image");
-            imgSlide.Location = new Point(85, 108);
+            imgSlide.Location = new Point(83, 108);
             imgSlide.Name = "imgSlide";
             imgSlide.Size = new Size(47, 150);
             imgSlide.SizeMode = PictureBoxSizeMode.Zoom;
             imgSlide.TabIndex = 1;
             imgSlide.TabStop = false;
             // 
-            // panel2
+            // panelContainer
             // 
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(151, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1209, 839);
-            panel2.TabIndex = 1;
+            guna2Transition1.SetDecoration(panelContainer, Guna.UI2.AnimatorNS.DecorationType.None);
+            panelContainer.Dock = DockStyle.Fill;
+            panelContainer.Location = new Point(151, 0);
+            panelContainer.Name = "panelContainer";
+            panelContainer.Size = new Size(1209, 839);
+            panelContainer.TabIndex = 1;
             // 
             // guna2Elipse1
             // 
             guna2Elipse1.BorderRadius = 50;
             guna2Elipse1.TargetControl = this;
+            // 
+            // guna2Transition1
+            // 
+            guna2Transition1.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = (PointF)resources.GetObject("animation1.BlindCoeff");
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = (PointF)resources.GetObject("animation1.MosaicCoeff");
+            animation1.MosaicShift = (PointF)resources.GetObject("animation1.MosaicShift");
+            animation1.MosaicSize = 0;
+            animation1.Padding = new Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = (PointF)resources.GetObject("animation1.ScaleCoeff");
+            animation1.SlideCoeff = (PointF)resources.GetObject("animation1.SlideCoeff");
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            guna2Transition1.DefaultAnimation = animation1;
             // 
             // TrangChu
             // 
@@ -300,8 +335,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1360, 839);
-            Controls.Add(panel2);
+            Controls.Add(panelContainer);
             Controls.Add(panel1);
+            guna2Transition1.SetDecoration(this, Guna.UI2.AnimatorNS.DecorationType.None);
             FormBorderStyle = FormBorderStyle.None;
             Name = "TrangChu";
             StartPosition = FormStartPosition.CenterScreen;
@@ -317,7 +353,7 @@
 
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
-        private Panel panel2;
+        private Panel panelContainer;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2Button btnHome;
         private PictureBox imgSlide;
@@ -327,5 +363,6 @@
         private Guna.UI2.WinForms.Guna2Button btnRevenue;
         private Guna.UI2.WinForms.Guna2Button btnBill;
         private Guna.UI2.WinForms.Guna2Button btnExit;
+        private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
     }
 }
