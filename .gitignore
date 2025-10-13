@@ -1,0 +1,33 @@
+
+
+# Ignore build output
+bin/
+obj/
+.vs/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore license / trial files (Guna, Siticone...)
+*.lic
+*.licx
+license.json
+
+# Ignore temporary and log files
+*.tmp
+*.log
+
+# Ignore publish output
+publish/
+dist/
+release/
+
+# Ignore backup files
+~$*
+
+# Ignore Visual Studio cache
+*.dbmdl
+*.opendb
