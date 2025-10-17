@@ -16,5 +16,25 @@ namespace MiniStore.User_Control
         {
             InitializeComponent();
         }
+
+        private void UC_Product_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2CustomGradientPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

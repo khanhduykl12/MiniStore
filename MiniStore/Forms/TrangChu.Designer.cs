@@ -71,7 +71,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(151, 839);
+            panel1.Size = new Size(151, 927);
             panel1.TabIndex = 0;
             // 
             // guna2CustomGradientPanel1
@@ -94,7 +94,7 @@
             guna2CustomGradientPanel1.Location = new Point(21, 12);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2CustomGradientPanel1.Size = new Size(130, 815);
+            guna2CustomGradientPanel1.Size = new Size(130, 903);
             guna2CustomGradientPanel1.TabIndex = 0;
             // 
             // btnExit
@@ -117,12 +117,13 @@
             btnExit.ForeColor = Color.White;
             btnExit.Image = (Image)resources.GetObject("btnExit.Image");
             btnExit.ImageSize = new Size(37, 37);
-            btnExit.Location = new Point(26, 723);
+            btnExit.Location = new Point(26, 802);
             btnExit.Name = "btnExit";
             btnExit.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnExit.Size = new Size(83, 68);
             btnExit.TabIndex = 7;
             btnExit.UseTransparentBackground = true;
+            btnExit.Click += btnExit_Click;
             // 
             // btnStaff
             // 
@@ -145,7 +146,7 @@
             btnStaff.ForeColor = Color.White;
             btnStaff.Image = (Image)resources.GetObject("btnStaff.Image");
             btnStaff.ImageSize = new Size(37, 37);
-            btnStaff.Location = new Point(41, 558);
+            btnStaff.Location = new Point(41, 582);
             btnStaff.Name = "btnStaff";
             btnStaff.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnStaff.Size = new Size(83, 68);
@@ -174,7 +175,7 @@
             btnRevenue.ForeColor = Color.White;
             btnRevenue.Image = (Image)resources.GetObject("btnRevenue.Image");
             btnRevenue.ImageSize = new Size(37, 37);
-            btnRevenue.Location = new Point(41, 456);
+            btnRevenue.Location = new Point(41, 480);
             btnRevenue.Name = "btnRevenue";
             btnRevenue.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnRevenue.Size = new Size(83, 68);
@@ -203,7 +204,7 @@
             btnBill.ForeColor = Color.White;
             btnBill.Image = (Image)resources.GetObject("btnBill.Image");
             btnBill.ImageSize = new Size(37, 37);
-            btnBill.Location = new Point(41, 354);
+            btnBill.Location = new Point(41, 378);
             btnBill.Name = "btnBill";
             btnBill.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnBill.Size = new Size(83, 68);
@@ -232,7 +233,7 @@
             btnProduct.ForeColor = Color.White;
             btnProduct.Image = (Image)resources.GetObject("btnProduct.Image");
             btnProduct.ImageSize = new Size(37, 37);
-            btnProduct.Location = new Point(41, 252);
+            btnProduct.Location = new Point(41, 276);
             btnProduct.Name = "btnProduct";
             btnProduct.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnProduct.Size = new Size(83, 68);
@@ -246,7 +247,7 @@
             pictureBox2.BackColor = Color.FromArgb(53, 41, 123);
             guna2Transition1.SetDecoration(pictureBox2, Guna.UI2.AnimatorNS.DecorationType.None);
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(28, 30);
+            pictureBox2.Location = new Point(28, 35);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(75, 59);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -275,7 +276,7 @@
             btnHome.ForeColor = Color.White;
             btnHome.Image = (Image)resources.GetObject("btnHome.Image");
             btnHome.ImageSize = new Size(37, 37);
-            btnHome.Location = new Point(41, 150);
+            btnHome.Location = new Point(41, 174);
             btnHome.Name = "btnHome";
             btnHome.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnHome.Size = new Size(83, 68);
@@ -288,7 +289,7 @@
             // 
             guna2Transition1.SetDecoration(imgSlide, Guna.UI2.AnimatorNS.DecorationType.None);
             imgSlide.Image = (Image)resources.GetObject("imgSlide.Image");
-            imgSlide.Location = new Point(83, 108);
+            imgSlide.Location = new Point(83, 132);
             imgSlide.Name = "imgSlide";
             imgSlide.Size = new Size(47, 150);
             imgSlide.SizeMode = PictureBoxSizeMode.Zoom;
@@ -301,7 +302,7 @@
             panelContainer.Dock = DockStyle.Fill;
             panelContainer.Location = new Point(151, 0);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(1209, 839);
+            panelContainer.Size = new Size(1345, 927);
             panelContainer.TabIndex = 1;
             // 
             // guna2Elipse1
@@ -334,11 +335,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1360, 839);
+            ClientSize = new Size(1496, 927);
             Controls.Add(panelContainer);
             Controls.Add(panel1);
             guna2Transition1.SetDecoration(this, Guna.UI2.AnimatorNS.DecorationType.None);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TrangChu";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";

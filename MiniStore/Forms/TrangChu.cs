@@ -47,5 +47,10 @@ namespace MiniStore
             UC_Product uC_ = new UC_Product();
             AddUserControl(uC_);
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

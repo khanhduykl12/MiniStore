@@ -130,11 +130,17 @@
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             pictureBox1 = new PictureBox();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            btnSetting = new Guna.UI2.WinForms.Guna2Button();
+            btnNotification = new Guna.UI2.WinForms.Guna2Button();
             guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(components);
             guna2DragControl2 = new Guna.UI2.WinForms.Guna2DragControl(components);
             parrotClock1 = new ReaLTaiizor.Controls.ParrotClock();
+            guna2vSeparator1 = new Guna.UI2.WinForms.Guna2VSeparator();
+            guna2vSeparator2 = new Guna.UI2.WinForms.Guna2VSeparator();
+            guna2vSeparator3 = new Guna.UI2.WinForms.Guna2VSeparator();
+            guna2vSeparator4 = new Guna.UI2.WinForms.Guna2VSeparator();
+            guna2vSeparator5 = new Guna.UI2.WinForms.Guna2VSeparator();
+            guna2vSeparator6 = new Guna.UI2.WinForms.Guna2VSeparator();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             guna2CustomGradientPanel2.SuspendLayout();
@@ -157,7 +163,7 @@
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(148, 187, 233);
             guna2CustomGradientPanel1.FillColor3 = Color.FromArgb(238, 174, 202);
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(148, 187, 233);
-            guna2CustomGradientPanel1.Location = new Point(27, 25);
+            guna2CustomGradientPanel1.Location = new Point(60, 38);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2CustomGradientPanel1.Size = new Size(631, 139);
@@ -201,7 +207,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Cambria", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(27, 206);
+            label3.Location = new Point(60, 215);
             label3.Name = "label3";
             label3.Size = new Size(261, 27);
             label3.TabIndex = 6;
@@ -212,7 +218,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(65, 250);
+            label4.Location = new Point(98, 263);
             label4.Name = "label4";
             label4.Size = new Size(53, 23);
             label4.TabIndex = 7;
@@ -223,7 +229,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(156, 250);
+            label5.Location = new Point(189, 263);
             label5.Name = "label5";
             label5.Size = new Size(43, 23);
             label5.TabIndex = 8;
@@ -234,7 +240,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(237, 250);
+            label6.Location = new Point(270, 263);
             label6.Name = "label6";
             label6.Size = new Size(54, 23);
             label6.TabIndex = 9;
@@ -245,7 +251,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(329, 250);
+            label7.Location = new Point(362, 263);
             label7.Name = "label7";
             label7.Size = new Size(42, 23);
             label7.TabIndex = 10;
@@ -256,7 +262,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(409, 250);
+            label8.Location = new Point(442, 263);
             label8.Name = "label8";
             label8.Size = new Size(31, 23);
             label8.TabIndex = 11;
@@ -267,7 +273,7 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(478, 250);
+            label9.Location = new Point(511, 263);
             label9.Name = "label9";
             label9.Size = new Size(39, 23);
             label9.TabIndex = 12;
@@ -278,7 +284,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.Location = new Point(555, 250);
+            label10.Location = new Point(588, 263);
             label10.Name = "label10";
             label10.Size = new Size(44, 23);
             label10.TabIndex = 13;
@@ -289,7 +295,7 @@
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(555, 286);
+            label11.Location = new Point(588, 299);
             label11.Name = "label11";
             label11.Size = new Size(43, 23);
             label11.TabIndex = 20;
@@ -301,7 +307,7 @@
             label12.BackColor = Color.Transparent;
             label12.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.FromArgb(0, 192, 0);
-            label12.Location = new Point(478, 286);
+            label12.Location = new Point(511, 299);
             label12.Name = "label12";
             label12.Size = new Size(43, 23);
             label12.TabIndex = 19;
@@ -312,7 +318,7 @@
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
             label13.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(409, 286);
+            label13.Location = new Point(442, 299);
             label13.Name = "label13";
             label13.Size = new Size(43, 23);
             label13.TabIndex = 18;
@@ -324,7 +330,7 @@
             label14.BackColor = Color.Transparent;
             label14.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.Red;
-            label14.Location = new Point(329, 286);
+            label14.Location = new Point(362, 299);
             label14.Name = "label14";
             label14.Size = new Size(43, 23);
             label14.TabIndex = 17;
@@ -335,7 +341,7 @@
             label15.AutoSize = true;
             label15.BackColor = Color.Transparent;
             label15.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.Location = new Point(237, 286);
+            label15.Location = new Point(270, 299);
             label15.Name = "label15";
             label15.Size = new Size(43, 23);
             label15.TabIndex = 16;
@@ -346,7 +352,7 @@
             label16.AutoSize = true;
             label16.BackColor = Color.Transparent;
             label16.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(156, 286);
+            label16.Location = new Point(189, 299);
             label16.Name = "label16";
             label16.Size = new Size(43, 23);
             label16.TabIndex = 15;
@@ -357,7 +363,7 @@
             label17.AutoSize = true;
             label17.BackColor = Color.Transparent;
             label17.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label17.Location = new Point(65, 286);
+            label17.Location = new Point(98, 299);
             label17.Name = "label17";
             label17.Size = new Size(43, 23);
             label17.TabIndex = 14;
@@ -368,7 +374,7 @@
             label18.AutoSize = true;
             label18.BackColor = Color.Transparent;
             label18.Font = new Font("Cambria", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label18.Location = new Point(27, 343);
+            label18.Location = new Point(60, 370);
             label18.Name = "label18";
             label18.Size = new Size(123, 27);
             label18.TabIndex = 21;
@@ -384,7 +390,7 @@
             guna2CustomGradientPanel2.FillColor2 = Color.Gainsboro;
             guna2CustomGradientPanel2.FillColor3 = Color.MistyRose;
             guna2CustomGradientPanel2.FillColor4 = Color.Gainsboro;
-            guna2CustomGradientPanel2.Location = new Point(27, 375);
+            guna2CustomGradientPanel2.Location = new Point(60, 409);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges6;
             guna2CustomGradientPanel2.Size = new Size(141, 174);
@@ -437,7 +443,7 @@
             guna2CustomGradientPanel3.FillColor2 = Color.Gainsboro;
             guna2CustomGradientPanel3.FillColor3 = Color.MistyRose;
             guna2CustomGradientPanel3.FillColor4 = Color.Gainsboro;
-            guna2CustomGradientPanel3.Location = new Point(517, 375);
+            guna2CustomGradientPanel3.Location = new Point(550, 409);
             guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             guna2CustomGradientPanel3.ShadowDecoration.CustomizableEdges = customizableEdges10;
             guna2CustomGradientPanel3.Size = new Size(141, 174);
@@ -490,7 +496,7 @@
             guna2CustomGradientPanel4.FillColor2 = Color.Gainsboro;
             guna2CustomGradientPanel4.FillColor3 = Color.MistyRose;
             guna2CustomGradientPanel4.FillColor4 = Color.Gainsboro;
-            guna2CustomGradientPanel4.Location = new Point(272, 375);
+            guna2CustomGradientPanel4.Location = new Point(305, 409);
             guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             guna2CustomGradientPanel4.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2CustomGradientPanel4.Size = new Size(141, 174);
@@ -544,7 +550,7 @@
             guna2CustomGradientPanel5.FillColor2 = Color.PowderBlue;
             guna2CustomGradientPanel5.FillColor3 = Color.Tan;
             guna2CustomGradientPanel5.FillColor4 = Color.PowderBlue;
-            guna2CustomGradientPanel5.Location = new Point(248, 626);
+            guna2CustomGradientPanel5.Location = new Point(281, 705);
             guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             guna2CustomGradientPanel5.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CustomGradientPanel5.Size = new Size(410, 154);
@@ -560,6 +566,8 @@
             guna2CircleProgressBar1.Location = new Point(245, 7);
             guna2CircleProgressBar1.Minimum = 0;
             guna2CircleProgressBar1.Name = "guna2CircleProgressBar1";
+            guna2CircleProgressBar1.ProgressColor = Color.DarkCyan;
+            guna2CircleProgressBar1.ProgressColor2 = Color.Crimson;
             guna2CircleProgressBar1.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2CircleProgressBar1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleProgressBar1.ShowText = true;
@@ -608,7 +616,7 @@
             guna2CustomGradientPanel6.FillColor2 = Color.Gainsboro;
             guna2CustomGradientPanel6.FillColor3 = Color.MistyRose;
             guna2CustomGradientPanel6.FillColor4 = Color.Gainsboro;
-            guna2CustomGradientPanel6.Location = new Point(712, 175);
+            guna2CustomGradientPanel6.Location = new Point(817, 198);
             guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
             guna2CustomGradientPanel6.ShadowDecoration.CustomizableEdges = customizableEdges41;
             guna2CustomGradientPanel6.Size = new Size(478, 642);
@@ -760,9 +768,9 @@
             label29.Font = new Font("Cambria", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label29.Location = new Point(26, 24);
             label29.Name = "label29";
-            label29.Size = new Size(193, 27);
+            label29.Size = new Size(195, 27);
             label29.TabIndex = 33;
-            label29.Text = "Sản Phẩm Bán Ra";
+            label29.Text = "7 Tháng Gần Nhất";
             // 
             // guna2vProgressBar7
             // 
@@ -851,7 +859,7 @@
             // guna2Separator1
             // 
             guna2Separator1.FillThickness = 2;
-            guna2Separator1.Location = new Point(27, 319);
+            guna2Separator1.Location = new Point(60, 332);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(631, 12);
             guna2Separator1.TabIndex = 26;
@@ -859,7 +867,7 @@
             // guna2Separator2
             // 
             guna2Separator2.FillThickness = 2;
-            guna2Separator2.Location = new Point(27, 579);
+            guna2Separator2.Location = new Point(60, 648);
             guna2Separator2.Name = "guna2Separator2";
             guna2Separator2.Size = new Size(631, 12);
             guna2Separator2.TabIndex = 27;
@@ -868,64 +876,62 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1059, 25);
+            pictureBox1.Location = new Point(1164, 38);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(131, 105);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
-            // guna2Button1
+            // btnSetting
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderColor = Color.FromArgb(53, 41, 123);
-            guna2Button1.BorderRadius = 35;
-            guna2Button1.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            guna2Button1.CheckedState.BorderColor = Color.White;
-            guna2Button1.CheckedState.FillColor = Color.White;
-            guna2Button1.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
-            guna2Button1.CustomizableEdges = customizableEdges42;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Transparent;
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
-            guna2Button1.ImageSize = new Size(37, 37);
-            guna2Button1.Location = new Point(946, 25);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges43;
-            guna2Button1.Size = new Size(83, 68);
-            guna2Button1.TabIndex = 24;
-            guna2Button1.UseTransparentBackground = true;
+            btnSetting.BackColor = Color.Transparent;
+            btnSetting.BorderColor = Color.FromArgb(53, 41, 123);
+            btnSetting.BorderRadius = 35;
+            btnSetting.CheckedState.BorderColor = Color.White;
+            btnSetting.CheckedState.FillColor = Color.White;
+            btnSetting.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
+            btnSetting.CustomizableEdges = customizableEdges42;
+            btnSetting.DisabledState.BorderColor = Color.DarkGray;
+            btnSetting.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSetting.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSetting.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSetting.FillColor = Color.Transparent;
+            btnSetting.Font = new Font("Segoe UI", 9F);
+            btnSetting.ForeColor = Color.White;
+            btnSetting.Image = (Image)resources.GetObject("btnSetting.Image");
+            btnSetting.ImageSize = new Size(37, 37);
+            btnSetting.Location = new Point(1051, 38);
+            btnSetting.Name = "btnSetting";
+            btnSetting.ShadowDecoration.CustomizableEdges = customizableEdges43;
+            btnSetting.Size = new Size(83, 68);
+            btnSetting.TabIndex = 24;
+            btnSetting.UseTransparentBackground = true;
             // 
-            // guna2Button2
+            // btnNotification
             // 
-            guna2Button2.BackColor = Color.Transparent;
-            guna2Button2.BorderColor = Color.FromArgb(53, 41, 123);
-            guna2Button2.BorderRadius = 35;
-            guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            guna2Button2.CheckedState.BorderColor = Color.White;
-            guna2Button2.CheckedState.FillColor = Color.White;
-            guna2Button2.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
-            guna2Button2.CustomizableEdges = customizableEdges44;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.Transparent;
-            guna2Button2.Font = new Font("Segoe UI", 9F);
-            guna2Button2.ForeColor = Color.White;
-            guna2Button2.Image = (Image)resources.GetObject("guna2Button2.Image");
-            guna2Button2.ImageSize = new Size(37, 37);
-            guna2Button2.Location = new Point(842, 25);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges45;
-            guna2Button2.Size = new Size(83, 68);
-            guna2Button2.TabIndex = 28;
-            guna2Button2.UseTransparentBackground = true;
+            btnNotification.BackColor = Color.Transparent;
+            btnNotification.BorderColor = Color.FromArgb(53, 41, 123);
+            btnNotification.BorderRadius = 35;
+            btnNotification.CheckedState.BorderColor = Color.White;
+            btnNotification.CheckedState.FillColor = Color.White;
+            btnNotification.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
+            btnNotification.CustomizableEdges = customizableEdges44;
+            btnNotification.DisabledState.BorderColor = Color.DarkGray;
+            btnNotification.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnNotification.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnNotification.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnNotification.FillColor = Color.Transparent;
+            btnNotification.Font = new Font("Segoe UI", 9F);
+            btnNotification.ForeColor = Color.White;
+            btnNotification.Image = (Image)resources.GetObject("btnNotification.Image");
+            btnNotification.ImageSize = new Size(37, 37);
+            btnNotification.Location = new Point(947, 38);
+            btnNotification.Name = "btnNotification";
+            btnNotification.ShadowDecoration.CustomizableEdges = customizableEdges45;
+            btnNotification.Size = new Size(83, 68);
+            btnNotification.TabIndex = 28;
+            btnNotification.UseTransparentBackground = true;
             // 
             // guna2DragControl1
             // 
@@ -949,7 +955,7 @@
             parrotClock1.Font = new Font("Impact", 15F);
             parrotClock1.HexagonColor = Color.FromArgb(60, 60, 70);
             parrotClock1.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            parrotClock1.Location = new Point(49, 626);
+            parrotClock1.Location = new Point(82, 705);
             parrotClock1.Name = "parrotClock1";
             parrotClock1.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             parrotClock1.ShowAmPm = false;
@@ -968,14 +974,62 @@
             parrotClock1.UnfilledMinuteColor = Color.FromArgb(60, 60, 70);
             parrotClock1.UnfilledSecondColor = Color.FromArgb(60, 60, 70);
             // 
+            // guna2vSeparator1
+            // 
+            guna2vSeparator1.Location = new Point(160, 263);
+            guna2vSeparator1.Name = "guna2vSeparator1";
+            guna2vSeparator1.Size = new Size(12, 59);
+            guna2vSeparator1.TabIndex = 30;
+            // 
+            // guna2vSeparator2
+            // 
+            guna2vSeparator2.Location = new Point(242, 263);
+            guna2vSeparator2.Name = "guna2vSeparator2";
+            guna2vSeparator2.Size = new Size(12, 59);
+            guna2vSeparator2.TabIndex = 31;
+            // 
+            // guna2vSeparator3
+            // 
+            guna2vSeparator3.Location = new Point(330, 263);
+            guna2vSeparator3.Name = "guna2vSeparator3";
+            guna2vSeparator3.Size = new Size(12, 59);
+            guna2vSeparator3.TabIndex = 32;
+            // 
+            // guna2vSeparator4
+            // 
+            guna2vSeparator4.Location = new Point(414, 263);
+            guna2vSeparator4.Name = "guna2vSeparator4";
+            guna2vSeparator4.Size = new Size(12, 59);
+            guna2vSeparator4.TabIndex = 33;
+            // 
+            // guna2vSeparator5
+            // 
+            guna2vSeparator5.Location = new Point(488, 263);
+            guna2vSeparator5.Name = "guna2vSeparator5";
+            guna2vSeparator5.Size = new Size(12, 59);
+            guna2vSeparator5.TabIndex = 34;
+            // 
+            // guna2vSeparator6
+            // 
+            guna2vSeparator6.Location = new Point(562, 263);
+            guna2vSeparator6.Name = "guna2vSeparator6";
+            guna2vSeparator6.Size = new Size(12, 59);
+            guna2vSeparator6.TabIndex = 35;
+            // 
             // UC_Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(guna2vSeparator6);
+            Controls.Add(guna2vSeparator5);
+            Controls.Add(guna2vSeparator4);
+            Controls.Add(guna2vSeparator3);
+            Controls.Add(guna2vSeparator2);
+            Controls.Add(guna2vSeparator1);
             Controls.Add(parrotClock1);
-            Controls.Add(guna2Button2);
-            Controls.Add(guna2Button1);
+            Controls.Add(btnNotification);
+            Controls.Add(btnSetting);
             Controls.Add(pictureBox1);
             Controls.Add(guna2Separator2);
             Controls.Add(guna2Separator1);
@@ -1002,7 +1056,7 @@
             Controls.Add(label3);
             Controls.Add(guna2CustomGradientPanel1);
             Name = "UC_Dashboard";
-            Size = new Size(1209, 839);
+            Size = new Size(1345, 927);
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -1080,10 +1134,16 @@
         private Label label29;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator3;
         private PictureBox pictureBox1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button btnSetting;
+        private Guna.UI2.WinForms.Guna2Button btnNotification;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl2;
         private ReaLTaiizor.Controls.ParrotClock parrotClock1;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator6;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator5;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator4;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator3;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator2;
+        private Guna.UI2.WinForms.Guna2VSeparator guna2vSeparator1;
     }
 }
