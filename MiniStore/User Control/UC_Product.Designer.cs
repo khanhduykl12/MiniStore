@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Product));
@@ -73,6 +74,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             pictureBox1 = new PictureBox();
@@ -82,6 +85,7 @@
             btnProduct = new Guna.UI2.WinForms.Guna2Button();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            label9 = new Label();
             guna2Panel7 = new Guna.UI2.WinForms.Guna2Panel();
             label8 = new Label();
             guna2Button9 = new Guna.UI2.WinForms.Guna2Button();
@@ -98,13 +102,14 @@
             label4 = new Label();
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             cboAllCate = new Guna.UI2.WinForms.Guna2ComboBox();
+            lOAISANPHAMBindingSource = new BindingSource(components);
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             label2 = new Label();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             label3 = new Label();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            label9 = new Label();
+            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
@@ -114,6 +119,7 @@
             guna2Panel5.SuspendLayout();
             guna2Panel4.SuspendLayout();
             guna2Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lOAISANPHAMBindingSource).BeginInit();
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
             SuspendLayout();
@@ -298,9 +304,20 @@
             guna2CustomGradientPanel2.Location = new Point(45, 428);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            guna2CustomGradientPanel2.Size = new Size(1010, 100);
+            guna2CustomGradientPanel2.Size = new Size(982, 100);
             guna2CustomGradientPanel2.TabIndex = 26;
             guna2CustomGradientPanel2.Paint += guna2CustomGradientPanel2_Paint;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(52, 7);
+            label9.Name = "label9";
+            label9.Size = new Size(113, 36);
+            label9.TabIndex = 36;
+            label9.Text = "Danh Sách \r\nLoại Sản Phẩm";
+            label9.TextAlign = ContentAlignment.TopCenter;
             // 
             // guna2Panel7
             // 
@@ -328,7 +345,6 @@
             // 
             // guna2Button9
             // 
-            guna2Button9.Animated = true;
             guna2Button9.AnimatedGIF = true;
             guna2Button9.BackColor = Color.Transparent;
             guna2Button9.BorderColor = Color.FromArgb(53, 41, 123);
@@ -381,7 +397,6 @@
             // 
             // guna2Button8
             // 
-            guna2Button8.Animated = true;
             guna2Button8.AnimatedGIF = true;
             guna2Button8.BackColor = Color.Transparent;
             guna2Button8.BorderColor = Color.FromArgb(53, 41, 123);
@@ -434,7 +449,6 @@
             // 
             // guna2Button7
             // 
-            guna2Button7.Animated = true;
             guna2Button7.AnimatedGIF = true;
             guna2Button7.BackColor = Color.Transparent;
             guna2Button7.BorderColor = Color.FromArgb(53, 41, 123);
@@ -487,7 +501,6 @@
             // 
             // guna2Button6
             // 
-            guna2Button6.Animated = true;
             guna2Button6.AnimatedGIF = true;
             guna2Button6.BackColor = Color.Transparent;
             guna2Button6.BorderColor = Color.FromArgb(53, 41, 123);
@@ -540,7 +553,6 @@
             // 
             // guna2Button5
             // 
-            guna2Button5.Animated = true;
             guna2Button5.AnimatedGIF = true;
             guna2Button5.BackColor = Color.Transparent;
             guna2Button5.BorderColor = Color.FromArgb(53, 41, 123);
@@ -573,6 +585,8 @@
             cboAllCate.BackColor = Color.Transparent;
             cboAllCate.BorderRadius = 16;
             cboAllCate.CustomizableEdges = customizableEdges33;
+            cboAllCate.DataSource = lOAISANPHAMBindingSource;
+            cboAllCate.DisplayMember = "TENLOAI";
             cboAllCate.DrawMode = DrawMode.OwnerDrawFixed;
             cboAllCate.DropDownStyle = ComboBoxStyle.DropDownList;
             cboAllCate.FillColor = Color.FromArgb(11, 107, 58);
@@ -583,13 +597,17 @@
             cboAllCate.ForeColor = Color.White;
             cboAllCate.HoverState.FillColor = Color.FromArgb(9, 92, 50);
             cboAllCate.ItemHeight = 30;
-            cboAllCate.Items.AddRange(new object[] { "Tất Cả Loại Hàng" });
             cboAllCate.Location = new Point(20, 54);
             cboAllCate.Name = "cboAllCate";
             cboAllCate.ShadowDecoration.CustomizableEdges = customizableEdges34;
             cboAllCate.Size = new Size(175, 36);
             cboAllCate.TabIndex = 29;
             cboAllCate.Tag = "";
+            cboAllCate.ValueMember = "MALOAI";
+            // 
+            // lOAISANPHAMBindingSource
+            // 
+            lOAISANPHAMBindingSource.DataSource = typeof(Models.LOAISANPHAM);
             // 
             // guna2Panel1
             // 
@@ -671,7 +689,6 @@
             // 
             // guna2Button4
             // 
-            guna2Button4.Animated = true;
             guna2Button4.AnimatedGIF = true;
             guna2Button4.BackColor = Color.Transparent;
             guna2Button4.BorderColor = Color.FromArgb(53, 41, 123);
@@ -698,22 +715,35 @@
             guna2Button4.TabIndex = 27;
             guna2Button4.UseTransparentBackground = true;
             // 
-            // label9
+            // guna2ComboBox1
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(52, 7);
-            label9.Name = "label9";
-            label9.Size = new Size(113, 36);
-            label9.TabIndex = 36;
-            label9.Text = "Danh Sách \r\nLoại Sản Phẩm";
-            label9.TextAlign = ContentAlignment.TopCenter;
+            guna2ComboBox1.BackColor = Color.Transparent;
+            guna2ComboBox1.BorderColor = Color.FromArgb(11, 107, 58);
+            guna2ComboBox1.BorderRadius = 16;
+            guna2ComboBox1.CustomizableEdges = customizableEdges45;
+            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
+            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox1.FocusedState.FillColor = Color.FromArgb(9, 92, 50);
+            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
+            guna2ComboBox1.ForeColor = Color.FromArgb(11, 107, 58);
+            guna2ComboBox1.HoverState.FillColor = Color.FromArgb(9, 92, 50);
+            guna2ComboBox1.ItemHeight = 30;
+            guna2ComboBox1.Items.AddRange(new object[] { "Tất Cả Loại Hàng" });
+            guna2ComboBox1.Location = new Point(1189, 482);
+            guna2ComboBox1.Name = "guna2ComboBox1";
+            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            guna2ComboBox1.Size = new Size(106, 36);
+            guna2ComboBox1.TabIndex = 37;
+            guna2ComboBox1.Tag = "";
             // 
             // UC_Product
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(guna2ComboBox1);
             Controls.Add(guna2Panel2);
             Controls.Add(guna2CustomGradientPanel2);
             Controls.Add(guna2PictureBox1);
@@ -737,6 +767,7 @@
             guna2Panel4.PerformLayout();
             guna2Panel3.ResumeLayout(false);
             guna2Panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)lOAISANPHAMBindingSource).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             guna2Panel2.ResumeLayout(false);
@@ -778,5 +809,7 @@
         private Label label7;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
         private Label label9;
+        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private BindingSource lOAISANPHAMBindingSource;
     }
 }

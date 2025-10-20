@@ -52,5 +52,10 @@ namespace MiniStore
         {
             this.Close();
         }
+
+        private void panelContainer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

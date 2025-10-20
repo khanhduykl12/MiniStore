@@ -304,6 +304,7 @@
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(1345, 927);
             panelContainer.TabIndex = 1;
+            panelContainer.Paint += panelContainer_Paint;
             // 
             // guna2Elipse1
             // 
