@@ -59,6 +59,7 @@ CREATE TABLE SANPHAM (
     MALOAI VARCHAR(10) NOT NULL,
     MASP VARCHAR(10) NOT NULL,
     TENSP NVARCHAR(100),
+	HINH NVARCHAR (255,
     NSX DATE,
     DVT NVARCHAR(10),
     GIABAN MONEY,
@@ -70,9 +71,6 @@ CREATE TABLE SANPHAM (
     CONSTRAINT FK_MASP_LOAISANPHAM FOREIGN KEY(MALOAI) REFERENCES LOAISANPHAM(MALOAI),
     CONSTRAINT FK_MAS_NHACUNGCAP FOREIGN KEY(MANCC) REFERENCES NHACUNGCAP(MANCC)
 );
-ALTER TABLE SANPHAM DROP COLUMN HSD; 
-ALTER TABLE SANPHAM DROP COLUMN BARCODE; 
-ALTER TABLE SANPHAM ADD  BARCODE VARCHAR(64) NULL;
 
 CREATE TABLE KHACHHANG (
     MAKH VARCHAR(10) NOT NULL,
@@ -354,22 +352,23 @@ INSERT INTO LOAISANPHAM (MALOAI, TENLOAI, HSD_NGAY) VALUES
 ('L07', N'Thực phẩm tươi', 7);
 
 -- Sản phẩm
-INSERT INTO SANPHAM (MALOAI, MASP, TENSP, NSX, DVT, GIABAN, SOLUONG, MANCC, BARCODE, GHICHU) VALUES
-('L01', 'SP001', N'Sữa tươi 1L', N'Hộp', 28000, 100, '8931234567890', N'HSD 6 tháng', 'NCC01'),
-('L01', 'SP002', N'Sữa chua uống 180ml', N'Lốc', 6000, 200, '8931234567891', N'HSD 3 tháng', 'NCC01'),
-('L02', 'SP003', N'Mì Hảo Hảo tôm chua cay', N'Thùng', 105000, 50, '8931234567892', N'Thùng 30 gói', 'NCC02');
-('L03', 'SP004', N'Pepsi lon 330ml',           '2025-09-15', N'Lon',   10000, 0, 'NCC03', '', NULL),
-('L03', 'SP005', N'7Up lon 330ml',             '2025-09-16', N'Lon',   10000, 0, 'NCC03', '', NULL),
-('L04', 'SP006', N'Chocopie hộp 12 cái',       '2025-08-20', N'Hộp',   52000, 0, 'NCC04', '', NULL),
-('L04', 'SP007', N'Snack khoai tây 90g',       '2025-09-05', N'Gói',   18000, 0, 'NCC04', '', NULL),
-('L05', 'SP008', N'Nước rửa chén Sunlight 750ml', '2025-06-01', N'Chai', 38000, 0, 'NCC05', '', NULL),
-('L05', 'SP009', N'Bột giặt OMO 3kg',          '2025-05-10', N'Túi',  195000, 0, 'NCC05', '', NULL),
-('L06', 'SP010', N'Xúc xích đông lạnh 500g',   '2025-09-28', N'Gói',   65000, 0, 'NCC05', '', NULL),
-('L07', 'SP011', N'Rau xà lách 300g',          '2025-10-03', N'Bó',    12000, 0, 'NCC06', '', NULL),
-('L07', 'SP012', N'Thịt heo xay 500g',         '2025-10-04', N'Khay',  85000, 0, 'NCC06', '', NULL),
-('L01', 'SP013', N'Sữa tươi 180ml (lốc 4)',    '2025-09-10', N'Lốc',   26000, 0, 'NCC01', '', NULL),
-('L02', 'SP014', N'Mì Đệ Nhất bò hầm',         '2025-07-30', N'Gói',   12000, 0, 'NCC02', '', NULL),
-('L03', 'SP015', N'Aquafina 500ml',            '2025-09-20', N'Chai',   7000, 0, 'NCC03', '', NULL);
+INSERT INTO SANPHAM (MALOAI, MASP, TENSP, HINH, NSX, DVT, GIABAN, SOLUONG, MANCC, BARCODE, GHICHU) VALUES
+('L01', 'SP001', N'Sữa tươi 1L', N'Sua1L.png', '2025-03-10', N'Hộp', 28000, 100, 'NCC01', '8931234567890', N'HSD 6 tháng'),
+('L01', 'SP002', N'Sữa chua uống 180ml', N'SuaChuaUong.png', '2025-04-05', N'Lốc', 6000, 200, 'NCC01', '8931234567891', N'HSD 3 tháng'),
+('L02', 'SP003', N'Mì Hảo Hảo tôm chua cay', N'HaoHao.png', '2025-02-20', N'Thùng', 105000, 50, 'NCC02', '8931234567892', N'Thùng 30 gói'),
+('L03', 'SP004', N'Pepsi lon 330ml', N'Pepsi.png', '2025-09-15', N'Lon', 10000, 80, 'NCC03', '8931234567893', N'HSD 6 tháng'),
+('L03', 'SP005', N'7Up lon 330ml', N'7Up.png', '2025-09-16', N'Lon', 10000, 70, 'NCC03', '8931234567894', N'HSD 6 tháng'),
+('L04', 'SP006', N'Chocopie hộp 12 cái', N'Chocopie.png', '2025-08-20', N'Hộp', 52000, 60, 'NCC04', '8931234567895', N'HSD 12 tháng'),
+('L04', 'SP007', N'Snack khoai tây 90g', N'SnackKhoai.png', '2025-09-05', N'Gói', 18000, 90, 'NCC04', '8931234567896', N'HSD 9 tháng'),
+('L05', 'SP008', N'Nước rửa chén Sunlight 750ml', N'Sunlight.png', '2025-06-01', N'Chai', 38000, 120, 'NCC05', '8931234567897', N'HSD 24 tháng'),
+('L05', 'SP009', N'Bột giặt OMO 3kg', N'Omo.png', '2025-05-10', N'Túi', 195000, 110, 'NCC05', '8931234567898', N'HSD 24 tháng'),
+('L06', 'SP010', N'Xúc xích đông lạnh 500g', N'XucXich.png', '2025-09-28', N'Gói', 65000, 80, 'NCC05', '8931234567899', N'HSD 12 tháng'),
+('L07', 'SP011', N'Rau xà lách 300g', N'XaLach.png', '2025-10-03', N'Bó', 12000, 100, 'NCC06', '8931234567900', N'HSD 7 ngày'),
+('L07', 'SP012', N'Thịt heo xay 500g', N'ThitHeoXay.png', '2025-10-04', N'Khay', 85000, 90, 'NCC06', '8931234567901', N'HSD 5 ngày'),
+('L01', 'SP013', N'Sữa tươi 180ml (lốc 4)', N'Sua180.png', '2025-09-10', N'Lốc', 26000, 60, 'NCC01', '8931234567902', N'HSD 6 tháng'),
+('L02', 'SP014', N'Mì Đệ Nhất bò hầm', N'DeNhat.png', '2025-07-30', N'Gói', 12000, 70, 'NCC02', '8931234567903', N'HSD 9 tháng'),
+('L03', 'SP015', N'Aquafina 500ml', N'Aquafina.png', '2025-09-20', N'Chai', 7000, 200, 'NCC03', '8931234567904', N'HSD 24 tháng');
+
 
 UPDATE SANPHAM
 SET NSX = '2025-08-01', HSD = '2026-02-01'

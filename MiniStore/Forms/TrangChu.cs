@@ -11,7 +11,9 @@ namespace MiniStore
             InitializeComponent();
             UC_Dashboard uC_ = new UC_Dashboard();
             AddUserControl(uC_);
+            
         }
+
         protected override CreateParams CreateParams
         {
             get { var cp = base.CreateParams; cp.ExStyle |= 0x02000000; return cp; }

@@ -42,6 +42,9 @@ public partial class SANPHAM
     [Unicode(false)]
     public string? BARCODE { get; set; }
 
+    [StringLength(255)]
+    public string? HINH { get; set; }
+
     [InverseProperty("MASPNavigation")]
     public virtual ICollection<CHITIETHDBAN> CHITIETHDBANs { get; set; } = new List<CHITIETHDBAN>();
 

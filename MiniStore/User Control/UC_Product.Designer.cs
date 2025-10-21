@@ -110,6 +110,9 @@
             label3 = new Label();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            flpProduct = new FlowLayoutPanel();
+            guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
@@ -285,7 +288,7 @@
             guna2PictureBox1.Location = new Point(45, 100);
             guna2PictureBox1.Name = "guna2PictureBox1";
             guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            guna2PictureBox1.Size = new Size(1250, 322);
+            guna2PictureBox1.Size = new Size(1250, 282);
             guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox1.TabIndex = 1;
             guna2PictureBox1.TabStop = false;
@@ -301,12 +304,11 @@
             guna2CustomGradientPanel2.Controls.Add(cboAllCate);
             guna2CustomGradientPanel2.Controls.Add(guna2Panel1);
             guna2CustomGradientPanel2.CustomizableEdges = customizableEdges39;
-            guna2CustomGradientPanel2.Location = new Point(45, 428);
+            guna2CustomGradientPanel2.Location = new Point(45, 398);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges40;
             guna2CustomGradientPanel2.Size = new Size(982, 100);
             guna2CustomGradientPanel2.TabIndex = 26;
-            guna2CustomGradientPanel2.Paint += guna2CustomGradientPanel2_Paint;
             // 
             // label9
             // 
@@ -329,7 +331,9 @@
             guna2Panel7.CustomizableEdges = customizableEdges15;
             guna2Panel7.Location = new Point(865, 3);
             guna2Panel7.Name = "guna2Panel7";
+            guna2Panel7.ShadowDecoration.Color = Color.Transparent;
             guna2Panel7.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Panel7.ShadowDecoration.Shadow = new Padding(0);
             guna2Panel7.Size = new Size(98, 88);
             guna2Panel7.TabIndex = 35;
             // 
@@ -352,12 +356,12 @@
             guna2Button9.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button9.CheckedState.BorderColor = Color.White;
             guna2Button9.CheckedState.FillColor = Color.White;
-            guna2Button9.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
+            guna2Button9.CheckedState.ForeColor = Color.Transparent;
             guna2Button9.CustomizableEdges = customizableEdges13;
-            guna2Button9.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button9.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button9.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button9.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button9.DisabledState.BorderColor = Color.Transparent;
+            guna2Button9.DisabledState.CustomBorderColor = Color.Transparent;
+            guna2Button9.DisabledState.FillColor = Color.Transparent;
+            guna2Button9.DisabledState.ForeColor = Color.Transparent;
             guna2Button9.Dock = DockStyle.Top;
             guna2Button9.FillColor = Color.Transparent;
             guna2Button9.Font = new Font("Segoe UI", 9F);
@@ -366,7 +370,10 @@
             guna2Button9.ImageSize = new Size(60, 60);
             guna2Button9.Location = new Point(0, 0);
             guna2Button9.Name = "guna2Button9";
+            guna2Button9.PressedColor = Color.Transparent;
+            guna2Button9.ShadowDecoration.Color = Color.Transparent;
             guna2Button9.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2Button9.ShadowDecoration.Shadow = new Padding(0);
             guna2Button9.Size = new Size(98, 68);
             guna2Button9.TabIndex = 27;
             guna2Button9.UseTransparentBackground = true;
@@ -404,7 +411,6 @@
             guna2Button8.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button8.CheckedState.BorderColor = Color.White;
             guna2Button8.CheckedState.FillColor = Color.White;
-            guna2Button8.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
             guna2Button8.CustomizableEdges = customizableEdges17;
             guna2Button8.DisabledState.BorderColor = Color.DarkGray;
             guna2Button8.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -419,6 +425,7 @@
             guna2Button8.Location = new Point(0, 0);
             guna2Button8.Name = "guna2Button8";
             guna2Button8.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2Button8.ShadowDecoration.Shadow = new Padding(0);
             guna2Button8.Size = new Size(98, 68);
             guna2Button8.TabIndex = 27;
             guna2Button8.UseTransparentBackground = true;
@@ -456,7 +463,6 @@
             guna2Button7.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button7.CheckedState.BorderColor = Color.White;
             guna2Button7.CheckedState.FillColor = Color.White;
-            guna2Button7.CheckedState.Image = (Image)resources.GetObject("resource.Image5");
             guna2Button7.CustomizableEdges = customizableEdges21;
             guna2Button7.DisabledState.BorderColor = Color.DarkGray;
             guna2Button7.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -471,6 +477,7 @@
             guna2Button7.Location = new Point(0, 0);
             guna2Button7.Name = "guna2Button7";
             guna2Button7.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            guna2Button7.ShadowDecoration.Shadow = new Padding(0);
             guna2Button7.Size = new Size(98, 68);
             guna2Button7.TabIndex = 27;
             guna2Button7.UseTransparentBackground = true;
@@ -508,7 +515,6 @@
             guna2Button6.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button6.CheckedState.BorderColor = Color.White;
             guna2Button6.CheckedState.FillColor = Color.White;
-            guna2Button6.CheckedState.Image = (Image)resources.GetObject("resource.Image6");
             guna2Button6.CustomizableEdges = customizableEdges25;
             guna2Button6.DisabledState.BorderColor = Color.DarkGray;
             guna2Button6.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -523,6 +529,7 @@
             guna2Button6.Location = new Point(0, 0);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2Button6.ShadowDecoration.Shadow = new Padding(0);
             guna2Button6.Size = new Size(98, 68);
             guna2Button6.TabIndex = 27;
             guna2Button6.UseTransparentBackground = true;
@@ -560,7 +567,6 @@
             guna2Button5.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button5.CheckedState.BorderColor = Color.White;
             guna2Button5.CheckedState.FillColor = Color.White;
-            guna2Button5.CheckedState.Image = (Image)resources.GetObject("resource.Image7");
             guna2Button5.CustomizableEdges = customizableEdges29;
             guna2Button5.DisabledState.BorderColor = Color.DarkGray;
             guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -575,10 +581,10 @@
             guna2Button5.Location = new Point(0, 0);
             guna2Button5.Name = "guna2Button5";
             guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            guna2Button5.ShadowDecoration.Shadow = new Padding(0);
             guna2Button5.Size = new Size(98, 68);
             guna2Button5.TabIndex = 27;
             guna2Button5.UseTransparentBackground = true;
-            guna2Button5.Click += guna2Button5_Click;
             // 
             // cboAllCate
             // 
@@ -632,11 +638,9 @@
             label2.TabIndex = 29;
             label2.Text = "Thịt";
             label2.TextAlign = ContentAlignment.TopCenter;
-            label2.Click += label2_Click;
             // 
             // guna2Button3
             // 
-            guna2Button3.Animated = true;
             guna2Button3.AnimatedGIF = true;
             guna2Button3.BackColor = Color.Transparent;
             guna2Button3.BorderColor = Color.FromArgb(53, 41, 123);
@@ -644,7 +648,6 @@
             guna2Button3.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button3.CheckedState.BorderColor = Color.White;
             guna2Button3.CheckedState.FillColor = Color.White;
-            guna2Button3.CheckedState.Image = (Image)resources.GetObject("resource.Image8");
             guna2Button3.CustomizableEdges = customizableEdges35;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
             guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -659,6 +662,7 @@
             guna2Button3.Location = new Point(0, 0);
             guna2Button3.Name = "guna2Button3";
             guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            guna2Button3.ShadowDecoration.Shadow = new Padding(0);
             guna2Button3.Size = new Size(98, 68);
             guna2Button3.TabIndex = 27;
             guna2Button3.UseTransparentBackground = true;
@@ -671,7 +675,7 @@
             guna2Panel2.Controls.Add(label3);
             guna2Panel2.Controls.Add(guna2Button4);
             guna2Panel2.CustomizableEdges = customizableEdges43;
-            guna2Panel2.Location = new Point(356, 432);
+            guna2Panel2.Location = new Point(356, 402);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges44;
             guna2Panel2.Size = new Size(98, 88);
@@ -696,7 +700,6 @@
             guna2Button4.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button4.CheckedState.BorderColor = Color.White;
             guna2Button4.CheckedState.FillColor = Color.White;
-            guna2Button4.CheckedState.Image = (Image)resources.GetObject("resource.Image9");
             guna2Button4.CustomizableEdges = customizableEdges41;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -711,6 +714,7 @@
             guna2Button4.Location = new Point(0, 0);
             guna2Button4.Name = "guna2Button4";
             guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            guna2Button4.ShadowDecoration.Shadow = new Padding(0);
             guna2Button4.Size = new Size(98, 68);
             guna2Button4.TabIndex = 27;
             guna2Button4.UseTransparentBackground = true;
@@ -731,24 +735,55 @@
             guna2ComboBox1.HoverState.FillColor = Color.FromArgb(9, 92, 50);
             guna2ComboBox1.ItemHeight = 30;
             guna2ComboBox1.Items.AddRange(new object[] { "Tất Cả Loại Hàng" });
-            guna2ComboBox1.Location = new Point(1189, 482);
+            guna2ComboBox1.Location = new Point(1189, 452);
             guna2ComboBox1.Name = "guna2ComboBox1";
             guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges46;
             guna2ComboBox1.Size = new Size(106, 36);
             guna2ComboBox1.TabIndex = 37;
             guna2ComboBox1.Tag = "";
             // 
+            // guna2Separator1
+            // 
+            guna2Separator1.FillThickness = 2;
+            guna2Separator1.Location = new Point(45, 383);
+            guna2Separator1.Name = "guna2Separator1";
+            guna2Separator1.Size = new Size(1250, 12);
+            guna2Separator1.TabIndex = 38;
+            // 
+            // flpProduct
+            // 
+            flpProduct.AutoScroll = true;
+            flpProduct.Location = new Point(45, 513);
+            flpProduct.Margin = new Padding(0);
+            flpProduct.Name = "flpProduct";
+            flpProduct.Padding = new Padding(25);
+            flpProduct.Size = new Size(1250, 414);
+            flpProduct.TabIndex = 39;
+            // 
+            // guna2Separator2
+            // 
+            guna2Separator2.FillThickness = 2;
+            guna2Separator2.Location = new Point(45, 498);
+            guna2Separator2.Name = "guna2Separator2";
+            guna2Separator2.Size = new Size(1250, 12);
+            guna2Separator2.TabIndex = 40;
+            // 
             // UC_Product
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(guna2Separator2);
+            Controls.Add(flpProduct);
+            Controls.Add(guna2Separator1);
             Controls.Add(guna2ComboBox1);
             Controls.Add(guna2Panel2);
             Controls.Add(guna2CustomGradientPanel2);
             Controls.Add(guna2PictureBox1);
             Controls.Add(guna2CustomGradientPanel1);
             Name = "UC_Product";
+            Padding = new Padding(10);
             Size = new Size(1345, 927);
             Load += UC_Product_Load;
             guna2CustomGradientPanel1.ResumeLayout(false);
@@ -811,5 +846,8 @@
         private Label label9;
         private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
         private BindingSource lOAISANPHAMBindingSource;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
+        private FlowLayoutPanel flpProduct;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
     }
 }
