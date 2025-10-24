@@ -307,14 +307,15 @@
             guna2CustomGradientPanel2.Location = new Point(45, 398);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            guna2CustomGradientPanel2.Size = new Size(982, 100);
+            guna2CustomGradientPanel2.Size = new Size(1114, 100);
             guna2CustomGradientPanel2.TabIndex = 26;
+            guna2CustomGradientPanel2.Paint += guna2CustomGradientPanel2_Paint;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(52, 7);
+            label9.Location = new Point(73, 3);
             label9.Name = "label9";
             label9.Size = new Size(113, 36);
             label9.TabIndex = 36;
@@ -329,7 +330,7 @@
             guna2Panel7.Controls.Add(label8);
             guna2Panel7.Controls.Add(guna2Button9);
             guna2Panel7.CustomizableEdges = customizableEdges15;
-            guna2Panel7.Location = new Point(865, 3);
+            guna2Panel7.Location = new Point(983, 3);
             guna2Panel7.Name = "guna2Panel7";
             guna2Panel7.ShadowDecoration.Color = Color.Transparent;
             guna2Panel7.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -349,7 +350,6 @@
             // 
             // guna2Button9
             // 
-            guna2Button9.AnimatedGIF = true;
             guna2Button9.BackColor = Color.Transparent;
             guna2Button9.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button9.BorderRadius = 35;
@@ -386,7 +386,7 @@
             guna2Panel6.Controls.Add(label7);
             guna2Panel6.Controls.Add(guna2Button8);
             guna2Panel6.CustomizableEdges = customizableEdges19;
-            guna2Panel6.Location = new Point(755, 4);
+            guna2Panel6.Location = new Point(873, 4);
             guna2Panel6.Name = "guna2Panel6";
             guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2Panel6.Size = new Size(98, 88);
@@ -404,7 +404,6 @@
             // 
             // guna2Button8
             // 
-            guna2Button8.AnimatedGIF = true;
             guna2Button8.BackColor = Color.Transparent;
             guna2Button8.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button8.BorderRadius = 35;
@@ -438,7 +437,7 @@
             guna2Panel5.Controls.Add(label6);
             guna2Panel5.Controls.Add(guna2Button7);
             guna2Panel5.CustomizableEdges = customizableEdges23;
-            guna2Panel5.Location = new Point(645, 4);
+            guna2Panel5.Location = new Point(763, 4);
             guna2Panel5.Name = "guna2Panel5";
             guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2Panel5.Size = new Size(98, 88);
@@ -456,7 +455,6 @@
             // 
             // guna2Button7
             // 
-            guna2Button7.AnimatedGIF = true;
             guna2Button7.BackColor = Color.Transparent;
             guna2Button7.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button7.BorderRadius = 35;
@@ -490,7 +488,7 @@
             guna2Panel4.Controls.Add(label5);
             guna2Panel4.Controls.Add(guna2Button6);
             guna2Panel4.CustomizableEdges = customizableEdges27;
-            guna2Panel4.Location = new Point(533, 4);
+            guna2Panel4.Location = new Point(653, 4);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2Panel4.Size = new Size(98, 88);
@@ -508,7 +506,6 @@
             // 
             // guna2Button6
             // 
-            guna2Button6.AnimatedGIF = true;
             guna2Button6.BackColor = Color.Transparent;
             guna2Button6.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button6.BorderRadius = 35;
@@ -542,7 +539,7 @@
             guna2Panel3.Controls.Add(label4);
             guna2Panel3.Controls.Add(guna2Button5);
             guna2Panel3.CustomizableEdges = customizableEdges31;
-            guna2Panel3.Location = new Point(421, 4);
+            guna2Panel3.Location = new Point(543, 4);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges32;
             guna2Panel3.Size = new Size(98, 88);
@@ -560,7 +557,6 @@
             // 
             // guna2Button5
             // 
-            guna2Button5.AnimatedGIF = true;
             guna2Button5.BackColor = Color.Transparent;
             guna2Button5.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button5.BorderRadius = 35;
@@ -606,7 +602,7 @@
             cboAllCate.Location = new Point(20, 54);
             cboAllCate.Name = "cboAllCate";
             cboAllCate.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            cboAllCate.Size = new Size(175, 36);
+            cboAllCate.Size = new Size(243, 36);
             cboAllCate.TabIndex = 29;
             cboAllCate.Tag = "";
             cboAllCate.ValueMember = "MALOAI";
@@ -623,7 +619,7 @@
             guna2Panel1.Controls.Add(label2);
             guna2Panel1.Controls.Add(guna2Button3);
             guna2Panel1.CustomizableEdges = customizableEdges37;
-            guna2Panel1.Location = new Point(201, 3);
+            guna2Panel1.Location = new Point(323, 3);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges38;
             guna2Panel1.Size = new Size(98, 88);
@@ -641,7 +637,6 @@
             // 
             // guna2Button3
             // 
-            guna2Button3.AnimatedGIF = true;
             guna2Button3.BackColor = Color.Transparent;
             guna2Button3.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button3.BorderRadius = 35;
@@ -675,7 +670,7 @@
             guna2Panel2.Controls.Add(label3);
             guna2Panel2.Controls.Add(guna2Button4);
             guna2Panel2.CustomizableEdges = customizableEdges43;
-            guna2Panel2.Location = new Point(356, 402);
+            guna2Panel2.Location = new Point(478, 402);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges44;
             guna2Panel2.Size = new Size(98, 88);
@@ -693,7 +688,6 @@
             // 
             // guna2Button4
             // 
-            guna2Button4.AnimatedGIF = true;
             guna2Button4.BackColor = Color.Transparent;
             guna2Button4.BorderColor = Color.FromArgb(53, 41, 123);
             guna2Button4.BorderRadius = 35;

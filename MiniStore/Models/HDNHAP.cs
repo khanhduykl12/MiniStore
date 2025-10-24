@@ -40,5 +40,5 @@ public partial class HDNHAP
 
     [ForeignKey("USERNAME")]
     [InverseProperty("HDNHAPs")]
-    public virtual NHANVIEN? USERNAMENavigation { get; set; }
+    public virtual NGUOIDUNG? USERNAMENavigation { get; set; }
 }

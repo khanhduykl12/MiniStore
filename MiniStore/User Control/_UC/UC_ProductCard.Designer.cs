@@ -63,6 +63,7 @@
             guna2Panel1.ShadowDecoration.Shadow = new Padding(0, 2, 6, 6);
             guna2Panel1.Size = new Size(227, 250);
             guna2Panel1.TabIndex = 0;
+            guna2Panel1.Paint += guna2Panel1_Paint;
             // 
             // lblGia
             // 

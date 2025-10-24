@@ -57,8 +57,12 @@ namespace MiniStore.User_Control._UC
         {
             if (DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
         }
-        
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
-    
+
 }

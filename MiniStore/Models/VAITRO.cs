@@ -10,7 +10,8 @@ namespace MiniStore.Models;
 public partial class VAITRO
 {
     [Key]
-    public int MAROLE { get; set; }
+    [StringLength(10)]
+    public string MAROLE { get; set; } = null!;
 
     [StringLength(50)]
     public string? MOTA { get; set; }

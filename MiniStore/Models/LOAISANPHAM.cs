@@ -14,7 +14,7 @@ public partial class LOAISANPHAM
     [Unicode(false)]
     public string MALOAI { get; set; } = null!;
 
-    [StringLength(20)]
+    [StringLength(100)]
     public string? TENLOAI { get; set; }
 
     public int? HSD_NGAY { get; set; }

@@ -10,21 +10,53 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ImagesProduct\7Up.png" />
     <None Remove="ImagesProduct\Aquafina.png" />
+    <None Remove="ImagesProduct\C2.png" />
+    <None Remove="ImagesProduct\CaVien.png" />
     <None Remove="ImagesProduct\Chocopie.png" />
+    <None Remove="ImagesProduct\Cosy.png" />
     <None Remove="ImagesProduct\DeNhat.png" />
+    <None Remove="ImagesProduct\Downy.png" />
+    <None Remove="ImagesProduct\FrozenFries.png" />
+    <None Remove="ImagesProduct\GaoST25.png" />
     <None Remove="ImagesProduct\HaoHao.png" />
+    <None Remove="ImagesProduct\Haribo.png" />
+    <None Remove="ImagesProduct\LauSan.png" />
+    <None Remove="ImagesProduct\Lavie1_5L.png" />
     <None Remove="ImagesProduct\Omo.png" />
     <None Remove="ImagesProduct\Pepsi.png" />
+    <None Remove="ImagesProduct\PhoMai.png" />
     <None Remove="ImagesProduct\SnackKhoai.png" />
+    <None Remove="ImagesProduct\Sting.png" />
     <None Remove="ImagesProduct\Sua180.png" />
     <None Remove="ImagesProduct\Sua1L.png" />
+    <None Remove="ImagesProduct\SuaChuaAn.png" />
     <None Remove="ImagesProduct\SuaChuaUong.png" />
+    <None Remove="ImagesProduct\SuaDac.png" />
     <None Remove="ImagesProduct\Sunlight.png" />
     <None Remove="ImagesProduct\ThitHeoXay.png" />
+    <None Remove="ImagesProduct\Tomato.png" />
     <None Remove="ImagesProduct\XaLach.png" />
     <None Remove="ImagesProduct\XucXich.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ImagesProduct\SuaChuaAn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ImagesProduct\FrozenFries.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -34,13 +66,40 @@
     <Content Include="ImagesProduct\Aquafina.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ImagesProduct\C2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\CaVien.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ImagesProduct\Chocopie.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Cosy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ImagesProduct\DeNhat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ImagesProduct\Downy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\GaoST25.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Halls.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ImagesProduct\HaoHao.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Haribo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\LauSan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Lavie1_5L.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ImagesProduct\Omo.png">
@@ -49,7 +108,13 @@
     <Content Include="ImagesProduct\Pepsi.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ImagesProduct\PhoMai.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ImagesProduct\SnackKhoai.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Sting.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ImagesProduct\Sua180.png">
@@ -61,10 +126,16 @@
     <Content Include="ImagesProduct\SuaChuaUong.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ImagesProduct\SuaDac.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ImagesProduct\Sunlight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ImagesProduct\ThitHeoXay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ImagesProduct\Tomato.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ImagesProduct\XaLach.png">
@@ -104,10 +175,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

@@ -25,13 +25,13 @@ public partial class MiniStoreContext : DbContext
 
     public virtual DbSet<HDNHAP> HDNHAPs { get; set; }
 
-    public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
-
     public virtual DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
+
+    public virtual DbSet<NGUOIDUNG> NGUOIDUNGs { get; set; }
 
     public virtual DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
 
-    public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
+    public virtual DbSet<OTP_LOG> OTP_LOGs { get; set; }
 
     public virtual DbSet<PHIEUTHANHTOAN> PHIEUTHANHTOANs { get; set; }
 
@@ -45,8 +45,6 @@ public partial class MiniStoreContext : DbContext
 
     public virtual DbSet<V_CONGNO_PHAITRA> V_CONGNO_PHAITRAs { get; set; }
 
-    public virtual DbSet<V_NHANVIEN_TAIKHOAN> V_NHANVIEN_TAIKHOANs { get; set; }
-
     public virtual DbSet<V_SANPHAM_HSD> V_SANPHAM_HSDs { get; set; }
 
     public virtual DbSet<V_SANPHAM_NHACUNGCAP> V_SANPHAM_NHACUNGCAPs { get; set; }
@@ -55,13 +53,13 @@ public partial class MiniStoreContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=KHANHDUY\\SQLEXPRESS;Database=QL_SIEUTHIMINI_TIEMTAPHOA;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=KHANHDUY\\SQLEXPRESS;Database=QL_MiniShop;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CHITIETHDBAN>(entity =>
         {
-            entity.ToTable("CHITIETHDBAN", tb => tb.HasTrigger("trg_UpdateSoLuongBan"));
+            entity.ToTable("CHITIETHDBAN", tb => tb.HasTrigger("trg_Update_SoLuongBan"));
 
             entity.Property(e => e.THANHTIEN).HasComputedColumnSql("([SOLUONG]*[DONGIA])", true);
 
@@ -76,11 +74,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<CHITIETHDNHAP>(entity =>
         {
-            entity.ToTable("CHITIETHDNHAP", tb =>
-                {
-                    tb.HasTrigger("trg_InsertCongNo_FromNhapHang");
-                    tb.HasTrigger("trg_UpdateSoLuongNhap");
-                });
+            entity.ToTable("CHITIETHDNHAP", tb => tb.HasTrigger("trg_Update_SoLuongNhap"));
 
             entity.Property(e => e.THANHTIENN).HasComputedColumnSql("([SOLUONGTN]*[DONGIANHAP])", true);
 
@@ -110,9 +104,17 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<HDBAN>(entity =>
         {
-            entity.HasOne(d => d.MAKHNavigation).WithMany(p => p.HDBANs).HasConstraintName("FK_HDBAN_KHACHHANG");
+            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CEEA0E48BF");
 
-            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.HDBANs).HasConstraintName("FK_HDBAN_NHANVIEN");
+            entity.ToTable("HDBAN", tb => tb.HasTrigger("trg_CheckRole_HDBAN"));
+
+            entity.HasOne(d => d.NGUOILAP).WithMany(p => p.HDBANNGUOILAPs)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__HDBAN__NGUOILAP___59FA5E80");
+
+            entity.HasOne(d => d.NGUOIMUA).WithMany(p => p.HDBANNGUOIMUAs)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__HDBAN__NGUOIMUA___5AEE82B9");
         });
 
         modelBuilder.Entity<HDNHAP>(entity =>
@@ -121,19 +123,30 @@ public partial class MiniStoreContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HDNHAP_NHACC");
 
-            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.HDNHAPs).HasConstraintName("FK_HDNHAP_NHANVIEN");
+            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.HDNHAPs)
+                .HasPrincipalKey(p => p.USERNAME)
+                .HasForeignKey(d => d.USERNAME)
+                .HasConstraintName("FK_HDNHAP_NHANVIEN");
         });
 
-        modelBuilder.Entity<KHACHHANG>(entity =>
+        modelBuilder.Entity<NGUOIDUNG>(entity =>
         {
-            entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.KHACHHANG).HasConstraintName("FK__KHACHHANG__USERN__628FA481");
-        });
+            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC27EBDB4837");
 
-        modelBuilder.Entity<NHANVIEN>(entity =>
-        {
-            entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.NHANVIEN)
+            entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.NGUOIDUNG)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_NHANVIEN_TAIKHOAN");
+        });
+
+        modelBuilder.Entity<OTP_LOG>(entity =>
+        {
+            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC271C22D3B8");
+
+            entity.Property(e => e.CREATE_AT).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.OTP_LOGs)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_OTP_LOG_TAIKHOAN");
         });
 
         modelBuilder.Entity<PHIEUTHANHTOAN>(entity =>
@@ -167,11 +180,6 @@ public partial class MiniStoreContext : DbContext
                 .HasConstraintName("FK_TAIKHOAN_VAITRO");
         });
 
-        modelBuilder.Entity<VAITRO>(entity =>
-        {
-            entity.Property(e => e.MAROLE).ValueGeneratedNever();
-        });
-
         modelBuilder.Entity<VIEW_ThongKeDoanhThu>(entity =>
         {
             entity.ToView("VIEW_ThongKeDoanhThu");
@@ -180,11 +188,6 @@ public partial class MiniStoreContext : DbContext
         modelBuilder.Entity<V_CONGNO_PHAITRA>(entity =>
         {
             entity.ToView("V_CONGNO_PHAITRA");
-        });
-
-        modelBuilder.Entity<V_NHANVIEN_TAIKHOAN>(entity =>
-        {
-            entity.ToView("V_NHANVIEN_TAIKHOAN");
         });
 
         modelBuilder.Entity<V_SANPHAM_HSD>(entity =>
@@ -201,7 +204,6 @@ public partial class MiniStoreContext : DbContext
         {
             entity.ToView("V_TONKHO");
         });
-        modelBuilder.HasSequence<int>("seq_MACONGNO");
 
         OnModelCreatingPartial(modelBuilder);
     }

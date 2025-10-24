@@ -21,6 +21,9 @@ public partial class SANPHAM
     [StringLength(100)]
     public string? TENSP { get; set; }
 
+    [StringLength(255)]
+    public string? HINH { get; set; }
+
     public DateOnly? NSX { get; set; }
 
     [StringLength(10)]
@@ -35,15 +38,12 @@ public partial class SANPHAM
     [Unicode(false)]
     public string MANCC { get; set; } = null!;
 
-    [StringLength(40)]
-    public string? GHICHU { get; set; }
-
     [StringLength(64)]
     [Unicode(false)]
     public string? BARCODE { get; set; }
 
-    [StringLength(255)]
-    public string? HINH { get; set; }
+    [StringLength(100)]
+    public string? GHICHU { get; set; }
 
     [InverseProperty("MASPNavigation")]
     public virtual ICollection<CHITIETHDBAN> CHITIETHDBANs { get; set; } = new List<CHITIETHDBAN>();

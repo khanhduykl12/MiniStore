@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MiniStore.Models;
 
 [Table("TAIKHOAN")]
-[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF724FCA80804", IsUnique = true)]
+[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7248DF6BE6D", IsUnique = true)]
 public partial class TAIKHOAN
 {
     [Key]
@@ -19,19 +19,27 @@ public partial class TAIKHOAN
     [Unicode(false)]
     public string PASSWORD { get; set; } = null!;
 
-    public int MAROLE { get; set; }
+    [StringLength(10)]
+    public string MAROLE { get; set; } = null!;
 
     [StringLength(50)]
     [Unicode(false)]
     public string EMAIL { get; set; } = null!;
 
-    [InverseProperty("USERNAMENavigation")]
-    public virtual KHACHHANG? KHACHHANG { get; set; }
+    [StringLength(50)]
+    public string? TRANGTHAI { get; set; }
+
+    public DateOnly? NGAYKHOA { get; set; }
+
+    public DateOnly? NGAYMOKHOA { get; set; }
 
     [ForeignKey("MAROLE")]
     [InverseProperty("TAIKHOANs")]
     public virtual VAITRO MAROLENavigation { get; set; } = null!;
 
     [InverseProperty("USERNAMENavigation")]
-    public virtual NHANVIEN? NHANVIEN { get; set; }
+    public virtual NGUOIDUNG? NGUOIDUNG { get; set; }
+
+    [InverseProperty("USERNAMENavigation")]
+    public virtual ICollection<OTP_LOG> OTP_LOGs { get; set; } = new List<OTP_LOG>();
 }

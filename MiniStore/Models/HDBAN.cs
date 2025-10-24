@@ -16,25 +16,21 @@ public partial class HDBAN
 
     public DateOnly NGAYLAP { get; set; }
 
-    [StringLength(20)]
-    [Unicode(false)]
-    public string? USERNAME { get; set; }
+    public int NGUOILAP_ID { get; set; }
 
-    [StringLength(225)]
+    public int NGUOIMUA_ID { get; set; }
+
+    [StringLength(200)]
     public string? GHICHU { get; set; }
-
-    [StringLength(10)]
-    [Unicode(false)]
-    public string? MAKH { get; set; }
 
     [InverseProperty("MAHDNavigation")]
     public virtual ICollection<CHITIETHDBAN> CHITIETHDBANs { get; set; } = new List<CHITIETHDBAN>();
 
-    [ForeignKey("MAKH")]
-    [InverseProperty("HDBANs")]
-    public virtual KHACHHANG? MAKHNavigation { get; set; }
+    [ForeignKey("NGUOILAP_ID")]
+    [InverseProperty("HDBANNGUOILAPs")]
+    public virtual NGUOIDUNG NGUOILAP { get; set; } = null!;
 
-    [ForeignKey("USERNAME")]
-    [InverseProperty("HDBANs")]
-    public virtual NHANVIEN? USERNAMENavigation { get; set; }
+    [ForeignKey("NGUOIMUA_ID")]
+    [InverseProperty("HDBANNGUOIMUAs")]
+    public virtual NGUOIDUNG NGUOIMUA { get; set; } = null!;
 }

@@ -18,9 +18,9 @@ namespace MiniStore.User_Control
 
         // Paging
         private int _page = 0;
-        private const int _pageSize = 60;        
+        private const int _pageSize = 60;
         private bool _isLoading = false;
-        private List<SANPHAM> _filtered = new(); 
+        private List<SANPHAM> _filtered = new();
 
         public UC_Product()
         {
@@ -70,7 +70,7 @@ namespace MiniStore.User_Control
 
 
             _filtered = await q
-                .OrderBy(x => x.TENSP)        
+                .OrderBy(x => x.TENSP)
                 .ToListAsync();
             _page = 0;
             flpProduct.SuspendLayout();
@@ -98,11 +98,11 @@ namespace MiniStore.User_Control
                 {
                     var card = new UC_ProductCard
                     {
-                        
+
                         Title = sp.TENSP,
                         Price = (decimal)(sp.GIABAN ?? 0),
                         ImageFile = sp.HINH
-     
+
                     };
                     flpProduct.Controls.Add(card);
                 }
@@ -129,6 +129,11 @@ namespace MiniStore.User_Control
         public async Task ReloadAllAsync()
         {
             await ApplyFilterAndResetAsync();
+        }
+
+        private void guna2CustomGradientPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
