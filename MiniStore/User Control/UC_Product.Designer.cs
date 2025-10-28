@@ -82,7 +82,10 @@
             guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            btnProduct = new Guna.UI2.WinForms.Guna2Button();
+            btnOption = new Guna.UI2.WinForms.Guna2Button();
+            menuOption = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
+            addProduct = new ToolStripMenuItem();
+            RemoveProduct = new ToolStripMenuItem();
             guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             label9 = new Label();
@@ -115,6 +118,7 @@
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             guna2CustomGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            menuOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2CustomGradientPanel2.SuspendLayout();
             guna2Panel7.SuspendLayout();
@@ -135,7 +139,7 @@
             guna2CustomGradientPanel1.Controls.Add(guna2TextBox1);
             guna2CustomGradientPanel1.Controls.Add(label1);
             guna2CustomGradientPanel1.Controls.Add(guna2Button1);
-            guna2CustomGradientPanel1.Controls.Add(btnProduct);
+            guna2CustomGradientPanel1.Controls.Add(btnOption);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges9;
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(6, 76, 80);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(6, 76, 80);
@@ -253,31 +257,63 @@
             guna2Button1.TabIndex = 5;
             guna2Button1.UseTransparentBackground = true;
             // 
-            // btnProduct
+            // btnOption
             // 
-            btnProduct.Animated = true;
-            btnProduct.BackColor = Color.Transparent;
-            btnProduct.BorderColor = Color.FromArgb(53, 41, 123);
-            btnProduct.BorderRadius = 35;
-            btnProduct.CheckedState.BorderColor = Color.White;
-            btnProduct.CheckedState.FillColor = Color.White;
-            btnProduct.CheckedState.Image = (Image)resources.GetObject("resource.Image2");
-            btnProduct.CustomizableEdges = customizableEdges7;
-            btnProduct.DisabledState.BorderColor = Color.DarkGray;
-            btnProduct.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnProduct.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnProduct.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnProduct.FillColor = Color.Transparent;
-            btnProduct.Font = new Font("Segoe UI", 9F);
-            btnProduct.ForeColor = Color.White;
-            btnProduct.Image = (Image)resources.GetObject("btnProduct.Image");
-            btnProduct.ImageSize = new Size(45, 45);
-            btnProduct.Location = new Point(20, 6);
-            btnProduct.Name = "btnProduct";
-            btnProduct.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            btnProduct.Size = new Size(53, 52);
-            btnProduct.TabIndex = 4;
-            btnProduct.UseTransparentBackground = true;
+            btnOption.Animated = true;
+            btnOption.BackColor = Color.Transparent;
+            btnOption.BorderColor = Color.FromArgb(53, 41, 123);
+            btnOption.BorderRadius = 35;
+            btnOption.CheckedState.BorderColor = Color.White;
+            btnOption.CheckedState.FillColor = Color.White;
+            btnOption.CheckedState.Image = (Image)resources.GetObject("resource.Image2");
+            btnOption.ContextMenuStrip = menuOption;
+            btnOption.CustomizableEdges = customizableEdges7;
+            btnOption.DisabledState.BorderColor = Color.DarkGray;
+            btnOption.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnOption.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnOption.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnOption.FillColor = Color.Transparent;
+            btnOption.Font = new Font("Segoe UI", 9F);
+            btnOption.ForeColor = Color.White;
+            btnOption.Image = (Image)resources.GetObject("btnOption.Image");
+            btnOption.ImageSize = new Size(45, 45);
+            btnOption.Location = new Point(20, 6);
+            btnOption.Name = "btnOption";
+            btnOption.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnOption.Size = new Size(53, 52);
+            btnOption.TabIndex = 4;
+            btnOption.UseTransparentBackground = true;
+            btnOption.Click += btnOption_Click;
+            // 
+            // menuOption
+            // 
+            menuOption.BackColor = Color.White;
+            menuOption.ImageScalingSize = new Size(20, 20);
+            menuOption.Items.AddRange(new ToolStripItem[] { addProduct, RemoveProduct });
+            menuOption.Name = "guna2ContextMenuStrip1";
+            menuOption.RenderStyle.ArrowColor = Color.FromArgb(151, 143, 255);
+            menuOption.RenderStyle.BorderColor = Color.Gainsboro;
+            menuOption.RenderStyle.ColorTable = null;
+            menuOption.RenderStyle.RoundedEdges = true;
+            menuOption.RenderStyle.SelectionArrowColor = Color.White;
+            menuOption.RenderStyle.SelectionBackColor = Color.FromArgb(100, 88, 255);
+            menuOption.RenderStyle.SelectionForeColor = Color.White;
+            menuOption.RenderStyle.SeparatorColor = Color.Gainsboro;
+            menuOption.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            menuOption.Size = new Size(185, 52);
+            menuOption.Opening += menuOption_Opening;
+            // 
+            // addProduct
+            // 
+            addProduct.Name = "addProduct";
+            addProduct.Size = new Size(184, 24);
+            addProduct.Text = "Thêm Sản Phẩm";
+            // 
+            // RemoveProduct
+            // 
+            RemoveProduct.Name = "RemoveProduct";
+            RemoveProduct.Size = new Size(184, 24);
+            RemoveProduct.Text = "Xóa Sản Phẩm";
             // 
             // guna2PictureBox1
             // 
@@ -764,8 +800,8 @@
             // 
             // UC_Product
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             BackColor = Color.White;
             Controls.Add(guna2Separator2);
@@ -783,6 +819,7 @@
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            menuOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             guna2CustomGradientPanel2.ResumeLayout(false);
             guna2CustomGradientPanel2.PerformLayout();
@@ -807,7 +844,7 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
-        private Guna.UI2.WinForms.Guna2Button btnProduct;
+        private Guna.UI2.WinForms.Guna2Button btnOption;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Label label1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
@@ -843,5 +880,8 @@
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private FlowLayoutPanel flpProduct;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
+        private Guna.UI2.WinForms.Guna2ContextMenuStrip menuOption;
+        private ToolStripMenuItem addProduct;
+        private ToolStripMenuItem RemoveProduct;
     }
 }

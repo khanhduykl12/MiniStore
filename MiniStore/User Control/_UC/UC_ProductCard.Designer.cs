@@ -109,8 +109,8 @@
             // 
             // UC_ProductCard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(guna2Panel1);
             Name = "UC_ProductCard";
             Size = new Size(227, 250);

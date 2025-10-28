@@ -174,8 +174,8 @@
             // 
             // FormLuongChucVu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(800, 450);
             Controls.Add(lblErrorChucVu);
             Controls.Add(cboChucVu);

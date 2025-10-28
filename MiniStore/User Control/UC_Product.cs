@@ -135,5 +135,16 @@ namespace MiniStore.User_Control
         {
 
         }
+
+        private void btnOption_Click(object sender, EventArgs e)
+        {
+            var pt = new Point(0, btnOption.Height);
+            menuOption.Show(btnOption, pt);
+        }
+
+        private void menuOption_Opening(object sender, CancelEventArgs e)
+        {
+            
+        }
     }
 }
