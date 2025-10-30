@@ -10,14 +10,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MiniStore.Forms.Forms_Extra;
 
 namespace MiniStore.User_Control._UC
 {
     public partial class UC_ProductCard : UserControl
     {
+        public event EventHandler ProductClicked;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string MaSP { get; set; }
         public UC_ProductCard()
         {
             InitializeComponent();
+            WireClickRecursive(this);
+            this.Cursor = Cursors.Hand;
+
         }
         [Category("Product"), Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -57,7 +64,21 @@ namespace MiniStore.User_Control._UC
         {
             if (DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
         }
+        private void WireClickRecursive(Control parent)
+        {
+            parent.Click += AnyChild_Click;
+            foreach (Control c in parent.Controls)
+                WireClickRecursive(c);
+        }
 
+        private void AnyChild_Click(object sender, EventArgs e)
+            => ProductClicked?.Invoke(this, EventArgs.Empty);
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            ProductClicked?.Invoke(this, EventArgs.Empty);
+        }
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
 

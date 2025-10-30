@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniStore.Forms.Forms_Extra;
 using MiniStore.Models;
 using MiniStore.User_Control._UC;
 using System;
@@ -98,14 +99,16 @@ namespace MiniStore.User_Control
                 {
                     var card = new UC_ProductCard
                     {
-
+                        MaSP = sp.MASP,
                         Title = sp.TENSP,
                         Price = (decimal)(sp.GIABAN ?? 0),
                         ImageFile = sp.HINH
 
                     };
+                    card.ProductClicked += Card_ProductClicked;
                     flpProduct.Controls.Add(card);
                 }
+
                 flpProduct.ResumeLayout();
             }
             finally
@@ -146,5 +149,15 @@ namespace MiniStore.User_Control
         {
             
         }
+        private void Card_ProductClicked(object sender, EventArgs e)
+        {
+            if (sender is UC_ProductCard card && !string.IsNullOrWhiteSpace(card.MaSP))
+            {
+                using var frm = new ProductDetails(card.MaSP);
+                frm.ShowDialog();
+            }
+        }
+
+
     }
 }
