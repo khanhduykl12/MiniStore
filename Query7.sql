@@ -157,40 +157,6 @@ CREATE TABLE PHIEUTHANHTOAN (
 
 
    ---- TRIGGERS ----
---Lap hoa don--- chạy sau khi đã insertHDBAN----
-GO
-CREATE TRIGGER trg_CheckRole_HDBAN
-ON HDBAN
-FOR INSERT, UPDATE
-AS
-BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM inserted i
-        JOIN NGUOIDUNG nLap ON i.NGUOILAP_ID = nLap.ID
-        WHERE nLap.MAROLE NOT IN ('NV', 'ADMIN')
-    )
-    BEGIN
-        RAISERROR('Người lập phải là Nhân viên hoặc Admin!', 16, 1);
-        ROLLBACK TRANSACTION;
-        RETURN;
-    END;
-    IF EXISTS (
-        SELECT 1
-        FROM inserted i
-        JOIN NGUOIDUNG nMua ON i.NGUOIMUA_ID = nMua.ID
-        WHERE nMua.MAROLE <> 'KH'
-    )
-    BEGIN
-        RAISERROR('Người mua phải là Khách hàng!', 16, 1);
-        ROLLBACK TRANSACTION;
-        RETURN;
-    END;
-END;
-GO
-
-drop trigger trg_CheckRole_HDBAN
-
 -- Nhập hàng
 CREATE TRIGGER trg_Update_SoLuongNhap
 ON CHITIETHDNHAP
@@ -597,23 +563,6 @@ END
 EXEC usp_ThongKeDoanhThu @TuNgay = '2025-09-01', @DenNgay = '2025-10-10';
 
 -----User-defined Function----
-/*Lấy tuổi nhân viên từ ngày sinh*/
-go
-CREATE FUNCTION dbo.ufn_TinhTuoi(@NgaySinh DATE)
-RETURNS INT
-AS
-BEGIN
-    DECLARE @Tuoi INT;
-    SET @Tuoi = DATEDIFF(YEAR, @NgaySinh, GETDATE());
-    -- Nếu chưa tới sinh nhật năm nay thì trừ 1
-    IF (MONTH(@NgaySinh) > MONTH(GETDATE()))
-       OR (MONTH(@NgaySinh) = MONTH(GETDATE()) AND DAY(@NgaySinh) > DAY(GETDATE()))
-        SET @Tuoi = @Tuoi - 1;
-    RETURN @Tuoi;
-END
-SELECT HOTEN, dbo.ufn_TinhTuoi(NGAYSINH) AS TUOI FROM NGUOIDUNG;
-
-drop procedure usp_SanPhamSapHetHan
 
 ----Cursor----
 /*Liệt kê sản phẩm sắp hết hạn (HSD < 30 ngày)*/

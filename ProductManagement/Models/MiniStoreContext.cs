@@ -55,7 +55,7 @@ public partial class MiniStoreContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=KHANHDUY\\SQLEXPRESS;Database=QL_MiniShop;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=KHANHDUY\\SQLEXPRESS;Database=QL_SIEUTHIMINI_TIEMTAPHOA;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -106,9 +106,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<HDBAN>(entity =>
         {
-            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CEEA0E48BF");
-
-            entity.ToTable("HDBAN", tb => tb.HasTrigger("trg_CheckRole_HDBAN"));
+            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CEE37C7866");
 
             entity.HasOne(d => d.NGUOILAP).WithMany(p => p.HDBANNGUOILAPs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -133,7 +131,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<NGUOIDUNG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC27EBDB4837");
+            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC2797C63C2D");
 
             entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.NGUOIDUNG)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -142,7 +140,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<OTP_LOG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC271C22D3B8");
+            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC274DF7F2B7");
 
             entity.Property(e => e.CREATE_AT).HasDefaultValueSql("(getdate())");
 

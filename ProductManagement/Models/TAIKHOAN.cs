@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ProductManagement.Models;
 
 [Table("TAIKHOAN")]
-[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7248DF6BE6D", IsUnique = true)]
+[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7245E12F8DF", IsUnique = true)]
 public partial class TAIKHOAN
 {
     [Key]
