@@ -66,7 +66,7 @@
             guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             panelLeft = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnHuy = new Guna.UI2.WinForms.Guna2Button();
             btnBack = new Guna.UI2.WinForms.Guna2Button();
             flpCart = new FlowLayoutPanel();
             label1 = new Label();
@@ -162,7 +162,7 @@
             panelLeft.BackColor = Color.Silver;
             panelLeft.BorderColor = Color.White;
             panelLeft.BorderRadius = 30;
-            panelLeft.Controls.Add(guna2Button1);
+            panelLeft.Controls.Add(btnHuy);
             panelLeft.Controls.Add(btnBack);
             panelLeft.Controls.Add(flpCart);
             panelLeft.Controls.Add(label1);
@@ -176,25 +176,26 @@
             panelLeft.Size = new Size(646, 662);
             panelLeft.TabIndex = 20;
             // 
-            // guna2Button1
+            // btnHuy
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderColor = Color.Transparent;
-            guna2Button1.BorderRadius = 18;
-            guna2Button1.CustomizableEdges = customizableEdges9;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Firebrick;
-            guna2Button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(145, 599);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button1.Size = new Size(133, 50);
-            guna2Button1.TabIndex = 31;
-            guna2Button1.Text = "Hủy Đơn Hàng";
+            btnHuy.BackColor = Color.Transparent;
+            btnHuy.BorderColor = Color.Transparent;
+            btnHuy.BorderRadius = 18;
+            btnHuy.CustomizableEdges = customizableEdges9;
+            btnHuy.DisabledState.BorderColor = Color.DarkGray;
+            btnHuy.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnHuy.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnHuy.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnHuy.FillColor = Color.Firebrick;
+            btnHuy.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHuy.ForeColor = Color.White;
+            btnHuy.Location = new Point(145, 599);
+            btnHuy.Name = "btnHuy";
+            btnHuy.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnHuy.Size = new Size(133, 50);
+            btnHuy.TabIndex = 31;
+            btnHuy.Text = "Hủy Đơn Hàng";
+            btnHuy.Click += btnHuy_Click;
             // 
             // btnBack
             // 
@@ -649,7 +650,7 @@
         private Guna.UI2.WinForms.Guna2Button btnBack;
         private FlowLayoutPanel flpCart;
         private Label label1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnHuy;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private Label label2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;

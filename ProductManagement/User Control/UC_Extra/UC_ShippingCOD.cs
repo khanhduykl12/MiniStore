@@ -82,5 +82,10 @@ namespace ProductManagement.User_Control.UC_Extra
         {
             AddPhuong();
         }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

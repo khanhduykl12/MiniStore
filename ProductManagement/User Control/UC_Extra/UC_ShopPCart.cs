@@ -19,6 +19,7 @@ namespace ProductManagement.User_Control.UC_Extra
         public UC_ShopPCart()
         {
             InitializeComponent();
+            UpdateGia();
         }
         
         public void BlindDuLieu(CartItem item)
@@ -35,8 +36,8 @@ namespace ProductManagement.User_Control.UC_Extra
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            CartService.RemoveItem(_MaSP);
-            this.Parent?.Controls.Remove(this);
+            (FindForm() as ShoppingCart)?.RemoveItemAndRefresh(_MaSP);
+
         }
         private void UpdateGia()
         {   

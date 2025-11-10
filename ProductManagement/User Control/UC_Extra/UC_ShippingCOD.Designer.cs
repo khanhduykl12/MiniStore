@@ -44,7 +44,7 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            btnHuy = new Guna.UI2.WinForms.Guna2Button();
             btnBack = new Guna.UI2.WinForms.Guna2Button();
             label8 = new Label();
             txtEmail = new TextBox();
@@ -72,7 +72,7 @@
             guna2Panel1.BorderColor = Color.Red;
             guna2Panel1.BorderRadius = 30;
             guna2Panel1.Controls.Add(guna2Button2);
-            guna2Panel1.Controls.Add(guna2Button1);
+            guna2Panel1.Controls.Add(btnHuy);
             guna2Panel1.Controls.Add(btnBack);
             guna2Panel1.Controls.Add(label8);
             guna2Panel1.Controls.Add(txtEmail);
@@ -121,25 +121,26 @@
             guna2Button2.Text = "Hoàn Thành";
             guna2Button2.Click += guna2Button2_Click;
             // 
-            // guna2Button1
+            // btnHuy
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderColor = Color.Transparent;
-            guna2Button1.BorderRadius = 18;
-            guna2Button1.CustomizableEdges = customizableEdges3;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Firebrick;
-            guna2Button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(164, 580);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button1.Size = new Size(133, 50);
-            guna2Button1.TabIndex = 33;
-            guna2Button1.Text = "Hủy Đơn Hàng";
+            btnHuy.BackColor = Color.Transparent;
+            btnHuy.BorderColor = Color.Transparent;
+            btnHuy.BorderRadius = 18;
+            btnHuy.CustomizableEdges = customizableEdges3;
+            btnHuy.DisabledState.BorderColor = Color.DarkGray;
+            btnHuy.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnHuy.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnHuy.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnHuy.FillColor = Color.Firebrick;
+            btnHuy.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHuy.ForeColor = Color.White;
+            btnHuy.Location = new Point(164, 580);
+            btnHuy.Name = "btnHuy";
+            btnHuy.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnHuy.Size = new Size(133, 50);
+            btnHuy.TabIndex = 33;
+            btnHuy.Text = "Hủy Đơn Hàng";
+            btnHuy.Click += btnHuy_Click;
             // 
             // btnBack
             // 
@@ -365,7 +366,7 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnHuy;
         private Guna.UI2.WinForms.Guna2Button btnBack;
         private Label label8;
         private TextBox txtEmail;

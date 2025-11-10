@@ -1,4 +1,5 @@
-﻿using ProductManagement.Class;
+﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using ProductManagement.Class;
 using ProductManagement.User_Control.UC_Extra;
 using System;
 using System.Linq;
@@ -37,14 +38,21 @@ namespace ProductManagement.Forms.Forms_Extra
                 flpCart.Controls.Add(cart);
             }
             flpCart.ResumeLayout();
+           
         }
 
         public void UpdateSum()
         {
             decimal productsSum = CartService.GetTotal();
             decimal transport = productsSum * 0.10m;
-            decimal discount = 10000m;
+            decimal discount;
+            discount = 10000m; 
             decimal total = productsSum + transport - discount;
+            if (total < 0m)
+            {
+                total = 0m;
+                discount = 0m;
+            }
 
             lblProductSum.Text = $"{productsSum:N0} đ";
             lblTransport.Text = $"{transport:N0} đ";
@@ -76,6 +84,34 @@ namespace ProductManagement.Forms.Forms_Extra
             {
                 var uc = new UC_ShippingCOD();
                 AddUCShip(uc);
+            }
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            if (flpCart.Controls.Count == 0) return;
+            var results = MessageBox.Show("Bạn có muốn hủy đơn hàng không", "Xác Nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (results != DialogResult.Yes) return;
+            CartService.Clear();
+            flpCart.SuspendLayout();
+            flpCart.Controls.Clear();
+            flpCart.ResumeLayout();
+            UpdateSum();
+            if(_shippingOverlay != null)
+            {
+                panelLeft.Controls.Remove(_shippingOverlay);
+                _shippingOverlay = null;
+            }
+        }
+        public void RemoveItemAndRefresh(string maSP)
+        {
+            CartService.RemoveItem(maSP);
+            LoadCart();
+            UpdateSum();
+            if (CartService.Items.Count == 0 && _shippingOverlay != null)
+            {
+                panelLeft.Controls.Remove(_shippingOverlay);
+                _shippingOverlay = null;
             }
         }
     }
