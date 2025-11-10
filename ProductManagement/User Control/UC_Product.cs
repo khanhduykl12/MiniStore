@@ -154,5 +154,30 @@ namespace ProductManagement.User_Control
             ShoppingCart sc = new ShoppingCart();
             sc.Show();
         }
+
+        private void btnKho_Click(object sender, EventArgs e)
+        {
+            var parent = this.Parent;
+            if (parent == null) return;
+
+            this.Visible = false;
+
+            var ucKho = new UC_Kho
+            {
+                Dock = DockStyle.Fill,
+                Tag = this
+            };
+
+
+            ucKho.Disposed += (s, ev) =>
+            {
+                if (this.IsDisposed) return;
+                this.Visible = true;
+                this.BringToFront();
+            };
+
+            parent.Controls.Add(ucKho);
+            ucKho.BringToFront();
+        }
     }
 }
