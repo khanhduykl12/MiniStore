@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProductManagement.Models;
+namespace MiniStore.Models;
 
 [Table("TAIKHOAN")]
-[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7245E12F8DF", IsUnique = true)]
+[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7248DF6BE6D", IsUnique = true)]
 public partial class TAIKHOAN
 {
     [Key]

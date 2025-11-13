@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.User_Control._UC
+﻿namespace MiniStore.User_Control._UC
 {
     partial class UC_ProductCart
     {

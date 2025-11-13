@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductManagement
+namespace MiniStore.Class
 {
     public static class Session
     {

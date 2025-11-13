@@ -1,8 +1,8 @@
 ﻿using Guna.UI2.WinForms;
-using ProductManagement.UC;
-using ProductManagement.User_Control;
+using MiniStore.UC;
+using MiniStore.User_Control;
 
-namespace ProductManagement
+namespace MiniStore
 {
     public partial class TrangChu : Form
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductManagement.Class;
-using ProductManagement.Models;
+using MiniStore.Class;
+using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProductManagement.Forms.Forms_Extra
+namespace MiniStore.Forms.Forms_Extra
 {
 
     public partial class ProductDetails : Form

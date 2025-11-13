@@ -1,4 +1,5 @@
-﻿using ProductManagement.Models;
+﻿using MiniStore.Models;
+using MiniStore.Class;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace ProductManagement
+namespace MiniStore
 {
     public partial class FormResetPass : Form
     {

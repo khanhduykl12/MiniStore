@@ -1,6 +1,6 @@
 ﻿using FFImageLoading.Cache;
 using Guna.UI2.WinForms;
-using ProductManagement.Models;
+using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProductManagement.Forms.Forms_Extra;
+using MiniStore.Forms.Forms_Extra;
 
-namespace ProductManagement.User_Control._UC
+namespace MiniStore.User_Control._UC
 {
     public partial class UC_ProductCart : UserControl
     {

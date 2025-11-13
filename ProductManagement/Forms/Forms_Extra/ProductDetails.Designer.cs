@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.Forms.Forms_Extra
+﻿namespace MiniStore.Forms.Forms_Extra
 {
     partial class ProductDetails
     {

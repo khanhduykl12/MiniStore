@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProductManagement.Forms.Forms_Extra;
-using ProductManagement.Models;
-using ProductManagement.User_Control._UC;
+using MiniStore.Forms.Forms_Extra;
+using MiniStore.Models;
+using MiniStore.User_Control._UC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProductManagement.User_Control
+namespace MiniStore.User_Control
 {
     public partial class UC_Product : UserControl
     {

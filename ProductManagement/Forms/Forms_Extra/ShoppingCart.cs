@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using ProductManagement.Class;
-using ProductManagement.User_Control.UC_Extra;
+using MiniStore.Class;
+using MiniStore.User_Control.UC_Extra;
 using System;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ProductManagement.Forms.Forms_Extra
+namespace MiniStore.Forms.Forms_Extra
 {
     public partial class ShoppingCart : Form
     {

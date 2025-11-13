@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.UC
+﻿namespace MiniStore.UC
 {
     partial class UC_Dashboard
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProductManagement.Properties {
+namespace MiniStore.Properties {
     using System;
     
     

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProductManagement.Models;
+namespace MiniStore.Models;
 
 [Table("SANPHAM")]
 public partial class SANPHAM
@@ -50,6 +50,9 @@ public partial class SANPHAM
 
     [InverseProperty("MASPNavigation")]
     public virtual ICollection<CHITIETHDNHAP> CHITIETHDNHAPs { get; set; } = new List<CHITIETHDNHAP>();
+
+    [InverseProperty("MASPNavigation")]
+    public virtual HANGTRUNGBAY? HANGTRUNGBAY { get; set; }
 
     [ForeignKey("MALOAI")]
     [InverseProperty("SANPHAMs")]

@@ -1,5 +1,5 @@
-﻿using ProductManagement.Class;
-using ProductManagement.Forms.Forms_Extra;
+﻿using MiniStore.Class;
+using MiniStore.Forms.Forms_Extra;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProductManagement.User_Control.UC_Extra
+namespace MiniStore.User_Control.UC_Extra
 {
     public partial class UC_ShopPCart : UserControl
     {

@@ -1,7 +1,7 @@
 using Guna.UI2.WinForms;
 using Microsoft.VisualBasic.ApplicationServices;
-using ProductManagement.Models;
-namespace ProductManagement
+using MiniStore.Models;
+namespace MiniStore
 {
     public partial class FormLogin : Form
     {

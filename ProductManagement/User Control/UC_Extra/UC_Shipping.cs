@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProductManagement.User_Control.UC_Extra
+namespace MiniStore.User_Control.UC_Extra
 {
     public partial class UC_Shipping : UserControl
     {

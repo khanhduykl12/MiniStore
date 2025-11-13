@@ -1,4 +1,4 @@
-﻿namespace ProductManagement
+﻿namespace MiniStore
 {
     partial class FormRegister
     {

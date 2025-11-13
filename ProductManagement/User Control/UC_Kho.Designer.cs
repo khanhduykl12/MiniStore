@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.User_Control
+﻿namespace MiniStore.User_Control
 {
     partial class UC_Kho
     {

@@ -6,18 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MiniStore.Models;
 
-[Keyless]
-public partial class V_SANPHAM_NHACUNGCAP
+[Table("HANGTRUNGBAY")]
+public partial class HANGTRUNGBAY
 {
+    [Key]
     [StringLength(10)]
     [Unicode(false)]
     public string MASP { get; set; } = null!;
 
-    [StringLength(100)]
-    public string? TENSP { get; set; }
+    public int SOLUONG_TRENKE { get; set; }
 
-    public int? SOLUONG { get; set; }
-
-    [StringLength(30)]
-    public string? TENNCC { get; set; }
+    [ForeignKey("MASP")]
+    [InverseProperty("HANGTRUNGBAY")]
+    public virtual SANPHAM MASPNavigation { get; set; } = null!;
 }

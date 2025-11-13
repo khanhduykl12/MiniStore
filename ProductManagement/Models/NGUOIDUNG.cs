@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProductManagement.Models;
+namespace MiniStore.Models;
 
 [Table("NGUOIDUNG")]
-[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12E2398BADB", IsUnique = true)]
+[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12E612F915C", IsUnique = true)]
 public partial class NGUOIDUNG
 {
     [Key]

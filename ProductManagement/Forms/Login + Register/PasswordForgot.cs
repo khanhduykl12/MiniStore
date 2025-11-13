@@ -1,4 +1,4 @@
-﻿using ProductManagement.Models;
+﻿using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,8 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using MiniStore.Class;
 
-namespace ProductManagement
+namespace MiniStore
 {
     public partial class PasswordForgot : Form
     {

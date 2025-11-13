@@ -1,4 +1,4 @@
-﻿using ProductManagement.Models;
+﻿using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProductManagement.User_Control
+namespace MiniStore.User_Control
 {
     public partial class UC_Kho : UserControl
     {

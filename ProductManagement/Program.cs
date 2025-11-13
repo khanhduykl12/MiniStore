@@ -1,4 +1,4 @@
-namespace ProductManagement
+namespace MiniStore
 {
     internal static class Program
     {
