@@ -1,7 +1,7 @@
-﻿create database QL_SIEUTHIMINI_TIEMTAPHOA;
+﻿create database QL_MiniShop;
 Go
 
-use QL_SIEUTHIMINI_TIEMTAPHOA;
+use QL_MiniShop;
 
 /* =======================
    TẠO CÁC BẢNG CHÍNH
@@ -154,6 +154,13 @@ CREATE TABLE PHIEUTHANHTOAN (
     CONSTRAINT PK_PHIEUTHANHTOAN PRIMARY KEY(MAPTT),
     CONSTRAINT FK_PHIEUTHANHTOAN_CONGNO FOREIGN KEY(MACONGNO) REFERENCES CONGNO(MACONGNO)
 );
+
+CREATE TABLE HANGTRUNG_AY (
+    MASP VARCHAR(10) NOT NULL PRIMARY KEY
+        REFERENCES SANPHAM(MASP),
+    SOLUONG_TRENKE INT NOT NULL DEFAULT 0
+);
+
 
 
    ---- TRIGGERS ----
@@ -435,6 +442,14 @@ INSERT INTO SANPHAM (MALOAI, MASP, TENSP, HINH, NSX, DVT, GIABAN, SOLUONG, MANCC
 ('LSP4' , 'SP030', N'Nước suối Lavie 1.5L',       N'Lavie1_5L.png',     '2025-09-02', N'Chai', 12000, 180, 'NCC03', '8931234567919', N'Nước chai dung tích lớn');
 
 
+--Bảng Hàng Trên Kệ
+
+INSERT INTO HANGTRUNGBAY (MASP, SOLUONG_TRENKE)
+SELECT SP.MASP, 0
+FROM SANPHAM SP
+LEFT JOIN HANGTRUNGBAY HTB ON SP.MASP = HTB.MASP
+WHERE HTB.MASP IS NULL;
+
 -- BẢNG HÓA ĐƠN BÁN
 INSERT INTO HDBAN (MAHD, NGAYLAP, NGUOILAP_ID, NGUOIMUA_ID, GHICHU) VALUES
 (N'HDB1', '2024-07-11', 3, 6, N'Ghi chú hóa đơn bán 1'),
@@ -561,6 +576,58 @@ BEGIN
 END
 
 EXEC usp_ThongKeDoanhThu @TuNgay = '2025-09-01', @DenNgay = '2025-10-10';
+
+----- Day Hang Len Ke -----
+GO
+CREATE PROCEDURE usp_DuaHangLenKe
+    @MaSP    VARCHAR(10),
+    @SoLuong INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @SoLuong <= 0
+    BEGIN
+        RAISERROR (N'Số lượng phải > 0', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @TonKho INT;
+
+    SELECT @TonKho = SOLUONG
+    FROM SANPHAM
+    WHERE MASP = @MaSP;
+
+    IF @TonKho IS NULL
+    BEGIN
+        RAISERROR (N'Sản phẩm không tồn tại', 16, 1);
+        RETURN;
+    END
+
+    IF @TonKho < @SoLuong
+    BEGIN
+        RAISERROR (N'Không đủ hàng trong kho', 16, 1);
+        RETURN;
+    END
+
+    -- Trừ trong kho
+    UPDATE SANPHAM
+    SET SOLUONG = SOLUONG - @SoLuong
+    WHERE MASP = @MaSP;
+
+    -- Cộng trên kệ
+    MERGE HANG_TRUNG_BAY AS target
+    USING (SELECT @MaSP AS MASP, @SoLuong AS SL) AS src
+    ON target.MASP = src.MASP
+    WHEN MATCHED THEN
+        UPDATE SET SL_TREN_KE = SL_TREN_KE + src.SL
+    WHEN NOT MATCHED THEN
+        INSERT (MASP, SL_TREN_KE)
+        VALUES (src.MASP, src.SL);
+END
+GO
+
+
 
 -----User-defined Function----
 

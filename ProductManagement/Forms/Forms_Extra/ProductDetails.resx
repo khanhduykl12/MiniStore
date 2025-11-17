@@ -123,11 +123,14 @@
   <metadata name="lOAISANPHAMBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="lOAISANPHAMBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnAddCard.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAF3FJREFUeF7t3ffTfGdZBvArPSRBoiACCU0YRBEZI11MEAiKCoZxgiW0QSkWxEoT
+        vAAADrwBlbxySQAAF3FJREFUeF7t3ffTfGdZBvArPSRBoiACCU0YRBEZI11MEAiKCoZxgiW0QSkWxEoT
         gUGlg7RgGUUBFekjiFhARlQggERFSIBABJOR8Z/A2WRJub/t3d2zu89zns9nZn+EvOe85zr3+72v3T0J
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwndskuSDJ05NcnORPk7xt8Ndf
         JHltkucn+bkk901yYj1xANCb70zykiSXf40DS/IPSZ6Y5PR6QgGgZQ9O8o91sLG6JK9OclY9wQDQkrOT

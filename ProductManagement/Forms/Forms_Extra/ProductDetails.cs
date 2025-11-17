@@ -62,6 +62,14 @@ namespace MiniStore.Forms.Forms_Extra
         }
         [Category("Product"), Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Bindable(true), DefaultValue(typeof(decimal), "0")]
+        public decimal SoLuongTrenKe
+        {
+            get => int.TryParse(lblSoLuongTrenKe.Tag?.ToString(), out var v) ? v : 0;
+            set { lblSoLuongTrenKe.Tag = value; lblSoLuongTrenKe.Text = $"Số Lượng Còn Trên Kệ: {value}"; }
+        }
+        [Category("Product"), Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Bindable(true), DefaultValue("")]
         public string ImageFile
         {
@@ -94,6 +102,7 @@ namespace MiniStore.Forms.Forms_Extra
                     x.TENSP,
                     x.DVT,
                     x.GIABAN,
+                    x.HANGTRUNGBAY.SOLUONG_TRENKE,
                     x.HINH
                 }).FirstOrDefaultAsync();
             if (sp == null)
@@ -109,6 +118,7 @@ namespace MiniStore.Forms.Forms_Extra
                 Gia = (decimal)(sp.GIABAN ?? 0);
                 DVT = sp.DVT;
                 LoaiHang = sp.TENLOAI ?? "";
+                SoLuongTrenKe = sp.SOLUONG_TRENKE;
                 ImageFile = sp.HINH;
             }
 

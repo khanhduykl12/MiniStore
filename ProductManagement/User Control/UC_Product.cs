@@ -47,7 +47,6 @@ namespace MiniStore.User_Control
             loais.Insert(0, new LOAISANPHAM { MALOAI = "ALL", TENLOAI = "Tất Cả Loại Hàng" });
 
             lOAISANPHAMBindingSource.DataSource = loais;
-
             if (cboAllCate.Items.Count > 0)
                 cboAllCate.SelectedIndex = 0;
 
@@ -178,6 +177,12 @@ namespace MiniStore.User_Control
 
             parent.Controls.Add(ucKho);
             ucKho.BringToFront();
+        }
+
+        private void addProduct_Click(object sender, EventArgs e)
+        {
+            AddProductShelves ps = new AddProductShelves();
+            ps.Show();
         }
     }
 }
