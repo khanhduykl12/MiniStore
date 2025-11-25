@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 
 
 # Ignore build output
+=======
+﻿# Ignore build output
+>>>>>>> main
 bin/
 obj/
 .vs/
@@ -31,3 +35,7 @@ release/
 # Ignore Visual Studio cache
 *.dbmdl
 *.opendb
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
