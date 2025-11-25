@@ -20,7 +20,7 @@ public partial class V_SANPHAM_HSD
     [Unicode(false)]
     public string MALOAI { get; set; } = null!;
 
-    [StringLength(100)]
+    [StringLength(20)]
     public string? TENLOAI { get; set; }
 
     public DateOnly? NSX { get; set; }

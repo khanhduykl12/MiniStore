@@ -17,5 +17,8 @@ public partial class VAITRO
     public string? MOTA { get; set; }
 
     [InverseProperty("MAROLENavigation")]
+    public virtual ICollection<NGUOIDUNG> NGUOIDUNGs { get; set; } = new List<NGUOIDUNG>();
+
+    [InverseProperty("MAROLENavigation")]
     public virtual ICollection<TAIKHOAN> TAIKHOANs { get; set; } = new List<TAIKHOAN>();
 }

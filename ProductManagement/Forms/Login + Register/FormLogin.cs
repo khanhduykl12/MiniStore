@@ -56,7 +56,7 @@ namespace MiniStore
                 }
                 if (user.MAROLE == "ADMIN" || user.MAROLE =="NV" || user.MAROLE == "KH")
                 {
-                    TrangChu tc = new TrangChu();
+                    TrangChu tc = new TrangChu(user.MAROLE);
                     this.Hide();
                     tc.ShowDialog();
                     this.Show();
