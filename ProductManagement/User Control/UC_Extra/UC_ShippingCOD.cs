@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniStore.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -52,10 +53,7 @@ namespace MiniStore.User_Control.UC_Extra
             uc.Show();
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Đơn hàng của bạn sẽ được giao trong vài giờ tới,vui lòng chú ý điện thoại!!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+
         private void AddPhuong()
         {
 
@@ -86,6 +84,15 @@ namespace MiniStore.User_Control.UC_Extra
         private void btnHuy_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Đơn hàng của bạn sẽ được giao trong vài giờ tới,vui lòng chú ý điện thoại!!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var db = new MiniStoreContext())
+            {
+                
+            }
         }
     }
 }

@@ -131,6 +131,11 @@ namespace MiniStore.Forms.Forms_Extra
 
         private void btnAddCard_Click(object sender, EventArgs e)
         {
+            if(int.TryParse(lblSoLuongTrenKe.Tag?.ToString(), out var soLuongTrenKe)&& soLuongTrenKe==0)
+            {
+                MessageBox.Show("Sản phẩm đã hết hàng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var gia = decimal.TryParse(lblGia.Tag?.ToString(), out var v) ? v : 0m;
             var soluong = (int)numSoLuong.Value;
             var ten = lblTen.Text ?? "";

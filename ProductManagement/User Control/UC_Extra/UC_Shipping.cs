@@ -72,7 +72,7 @@ namespace MiniStore.User_Control.UC_Extra
 
             cboPhuong.EndUpdate();
         }
-        
+
 
         private void cboQuan_SelectedIndexChanged(object sender, EventArgs e)
         {
