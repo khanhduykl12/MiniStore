@@ -1,16 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniStore.Class;
 using MiniStore.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Quic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MiniStore.Forms.Forms_Extra
 {
@@ -131,7 +123,7 @@ namespace MiniStore.Forms.Forms_Extra
 
         private void btnAddCard_Click(object sender, EventArgs e)
         {
-            if(int.TryParse(lblSoLuongTrenKe.Tag?.ToString(), out var soLuongTrenKe)&& soLuongTrenKe==0)
+            if (int.TryParse(lblSoLuongTrenKe.Tag?.ToString(), out var soLuongTrenKe) && soLuongTrenKe == 0)
             {
                 MessageBox.Show("Sản phẩm đã hết hàng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -151,7 +143,7 @@ namespace MiniStore.Forms.Forms_Extra
                 Hinh = HinhFile
             };
             CartService.AddItem(item);
-            MessageBox.Show("Đã thêm sản phẩm vào giỏ !!","Thông Báo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Đã thêm sản phẩm vào giỏ !!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }

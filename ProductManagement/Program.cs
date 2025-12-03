@@ -1,3 +1,5 @@
+using MiniShop.Forms.Forms_Extra;
+
 namespace MiniStore
 {
     internal static class Program
@@ -17,7 +19,7 @@ namespace MiniStore
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new TrangChu());
+                Application.Run(new ShoppingCartStaff());
             }
             catch (Exception ex)
             {
