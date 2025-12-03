@@ -1,4 +1,5 @@
-﻿using MiniStore.Class;
+﻿using MiniShop.User_Control.UC_Extra;
+using MiniStore.Class;
 using MiniStore.User_Control.UC_Extra;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace MiniShop.Forms.Forms_Extra
     public partial class ShoppingCartStaff : Form
     {
         private UserControl _shippingOverlay;
+        private UserControl _ScanbarcodeOverplay;
         private Control _cartView;
         public ShoppingCartStaff()
         {
@@ -75,6 +77,14 @@ namespace MiniShop.Forms.Forms_Extra
             uc.BringToFront();
             _shippingOverlay = uc;
         }
+        private void AddUCScan(UserControl uc)
+        {
+
+            uc.Dock = DockStyle.Fill;
+            panelRight.Controls.Add(uc);
+            uc.BringToFront();
+            _shippingOverlay = uc;
+        }
 
         private void btnDatHang_Click(object sender, EventArgs e)
         {
@@ -120,8 +130,8 @@ namespace MiniShop.Forms.Forms_Extra
 
         private void btnScanBarCode_Click(object sender, EventArgs e)
         {
-            ScanBarCode sbc = new ScanBarCode();
-            sbc.ShowDialog();
+            var uc = new UC_ScanBarCode();
+            AddUCScan(uc);
         }
     }
 }
