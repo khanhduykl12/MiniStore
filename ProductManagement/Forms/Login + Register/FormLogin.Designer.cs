@@ -31,28 +31,36 @@
             components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(components);
             txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             txtPassWord = new Guna.UI2.WinForms.Guna2TextBox();
             guna2GradientButton1 = new Guna.UI2.WinForms.Guna2GradientButton();
             btnRegisterForm = new Guna.UI2.WinForms.Guna2Button();
-            lblErrorUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            lblErrorPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2ImageButton1 = new Guna.UI2.WinForms.Guna2ImageButton();
-            guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(components);
             lblQuenMatKhau = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblErrorPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            lblErrorUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            videoView1 = new LibVLCSharp.WinForms.VideoView();
+            ((System.ComponentModel.ISupportInitialize)videoView1).BeginInit();
             SuspendLayout();
+            // 
+            // guna2DragControl1
+            // 
+            guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
+            guna2DragControl1.TargetControl = this;
+            guna2DragControl1.UseTransparentDrag = true;
             // 
             // txtUserName
             // 
+            txtUserName.BackColor = Color.Transparent;
             txtUserName.CustomizableEdges = customizableEdges1;
             txtUserName.DefaultText = "";
             txtUserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -62,7 +70,7 @@
             txtUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtUserName.Font = new Font("Segoe UI", 9F);
             txtUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtUserName.Location = new Point(353, 191);
+            txtUserName.Location = new Point(330, 185);
             txtUserName.Margin = new Padding(3, 4, 3, 4);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "UserName";
@@ -75,7 +83,8 @@
             // 
             // txtPassWord
             // 
-            txtPassWord.CustomizableEdges = customizableEdges3;
+            txtPassWord.BackColor = Color.Transparent;
+            txtPassWord.CustomizableEdges = customizableEdges4;
             txtPassWord.DefaultText = "";
             txtPassWord.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPassWord.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -84,21 +93,21 @@
             txtPassWord.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPassWord.Font = new Font("Segoe UI", 9F);
             txtPassWord.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPassWord.Location = new Point(353, 296);
+            txtPassWord.Location = new Point(330, 290);
             txtPassWord.Margin = new Padding(3, 4, 3, 4);
             txtPassWord.Name = "txtPassWord";
             txtPassWord.PasswordChar = '*';
             txtPassWord.PlaceholderText = "Password";
             txtPassWord.SelectedText = "";
-            txtPassWord.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            txtPassWord.ShadowDecoration.CustomizableEdges = customizableEdges5;
             txtPassWord.Size = new Size(286, 60);
             txtPassWord.TabIndex = 2;
             txtPassWord.TextChanged += txtPassWord_TextChanged;
             // 
             // guna2GradientButton1
             // 
-            guna2GradientButton1.BorderRadius = 30;
-            guna2GradientButton1.CustomizableEdges = customizableEdges5;
+            guna2GradientButton1.BackColor = Color.Transparent;
+            guna2GradientButton1.CustomizableEdges = customizableEdges6;
             guna2GradientButton1.DisabledState.BorderColor = Color.DarkGray;
             guna2GradientButton1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2GradientButton1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -106,125 +115,123 @@
             guna2GradientButton1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2GradientButton1.Font = new Font("Segoe UI", 9F);
             guna2GradientButton1.ForeColor = Color.White;
-            guna2GradientButton1.Location = new Point(552, 420);
+            guna2GradientButton1.Location = new Point(656, 424);
             guna2GradientButton1.Name = "guna2GradientButton1";
-            guna2GradientButton1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2GradientButton1.Size = new Size(225, 56);
+            guna2GradientButton1.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            guna2GradientButton1.Size = new Size(224, 56);
             guna2GradientButton1.TabIndex = 3;
             guna2GradientButton1.Text = "Đăng Nhập";
             guna2GradientButton1.Click += guna2GradientButton1_Click;
             // 
             // btnRegisterForm
             // 
-            btnRegisterForm.BorderRadius = 30;
-            btnRegisterForm.CustomizableEdges = customizableEdges7;
+            btnRegisterForm.BackColor = Color.White;
+            btnRegisterForm.CustomizableEdges = customizableEdges8;
             btnRegisterForm.DisabledState.BorderColor = Color.DarkGray;
             btnRegisterForm.DisabledState.CustomBorderColor = Color.DarkGray;
             btnRegisterForm.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnRegisterForm.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             btnRegisterForm.Font = new Font("Segoe UI", 9F);
             btnRegisterForm.ForeColor = Color.White;
-            btnRegisterForm.Location = new Point(235, 420);
+            btnRegisterForm.Location = new Point(112, 424);
             btnRegisterForm.Name = "btnRegisterForm";
-            btnRegisterForm.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnRegisterForm.ShadowDecoration.CustomizableEdges = customizableEdges9;
             btnRegisterForm.Size = new Size(225, 56);
             btnRegisterForm.TabIndex = 4;
             btnRegisterForm.Text = "Đăng Ký";
             btnRegisterForm.Click += btnRegisterForm_Click;
             // 
-            // lblErrorUserName
-            // 
-            lblErrorUserName.BackColor = Color.Transparent;
-            lblErrorUserName.Location = new Point(355, 162);
-            lblErrorUserName.Name = "lblErrorUserName";
-            lblErrorUserName.Size = new Size(129, 22);
-            lblErrorUserName.TabIndex = 5;
-            lblErrorUserName.Text = "thong bao loi valid";
-            // 
-            // lblErrorPassword
-            // 
-            lblErrorPassword.BackColor = Color.Transparent;
-            lblErrorPassword.Location = new Point(355, 267);
-            lblErrorPassword.Name = "lblErrorPassword";
-            lblErrorPassword.Size = new Size(129, 22);
-            lblErrorPassword.TabIndex = 6;
-            lblErrorPassword.Text = "thong bao loi valid";
-            // 
-            // guna2HtmlLabel1
-            // 
-            guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 25F);
-            guna2HtmlLabel1.Location = new Point(372, 84);
-            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(215, 59);
-            guna2HtmlLabel1.TabIndex = 7;
-            guna2HtmlLabel1.Text = "Đăng Nhập";
-            // 
             // guna2ImageButton1
             // 
+            guna2ImageButton1.BackColor = Color.Transparent;
             guna2ImageButton1.CheckedState.ImageSize = new Size(64, 64);
             guna2ImageButton1.HoverState.ImageSize = new Size(64, 64);
             guna2ImageButton1.Image = (Image)resources.GetObject("guna2ImageButton1.Image");
             guna2ImageButton1.ImageOffset = new Point(0, 0);
             guna2ImageButton1.ImageRotate = 0F;
-            guna2ImageButton1.Location = new Point(870, 37);
+            guna2ImageButton1.Location = new Point(866, 12);
             guna2ImageButton1.Name = "guna2ImageButton1";
             guna2ImageButton1.PressedState.ImageSize = new Size(64, 64);
-            guna2ImageButton1.ShadowDecoration.CustomizableEdges = customizableEdges9;
+            guna2ImageButton1.ShadowDecoration.CustomizableEdges = customizableEdges3;
             guna2ImageButton1.Size = new Size(80, 68);
             guna2ImageButton1.TabIndex = 8;
             guna2ImageButton1.Click += guna2ImageButton1_Click;
             // 
-            // guna2DragControl1
-            // 
-            guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
-            guna2DragControl1.TargetControl = this;
-            guna2DragControl1.UseTransparentDrag = true;
-            // 
             // lblQuenMatKhau
             // 
             lblQuenMatKhau.BackColor = Color.Transparent;
-            lblQuenMatKhau.Location = new Point(438, 379);
+            lblQuenMatKhau.Location = new Point(415, 373);
             lblQuenMatKhau.Name = "lblQuenMatKhau";
             lblQuenMatKhau.Size = new Size(110, 22);
             lblQuenMatKhau.TabIndex = 9;
             lblQuenMatKhau.Text = "Quên mật khẩu?";
             lblQuenMatKhau.Click += lblQuenMatKhau_Click;
             // 
+            // lblErrorPassword
+            // 
+            lblErrorPassword.BackColor = Color.Transparent;
+            lblErrorPassword.Location = new Point(332, 261);
+            lblErrorPassword.Name = "lblErrorPassword";
+            lblErrorPassword.Size = new Size(129, 22);
+            lblErrorPassword.TabIndex = 6;
+            lblErrorPassword.Text = "thong bao loi valid";
+            // 
+            // lblErrorUserName
+            // 
+            lblErrorUserName.BackColor = Color.Transparent;
+            lblErrorUserName.Location = new Point(363, 165);
+            lblErrorUserName.Name = "lblErrorUserName";
+            lblErrorUserName.Size = new Size(129, 22);
+            lblErrorUserName.TabIndex = 5;
+            lblErrorUserName.Text = "thong bao loi valid";
+            // 
+            // videoView1
+            // 
+            videoView1.BackColor = Color.Black;
+            videoView1.Dock = DockStyle.Fill;
+            videoView1.Location = new Point(0, 0);
+            videoView1.MediaPlayer = null;
+            videoView1.Name = "videoView1";
+            videoView1.Size = new Size(975, 549);
+            videoView1.TabIndex = 13;
+            videoView1.Text = "videoView1";
+            videoView1.Click += videoView1_Click_1;
+            // 
             // FormLogin
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.White;
-            ClientSize = new Size(1000, 650);
+            ClientSize = new Size(975, 549);
+            Controls.Add(txtUserName);
             Controls.Add(lblQuenMatKhau);
             Controls.Add(guna2ImageButton1);
-            Controls.Add(guna2HtmlLabel1);
             Controls.Add(lblErrorPassword);
-            Controls.Add(lblErrorUserName);
-            Controls.Add(btnRegisterForm);
-            Controls.Add(guna2GradientButton1);
             Controls.Add(txtPassWord);
-            Controls.Add(txtUserName);
+            Controls.Add(lblErrorUserName);
+            Controls.Add(guna2GradientButton1);
+            Controls.Add(btnRegisterForm);
+            Controls.Add(videoView1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Đăng nhập";
             Load += FormLogin_Load;
+            ((System.ComponentModel.ISupportInitialize)videoView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2TextBox txtUserName;
-        private Guna.UI2.WinForms.Guna2TextBox txtPassWord;
-        private Guna.UI2.WinForms.Guna2GradientButton guna2GradientButton1;
-        private Guna.UI2.WinForms.Guna2Button btnRegisterForm;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblErrorUserName;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblErrorPassword;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton1;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblQuenMatKhau;
+        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblErrorPassword;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblErrorUserName;
+        private Guna.UI2.WinForms.Guna2Button btnRegisterForm;
+        private Guna.UI2.WinForms.Guna2GradientButton guna2GradientButton1;
+        private Guna.UI2.WinForms.Guna2TextBox txtPassWord;
+        private Guna.UI2.WinForms.Guna2TextBox txtUserName;
+        private LibVLCSharp.WinForms.VideoView videoView1;
     }
 }

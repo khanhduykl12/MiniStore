@@ -1,15 +1,19 @@
 using Guna.UI2.WinForms;
+using LibVLCSharp.Shared;
 using Microsoft.VisualBasic.ApplicationServices;
 using MiniStore.Models;
+using MiniStore.User_Control;
+using System.IO;
 namespace MiniStore
 {
     public partial class FormLogin : Form
     {
-        
+        private LibVLC _libVLC;
+        private MediaPlayer _mediaPlayer;
         public FormLogin()
         {
             InitializeComponent();
-          
+
         }
         int count = 3;
         private void guna2GradientButton1_Click(object sender, EventArgs e)
@@ -54,18 +58,19 @@ namespace MiniStore
                         count--;
                     }
                 }
-                if (user.MAROLE == "ADMIN" || user.MAROLE =="NV" || user.MAROLE == "KH")
+                if (user.MAROLE == "ADMIN" || user.MAROLE == "NV" || user.MAROLE == "KH")
                 {
                     TrangChu tc = new TrangChu(user.MAROLE);
+                    UC_Product prod = new UC_Product(user.MAROLE);
                     this.Hide();
                     tc.ShowDialog();
                     this.Show();
-                    
+
                 }
-               
+
             }
-            
-            
+
+
         }
 
         private void btnRegisterForm_Click(object sender, EventArgs e)
@@ -94,6 +99,72 @@ namespace MiniStore
             lblErrorUserName.Text = string.Empty;
             lblErrorPassword.Text = string.Empty;
             lblQuenMatKhau.Text = string.Empty;
+
+
+            Core.Initialize();
+
+            _libVLC = new LibVLC();
+            _mediaPlayer = new MediaPlayer(_libVLC);
+
+            videoView1.MediaPlayer = _mediaPlayer;
+            videoView1.Dock = DockStyle.Fill;   // Quan trọng: Video phải fill toàn màn hình
+            videoView1.SendToBack();            // Video nằm dưới panel login
+
+            // Đường dẫn video từ thư mục Forms
+            string videoPath = Path.Combine(Application.StartupPath, "..", "..", "..", "Forms", "videos", "mystore!(1).mp4");
+            string fullPath = Path.GetFullPath(videoPath);
+
+            // Nếu không tìm thấy, thử đường dẫn trong thư mục bin
+            if (!File.Exists(fullPath))
+            {
+                string altPath = Path.Combine(Application.StartupPath, "videos", "mystore!(1).mp4");
+                if (File.Exists(altPath))
+                {
+                    fullPath = altPath;
+                }
+                else
+                {
+                    // Thử đường dẫn khác: Forms\videos
+                    string altPath2 = Path.Combine(Application.StartupPath, "..", "..", "..", "..", "Forms", "videos", "mystore!(1).mp4");
+                    string fullPath2 = Path.GetFullPath(altPath2);
+                    if (File.Exists(fullPath2))
+                    {
+                        fullPath = fullPath2;
+                    }
+                }
+            }
+
+            if (File.Exists(fullPath))
+            {
+                var media = new Media(_libVLC, fullPath, FromType.FromPath,
+                                      ":input-repeat=-1",
+                                      ":no-video-title-show");
+
+                _mediaPlayer.Media = media;
+                _mediaPlayer.Play();
+                _mediaPlayer.Mute = true;
+
+                // Đảm bảo video lặp lại khi kết thúc
+                _mediaPlayer.EndReached += (sender, e) =>
+                {
+                    // Tạo media mới và phát lại
+                    var newMedia = new Media(_libVLC, fullPath, FromType.FromPath,
+                                            ":input-repeat=-1",
+                                            ":no-video-title-show");
+                    _mediaPlayer.Media = newMedia;
+                    _mediaPlayer.Play();
+                };
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy video. Đã thử:\n" +
+                              Path.GetFullPath(Path.Combine(Application.StartupPath, "..", "..", "..", "Forms", "videos", "mystore!(1).mp4")) + "\n" +
+                              Path.Combine(Application.StartupPath, "videos", "mystore!(1).mp4"));
+            }
+
+
+
+
         }
 
         private void txtUserName_Leave(object sender, EventArgs e)
@@ -113,7 +184,7 @@ namespace MiniStore
             // Xóa error message của userName khi có thay đổi
             lblErrorUserName.Text = string.Empty;
         }
-    
+
 
         private void validateUserName()
         {
@@ -173,6 +244,29 @@ namespace MiniStore
             }
         }
 
-       
+        private void backgroundLogin_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void videoView1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2CustomGradientPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void videoView1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

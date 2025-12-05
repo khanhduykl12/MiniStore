@@ -20,7 +20,7 @@ namespace MiniStore
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                Application.Run(new TrangChu("ADMIN"));
+                Application.Run(new FormLogin());
             }
             catch (Exception ex)
             {
