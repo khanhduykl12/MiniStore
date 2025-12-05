@@ -56,7 +56,7 @@ namespace MiniStore.User_Control._UC
                 if (DesignMode || LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
 
                 var p = Path.Combine(Application.StartupPath, "ImagesProduct", value ?? "");
-                picProduct.Image = File.Exists(p) ? Image.FromFile(p) : Properties.Resources.no_image;
+                picProduct.Image = File.Exists(p) ? Image.FromFile(p) : null;
             }
         }
 

@@ -3,6 +3,7 @@ using MiniStore.Class;
 using MiniStore.Models;
 using System.ComponentModel;
 using System.Data;
+using MiniShop.Properties;
 
 namespace MiniStore.Forms.Forms_Extra
 {
@@ -77,7 +78,7 @@ namespace MiniStore.Forms.Forms_Extra
                 }
                 else
                 {
-                    picProduct.Image = Properties.Resources.no_image;
+                    picProduct.Image = null;
                 }
                 picProduct.Tag = imageFile;
             }

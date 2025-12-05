@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniStore.Models;
+using MiniShop.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,7 +89,7 @@ namespace MiniStore.Forms.Forms_Extra
             }
             else
             {
-                picSanPham.Image = Properties.Resources.no_image;
+                picSanPham.Image = null;
             }
 
             var ncc = db.NHACUNGCAPs

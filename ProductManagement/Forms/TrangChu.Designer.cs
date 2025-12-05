@@ -146,7 +146,7 @@
             btnStaff.ForeColor = Color.White;
             btnStaff.Image = (Image)resources.GetObject("btnStaff.Image");
             btnStaff.ImageSize = new Size(37, 37);
-            btnStaff.Location = new Point(41, 582);
+            btnStaff.Location = new Point(47, 474);
             btnStaff.Name = "btnStaff";
             btnStaff.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnStaff.Size = new Size(83, 68);
@@ -175,13 +175,14 @@
             btnRevenue.ForeColor = Color.White;
             btnRevenue.Image = (Image)resources.GetObject("btnRevenue.Image");
             btnRevenue.ImageSize = new Size(37, 37);
-            btnRevenue.Location = new Point(41, 480);
+            btnRevenue.Location = new Point(47, 567);
             btnRevenue.Name = "btnRevenue";
             btnRevenue.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnRevenue.Size = new Size(83, 68);
             btnRevenue.TabIndex = 5;
             btnRevenue.UseTransparentBackground = true;
             btnRevenue.CheckedChanged += btnHome_CheckedChanged;
+            btnRevenue.Click += btnRevenue_Click;
             // 
             // btnBill
             // 
@@ -304,7 +305,6 @@
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(1345, 927);
             panelContainer.TabIndex = 1;
-            panelContainer.Paint += panelContainer_Paint;
             // 
             // guna2Elipse1
             // 

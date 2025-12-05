@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 ﻿# Ignore build output
+=======
+<<<<<<< HEAD
+
+
+# Ignore build output
+=======
+﻿# Ignore build output
+>>>>>>> main
+>>>>>>> origin/ThuanBranch
 bin/
 obj/
 .vs/
@@ -29,4 +39,11 @@ release/
 # Ignore Visual Studio cache
 *.dbmdl
 *.opendb
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
+>>>>>>> origin/ThuanBranch

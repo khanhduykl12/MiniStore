@@ -30,7 +30,7 @@ namespace MiniStore.User_Control.UC_Extra
             numSoLuong.Value = item.SoLuong;
             GiaSP = item.Gia;
             var pathIMG = Path.Combine(Application.StartupPath, "ImagesProduct", item.Hinh ?? "");
-            picProduct.Image = File.Exists(pathIMG) ? Image.FromFile(pathIMG) : Properties.Resources.no_image;
+            picProduct.Image = File.Exists(pathIMG) ? Image.FromFile(pathIMG) : null;
             UpdateGia();
         }
 
