@@ -47,6 +47,8 @@ public partial class MiniStoreContext : DbContext
 
     public virtual DbSet<V_CONGNO_PHAITRA> V_CONGNO_PHAITRAs { get; set; }
 
+    public virtual DbSet<V_HOADON_CHITIET> V_HOADON_CHITIETs { get; set; }
+
     public virtual DbSet<V_SANPHAM_HSD> V_SANPHAM_HSDs { get; set; }
 
     public virtual DbSet<V_SANPHAM_NHACUNGCAP> V_SANPHAM_NHACUNGCAPs { get; set; }
@@ -55,13 +57,13 @@ public partial class MiniStoreContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=laphuthu\\SQL2022DEV;Database=QL_MiniShop_Thuan;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=KHANHDUY\\SQLEXPRESS;Database=QL_MiniShop;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CHITIETHDBAN>(entity =>
         {
-            entity.ToTable("CHITIETHDBAN", tb => tb.HasTrigger("TRG_DeleteEmptyInvoice"));
+            entity.ToTable("CHITIETHDBAN", tb => tb.HasTrigger("trg_Update_SoLuongBan"));
 
             entity.Property(e => e.THANHTIEN).HasComputedColumnSql("([SOLUONG]*[DONGIA])", true);
 
@@ -76,6 +78,8 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<CHITIETHDNHAP>(entity =>
         {
+            entity.ToTable("CHITIETHDNHAP", tb => tb.HasTrigger("trg_Update_SoLuongNhap"));
+
             entity.Property(e => e.THANHTIENN).HasComputedColumnSql("([SOLUONGTN]*[DONGIANHAP])", true);
 
             entity.HasOne(d => d.MAHDNHAPNavigation).WithMany(p => p.CHITIETHDNHAPs)
@@ -104,24 +108,26 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<HANGTRUNGBAY>(entity =>
         {
-            entity.HasKey(e => e.MASP).HasName("PK__HANGTRUN__60228A32EA940407");
+            entity.HasKey(e => e.MASP).HasName("PK__HANGTRUN__60228A32345204A7");
 
             entity.HasOne(d => d.MASPNavigation).WithOne(p => p.HANGTRUNGBAY)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HANGTRUNGB__MASP__27AED5D5");
+                .HasConstraintName("FK__HANGTRUNGB__MASP__3C34F16F");
         });
 
         modelBuilder.Entity<HDBAN>(entity =>
         {
-            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CE903E184D");
+            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CEEA0E48BF");
+
+            entity.ToTable("HDBAN", tb => tb.HasTrigger("trg_CheckRole_HDBAN"));
 
             entity.HasOne(d => d.NGUOILAP).WithMany(p => p.HDBANNGUOILAPs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HDBAN__NGUOILAP___027D5126");
+                .HasConstraintName("FK__HDBAN__NGUOILAP___59FA5E80");
 
             entity.HasOne(d => d.NGUOIMUA).WithMany(p => p.HDBANNGUOIMUAs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HDBAN__NGUOIMUA___0371755F");
+                .HasConstraintName("FK__HDBAN__NGUOIMUA___5AEE82B9");
         });
 
         modelBuilder.Entity<HDNHAP>(entity =>
@@ -130,21 +136,24 @@ public partial class MiniStoreContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HDNHAP_NHACC");
 
-            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.HDNHAPs).HasConstraintName("FK_HDNHAP_TAIKHOAN");
+            entity.HasOne(d => d.USERNAMENavigation).WithMany(p => p.HDNHAPs)
+                .HasPrincipalKey(p => p.USERNAME)
+                .HasForeignKey(d => d.USERNAME)
+                .HasConstraintName("FK_HDNHAP_NHANVIEN");
         });
 
         modelBuilder.Entity<NGUOIDUNG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC2799B88A2F");
+            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC27EBDB4837");
 
-            entity.HasOne(d => d.MAROLENavigation).WithMany(p => p.NGUOIDUNGs).HasConstraintName("FK_NGUOIDUNG_VAITRO");
-
-            entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.NGUOIDUNG).HasConstraintName("FK_NHANVIEN_TAIKHOAN");
+            entity.HasOne(d => d.USERNAMENavigation).WithOne(p => p.NGUOIDUNG)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_NHANVIEN_TAIKHOAN");
         });
 
         modelBuilder.Entity<OTP_LOG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC270A4B0C40");
+            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC271C22D3B8");
 
             entity.Property(e => e.CREATE_AT).HasDefaultValueSql("(getdate())");
 
@@ -155,6 +164,8 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<PHIEUTHANHTOAN>(entity =>
         {
+            entity.ToTable("PHIEUTHANHTOAN", tb => tb.HasTrigger("trg_UpdateCongNo_AfterPTT"));
+
             entity.Property(e => e.NGAYTRA).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.MACONGNONavigation).WithMany(p => p.PHIEUTHANHTOANs)
@@ -190,6 +201,11 @@ public partial class MiniStoreContext : DbContext
         modelBuilder.Entity<V_CONGNO_PHAITRA>(entity =>
         {
             entity.ToView("V_CONGNO_PHAITRA");
+        });
+
+        modelBuilder.Entity<V_HOADON_CHITIET>(entity =>
+        {
+            entity.ToView("V_HOADON_CHITIET");
         });
 
         modelBuilder.Entity<V_SANPHAM_HSD>(entity =>

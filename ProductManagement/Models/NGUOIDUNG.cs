@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MiniStore.Models;
 
 [Table("NGUOIDUNG")]
-[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12EA271580D", IsUnique = true)]
+[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12E612F915C", IsUnique = true)]
 public partial class NGUOIDUNG
 {
     [Key]
@@ -15,7 +15,7 @@ public partial class NGUOIDUNG
 
     [StringLength(20)]
     [Unicode(false)]
-    public string? USERNAME { get; set; }
+    public string USERNAME { get; set; } = null!;
 
     [StringLength(30)]
     public string HOTEN { get; set; } = null!;
@@ -49,11 +49,10 @@ public partial class NGUOIDUNG
     [InverseProperty("NGUOIMUA")]
     public virtual ICollection<HDBAN> HDBANNGUOIMUAs { get; set; } = new List<HDBAN>();
 
-    [ForeignKey("MAROLE")]
-    [InverseProperty("NGUOIDUNGs")]
-    public virtual VAITRO? MAROLENavigation { get; set; }
+    [InverseProperty("USERNAMENavigation")]
+    public virtual ICollection<HDNHAP> HDNHAPs { get; set; } = new List<HDNHAP>();
 
     [ForeignKey("USERNAME")]
     [InverseProperty("NGUOIDUNG")]
-    public virtual TAIKHOAN? USERNAMENavigation { get; set; }
+    public virtual TAIKHOAN USERNAMENavigation { get; set; } = null!;
 }

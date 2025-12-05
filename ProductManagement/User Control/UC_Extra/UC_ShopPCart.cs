@@ -1,4 +1,5 @@
-﻿using MiniStore.Class;
+﻿using MiniShop.Forms.Forms_Extra;
+using MiniStore.Class;
 using MiniStore.Forms.Forms_Extra;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace MiniStore.User_Control.UC_Extra
             }
             UpdateGia();
             (FindForm() as ShoppingCart)?.UpdateSum();
+            (FindForm() as ShoppingCartStaff)?.UpdateSum();
         }
     }
 }

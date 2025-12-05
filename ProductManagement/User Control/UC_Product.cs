@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniShop.Forms.Forms_Extra;
 using MiniStore.Forms.Forms_Extra;
 using MiniStore.Models;
 using MiniStore.User_Control._UC;
@@ -150,7 +151,8 @@ namespace MiniStore.User_Control
 
         private void btnShopCard_Click(object sender, EventArgs e)
         {
-            ShoppingCart sc = new ShoppingCart();
+            //ShoppingCart sc = new ShoppingCart();
+            ShoppingCartStaff sc = new ShoppingCartStaff();
             sc.Show();
         }
 

@@ -151,5 +151,6 @@
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="ZXing.Net" Version="0.16.11" />
     <PackageReference Include="QuestPDF" Version="2024.10.2" />
+    <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.14" />
   </ItemGroup>
 </Project>

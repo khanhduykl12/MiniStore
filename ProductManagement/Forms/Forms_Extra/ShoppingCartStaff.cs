@@ -83,7 +83,7 @@ namespace MiniShop.Forms.Forms_Extra
             uc.Dock = DockStyle.Fill;
             panelRight.Controls.Add(uc);
             uc.BringToFront();
-            _shippingOverlay = uc;
+            _ScanbarcodeOverplay = uc;
         }
 
         private void btnDatHang_Click(object sender, EventArgs e)
@@ -131,7 +131,79 @@ namespace MiniShop.Forms.Forms_Extra
         private void btnScanBarCode_Click(object sender, EventArgs e)
         {
             var uc = new UC_ScanBarCode();
+            uc.ProductScanned += OnProductScanned;
             AddUCScan(uc);
+        }
+        private void OnProductScanned(object sender, UC_ScanBarCode.ProductScannedEventArgs e)
+        {
+            // Tìm trong giỏ đã có chưa
+            var existing = CartService.Items.FirstOrDefault(x => x.MaSP == e.MaSP);
+            if (existing != null)
+            {
+                existing.SoLuong += 1;
+            }
+            else
+            {
+                CartService.AddItem(new CartItem
+                {
+                    MaSP = e.MaSP,
+                    TenSP = e.TenSP,
+                    Gia = e.GiaBan,
+                    SoLuong = 1,
+                    DVT = e.DVT,
+                    Hinh = e.Hinh
+                });
+            }
+
+            LoadCart();
+            UpdateSum();
+
+            // ẩn overlay sau khi lưu (nếu muốn quét nhiều lần thì có thể bỏ đoạn này)
+            if (_ScanbarcodeOverplay is UC_ScanBarCode scan)
+            {
+                scan.CloseScanner();
+            }
+            if (_ScanbarcodeOverplay != null)
+            {
+                panelRight.Controls.Remove(_ScanbarcodeOverplay);
+                _ScanbarcodeOverplay = null;
+            }
+        }
+
+        private void btnBack_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnHuy_Click_1(object sender, EventArgs e)
+        {
+            if (flpCart.Controls.Count == 0) return;
+            var results = MessageBox.Show("Bạn có muốn hủy đơn hàng không", "Xác Nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (results != DialogResult.Yes) return;
+            CartService.Clear();
+            flpCart.SuspendLayout();
+            flpCart.Controls.Clear();
+            flpCart.ResumeLayout();
+            UpdateSum();
+            if (_shippingOverlay != null)
+            {
+                panelLeft.Controls.Remove(_shippingOverlay);
+                _shippingOverlay = null;
+            }
+        }
+
+        private void btnDatHang_Click_1(object sender, EventArgs e)
+        {
+            if (radMoMo.Checked || radBank.Checked)
+            {
+                var uc = new UC_Shipping();
+                AddUCShip(uc);
+            }
+            else
+            {
+                var uc = new UC_ShippingCOD();
+                AddUCShip(uc);
+            }
         }
     }
 }

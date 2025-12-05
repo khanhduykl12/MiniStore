@@ -241,6 +241,7 @@
             btnBack.Size = new Size(105, 50);
             btnBack.TabIndex = 30;
             btnBack.Text = "Trở Về";
+            btnBack.Click += btnBack_Click_1;
             // 
             // btnHuy
             // 
@@ -261,6 +262,7 @@
             btnHuy.Size = new Size(133, 50);
             btnHuy.TabIndex = 31;
             btnHuy.Text = "Hủy Đơn Hàng";
+            btnHuy.Click += btnHuy_Click_1;
             // 
             // panelLeft
             // 
@@ -405,6 +407,7 @@
             btnDatHang.Size = new Size(367, 52);
             btnDatHang.TabIndex = 34;
             btnDatHang.Text = "Đặt Hàng";
+            btnDatHang.Click += btnDatHang_Click_1;
             // 
             // guna2Separator4
             // 

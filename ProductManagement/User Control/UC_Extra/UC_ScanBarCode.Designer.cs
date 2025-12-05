@@ -38,31 +38,31 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            btnProduct = new Guna.UI2.WinForms.Guna2Button();
-            textBox1 = new TextBox();
+            txtBarCode = new TextBox();
+            btnSave = new Guna.UI2.WinForms.Guna2Button();
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            btnBack = new Guna.UI2.WinForms.Guna2Button();
+            btnStop = new Guna.UI2.WinForms.Guna2Button();
+            btnStart = new Guna.UI2.WinForms.Guna2Button();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            pictureBox1 = new PictureBox();
-            comboBox1 = new ComboBox();
+            picCamera = new PictureBox();
+            cboCamera = new ComboBox();
             label1 = new Label();
             guna2Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picCamera).BeginInit();
             SuspendLayout();
             // 
             // guna2Panel1
             // 
             guna2Panel1.BackColor = Color.Transparent;
             guna2Panel1.BorderRadius = 18;
-            guna2Panel1.Controls.Add(btnProduct);
-            guna2Panel1.Controls.Add(textBox1);
+            guna2Panel1.Controls.Add(txtBarCode);
+            guna2Panel1.Controls.Add(btnSave);
             guna2Panel1.Controls.Add(guna2Separator2);
-            guna2Panel1.Controls.Add(guna2Button1);
-            guna2Panel1.Controls.Add(btnBack);
+            guna2Panel1.Controls.Add(btnStop);
+            guna2Panel1.Controls.Add(btnStart);
             guna2Panel1.Controls.Add(guna2Separator1);
-            guna2Panel1.Controls.Add(pictureBox1);
-            guna2Panel1.Controls.Add(comboBox1);
+            guna2Panel1.Controls.Add(picCamera);
+            guna2Panel1.Controls.Add(cboCamera);
             guna2Panel1.Controls.Add(label1);
             guna2Panel1.CustomizableEdges = customizableEdges7;
             guna2Panel1.Dock = DockStyle.Fill;
@@ -73,39 +73,39 @@
             guna2Panel1.Size = new Size(403, 428);
             guna2Panel1.TabIndex = 0;
             // 
-            // btnProduct
+            // txtBarCode
             // 
-            btnProduct.BackColor = Color.Transparent;
-            btnProduct.BorderColor = Color.FromArgb(53, 41, 123);
-            btnProduct.BorderRadius = 35;
-            btnProduct.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            btnProduct.CheckedState.BorderColor = Color.White;
-            btnProduct.CheckedState.FillColor = Color.White;
-            btnProduct.Cursor = Cursors.Hand;
-            btnProduct.CustomizableEdges = customizableEdges1;
-            btnProduct.DisabledState.BorderColor = Color.DarkGray;
-            btnProduct.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnProduct.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnProduct.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnProduct.FillColor = Color.Transparent;
-            btnProduct.Font = new Font("Segoe UI", 9F);
-            btnProduct.ForeColor = Color.White;
-            btnProduct.Image = (Image)resources.GetObject("btnProduct.Image");
-            btnProduct.ImageSize = new Size(47, 47);
-            btnProduct.Location = new Point(322, 368);
-            btnProduct.Name = "btnProduct";
-            btnProduct.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnProduct.Size = new Size(59, 52);
-            btnProduct.TabIndex = 35;
-            btnProduct.UseTransparentBackground = true;
+            txtBarCode.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtBarCode.Location = new Point(18, 380);
+            txtBarCode.Name = "txtBarCode";
+            txtBarCode.Size = new Size(298, 34);
+            txtBarCode.TabIndex = 36;
             // 
-            // textBox1
+            // btnSave
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(18, 376);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(298, 34);
-            textBox1.TabIndex = 34;
+            btnSave.BackColor = Color.Transparent;
+            btnSave.BorderColor = Color.FromArgb(53, 41, 123);
+            btnSave.BorderRadius = 35;
+            btnSave.CheckedState.BorderColor = Color.White;
+            btnSave.CheckedState.FillColor = Color.White;
+            btnSave.Cursor = Cursors.Hand;
+            btnSave.CustomizableEdges = customizableEdges1;
+            btnSave.DisabledState.BorderColor = Color.DarkGray;
+            btnSave.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSave.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSave.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSave.FillColor = Color.Transparent;
+            btnSave.Font = new Font("Segoe UI", 9F);
+            btnSave.ForeColor = Color.White;
+            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
+            btnSave.ImageSize = new Size(47, 47);
+            btnSave.Location = new Point(322, 368);
+            btnSave.Name = "btnSave";
+            btnSave.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSave.Size = new Size(59, 52);
+            btnSave.TabIndex = 35;
+            btnSave.UseTransparentBackground = true;
+            btnSave.Click += btnSave_Click;
             // 
             // guna2Separator2
             // 
@@ -115,45 +115,47 @@
             guna2Separator2.Size = new Size(363, 12);
             guna2Separator2.TabIndex = 33;
             // 
-            // guna2Button1
+            // btnStop
             // 
-            guna2Button1.BackColor = Color.Transparent;
-            guna2Button1.BorderRadius = 18;
-            guna2Button1.Cursor = Cursors.Hand;
-            guna2Button1.CustomizableEdges = customizableEdges3;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.FromArgb(255, 128, 128);
-            guna2Button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.Black;
-            guna2Button1.Location = new Point(231, 317);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Button1.Size = new Size(105, 41);
-            guna2Button1.TabIndex = 32;
-            guna2Button1.Text = "Dừng";
+            btnStop.BackColor = Color.Transparent;
+            btnStop.BorderRadius = 18;
+            btnStop.Cursor = Cursors.Hand;
+            btnStop.CustomizableEdges = customizableEdges3;
+            btnStop.DisabledState.BorderColor = Color.DarkGray;
+            btnStop.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnStop.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnStop.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnStop.FillColor = Color.FromArgb(255, 128, 128);
+            btnStop.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStop.ForeColor = Color.Black;
+            btnStop.Location = new Point(231, 317);
+            btnStop.Name = "btnStop";
+            btnStop.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnStop.Size = new Size(105, 41);
+            btnStop.TabIndex = 32;
+            btnStop.Text = "Dừng";
+            btnStop.Click += btnStop_Click;
             // 
-            // btnBack
+            // btnStart
             // 
-            btnBack.BackColor = Color.Transparent;
-            btnBack.BorderRadius = 18;
-            btnBack.Cursor = Cursors.Hand;
-            btnBack.CustomizableEdges = customizableEdges5;
-            btnBack.DisabledState.BorderColor = Color.DarkGray;
-            btnBack.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnBack.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnBack.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnBack.FillColor = Color.ForestGreen;
-            btnBack.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(61, 317);
-            btnBack.Name = "btnBack";
-            btnBack.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnBack.Size = new Size(105, 41);
-            btnBack.TabIndex = 31;
-            btnBack.Text = "Bắt Đầu";
+            btnStart.BackColor = Color.Transparent;
+            btnStart.BorderRadius = 18;
+            btnStart.Cursor = Cursors.Hand;
+            btnStart.CustomizableEdges = customizableEdges5;
+            btnStart.DisabledState.BorderColor = Color.DarkGray;
+            btnStart.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnStart.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnStart.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnStart.FillColor = Color.ForestGreen;
+            btnStart.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStart.ForeColor = Color.White;
+            btnStart.Location = new Point(61, 317);
+            btnStart.Name = "btnStart";
+            btnStart.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnStart.Size = new Size(105, 41);
+            btnStart.TabIndex = 31;
+            btnStart.Text = "Bắt Đầu";
+            btnStart.Click += btnStart_Click;
             // 
             // guna2Separator1
             // 
@@ -163,21 +165,21 @@
             guna2Separator1.Size = new Size(363, 12);
             guna2Separator1.TabIndex = 3;
             // 
-            // pictureBox1
+            // picCamera
             // 
-            pictureBox1.Location = new Point(18, 53);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(363, 258);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
+            picCamera.Location = new Point(18, 53);
+            picCamera.Name = "picCamera";
+            picCamera.Size = new Size(363, 258);
+            picCamera.TabIndex = 2;
+            picCamera.TabStop = false;
             // 
-            // comboBox1
+            // cboCamera
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(107, 10);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(274, 28);
-            comboBox1.TabIndex = 1;
+            cboCamera.FormattingEnabled = true;
+            cboCamera.Location = new Point(107, 10);
+            cboCamera.Name = "cboCamera";
+            cboCamera.Size = new Size(274, 28);
+            cboCamera.TabIndex = 1;
             // 
             // label1
             // 
@@ -197,9 +199,10 @@
             Controls.Add(guna2Panel1);
             Name = "UC_ScanBarCode";
             Size = new Size(403, 428);
+            Load += UC_ScanBarCode_Load;
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picCamera).EndInit();
             ResumeLayout(false);
         }
 
@@ -207,13 +210,14 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Label label1;
-        private PictureBox pictureBox1;
-        private ComboBox comboBox1;
+        private PictureBox picCamera;
+        private ComboBox cboCamera;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button btnBack;
+        private Guna.UI2.WinForms.Guna2Button btnStop;
+        private Guna.UI2.WinForms.Guna2Button btnStart;
         private TextBox textBox1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
-        private Guna.UI2.WinForms.Guna2Button btnProduct;
+        private Guna.UI2.WinForms.Guna2Button btnSave;
+        private TextBox txtBarCode;
     }
 }

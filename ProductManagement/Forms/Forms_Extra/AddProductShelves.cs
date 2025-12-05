@@ -102,7 +102,7 @@ namespace MiniStore.Forms.Forms_Extra
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (cboMaSp.SelectedIndex == null)
+            if (cboMaSp.SelectedIndex < 0)
             {
                 MessageBox.Show("Bạn chưa chọn sản phẩm nào", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -114,36 +114,33 @@ namespace MiniStore.Forms.Forms_Extra
                 MessageBox.Show("Số lượng không được nhỏ hơn 0", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            using (db)
+            var sp = db.SANPHAMs.SingleOrDefault(x => x.MASP == masp);
+            if (masp == null)
             {
-                var sp = db.SANPHAMs.SingleOrDefault(x => x.MASP == masp);
-                if (masp == null)
-                {
-                    MessageBox.Show("Không tìm thấy sản phẩm trong kho.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (sp.SOLUONG < soluongThem)
-                {
-                    MessageBox.Show("Số lượng trong kho không đủ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                var hangtrenke = db.HANGTRUNGBAYs.SingleOrDefault(x => x.MASP == masp);
-                if (hangtrenke == null)
-                {
-                    hangtrenke = new HANGTRUNGBAY
-                    {
-                        MASP = masp,
-                        SOLUONG_TRENKE = soluongThem
-                    };
-                    db.HANGTRUNGBAYs.Add(hangtrenke);
-                }
-                else
-                {
-                    hangtrenke.SOLUONG_TRENKE += soluongThem;
-                }
-                sp.SOLUONG -= soluongThem;
-                db.SaveChanges();
+                MessageBox.Show("Không tìm thấy sản phẩm trong kho.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            if (sp.SOLUONG < soluongThem)
+            {
+                MessageBox.Show("Số lượng trong kho không đủ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            var hangtrenke = db.HANGTRUNGBAYs.SingleOrDefault(x => x.MASP == masp);
+            if (hangtrenke == null)
+            {
+                hangtrenke = new HANGTRUNGBAY
+                {
+                    MASP = masp,
+                    SOLUONG_TRENKE = soluongThem
+                };
+                db.HANGTRUNGBAYs.Add(hangtrenke);
+            }
+            else
+            {
+                hangtrenke.SOLUONG_TRENKE += soluongThem;
+            }
+            sp.SOLUONG -= soluongThem;
+            db.SaveChanges();
             MessageBox.Show("Đã thêm sản phẩm lên kệ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //goi grid sp cb them len ke
         }

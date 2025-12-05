@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MiniStore.Models;
 
 [Table("TAIKHOAN")]
-[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF72409E57C1C", IsUnique = true)]
+[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF7248DF6BE6D", IsUnique = true)]
 public partial class TAIKHOAN
 {
     [Key]
@@ -32,9 +32,6 @@ public partial class TAIKHOAN
     public DateOnly? NGAYKHOA { get; set; }
 
     public DateOnly? NGAYMOKHOA { get; set; }
-
-    [InverseProperty("USERNAMENavigation")]
-    public virtual ICollection<HDNHAP> HDNHAPs { get; set; } = new List<HDNHAP>();
 
     [ForeignKey("MAROLE")]
     [InverseProperty("TAIKHOANs")]
