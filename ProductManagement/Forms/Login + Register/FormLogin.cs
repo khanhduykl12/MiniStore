@@ -10,10 +10,24 @@ namespace MiniStore
     {
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
+        private System.Windows.Forms.Timer _validationTimer;
+        private string _lastValidatedUserName = string.Empty;
+        private bool _isValidating = false;
+        
         public FormLogin()
         {
             InitializeComponent();
-
+            // Khởi tạo timer cho debouncing validation
+            _validationTimer = new System.Windows.Forms.Timer();
+            _validationTimer.Interval = 300; // 300ms debounce
+            _validationTimer.Tick += async (s, e) =>
+            {
+                _validationTimer.Stop();
+                if (!_isValidating)
+                {
+                    await ValidateUserNameAsync();
+                }
+            };
         }
         int count = 3;
         private void guna2GradientButton1_Click(object sender, EventArgs e)
@@ -169,9 +183,12 @@ namespace MiniStore
 
         }
 
-        private void txtUserName_Leave(object sender, EventArgs e)
+        private async void txtUserName_Leave(object sender, EventArgs e)
         {
-            validateUserName();
+            // Dừng timer nếu đang chạy
+            _validationTimer.Stop();
+            // Validate ngay lập tức khi rời khỏi ô
+            await ValidateUserNameAsync();
         }
 
         private void txtPassWord_TextChanged(object sender, EventArgs e)
@@ -185,51 +202,132 @@ namespace MiniStore
             txtPassWord.Enabled = true;
             // Xóa error message của userName khi có thay đổi
             lblErrorUserName.Text = string.Empty;
+            
+            // Debounce validation - chỉ validate sau khi người dùng ngừng gõ 300ms
+            _validationTimer.Stop();
+            _validationTimer.Start();
         }
 
 
-        private void validateUserName()
+        private async Task ValidateUserNameAsync()
         {
-            using (var db = new MiniStoreContext())
+            // Tránh validate đồng thời nhiều lần
+            if (_isValidating) return;
+            
+            string currentUserName = txtUserName.Text;
+            
+            // Nếu username không thay đổi và đã validate rồi thì bỏ qua
+            if (currentUserName == _lastValidatedUserName && !string.IsNullOrEmpty(_lastValidatedUserName))
             {
-                var user = db.TAIKHOANs.Where(username => username.USERNAME == txtUserName.Text).FirstOrDefault();
-                if (string.IsNullOrWhiteSpace(txtUserName.Text))
+                return;
+            }
+            
+            _isValidating = true;
+            
+            try
+            {
+                // Kiểm tra trống trước (không cần database) - cập nhật UI ngay
+                if (string.IsNullOrWhiteSpace(currentUserName))
                 {
-                    lblErrorUserName.Text = "Vui lòng không để trống username!";
-                    lblErrorUserName.ForeColor = Color.Red;
-                }
-                else if (user == null)
-                {
-                    lblErrorUserName.Text = "Tài khoản không tồn tại";
-                    lblErrorUserName.ForeColor = Color.Red;
-                }
-                else if (user.TRANGTHAI == "Khóa")
-                {
-
-                    if (user.NGAYKHOA.HasValue && DateOnly.FromDateTime(DateTime.Now) >= user.NGAYMOKHOA.Value)
+                    UpdateUI(() =>
                     {
-                        user.TRANGTHAI = "Hoạt động";
-                        user.NGAYKHOA = null;
-                        user.NGAYMOKHOA = null;
-                        db.SaveChanges();
+                        lblErrorUserName.Text = "Vui lòng không để trống username!";
+                        lblErrorUserName.ForeColor = Color.Red;
+                    });
+                    _lastValidatedUserName = currentUserName;
+                    return;
+                }
+                
+                // Chạy database query bất đồng bộ để không block UI
+                TAIKHOAN user = null;
+                using (var db = new MiniStoreContext())
+                {
+                    // Query database trong background
+                    user = await Task.Run(() => 
+                        db.TAIKHOANs.FirstOrDefault(username => username.USERNAME == currentUserName));
+                    
+                    // Kiểm tra lại xem username có thay đổi không (tránh race condition)
+                    if (txtUserName.Text != currentUserName)
+                    {
+                        return;
+                    }
+                    
+                    // Xử lý kết quả và cập nhật UI
+                    if (user == null)
+                    {
+                        UpdateUI(() =>
+                        {
+                            lblErrorUserName.Text = "Tài khoản không tồn tại";
+                            lblErrorUserName.ForeColor = Color.Red;
+                        });
+                        _lastValidatedUserName = currentUserName;
+                    }
+                    else if (user.TRANGTHAI == "Khóa")
+                    {
+                        if (user.NGAYKHOA.HasValue && DateOnly.FromDateTime(DateTime.Now) >= user.NGAYMOKHOA.Value)
+                        {
+                            // Mở khóa tài khoản
+                            user.TRANGTHAI = "Hoạt động";
+                            user.NGAYKHOA = null;
+                            user.NGAYMOKHOA = null;
+                            await Task.Run(() => db.SaveChanges());
 
-                        lblErrorUserName.Text = string.Empty;
-                        txtPassWord.Enabled = true;
+                            UpdateUI(() =>
+                            {
+                                lblErrorUserName.Text = string.Empty;
+                                txtPassWord.Enabled = true;
+                            });
+                            _lastValidatedUserName = currentUserName;
+                        }
+                        else
+                        {
+                            UpdateUI(() =>
+                            {
+                                lblErrorUserName.Text = $"Tài khoản của bạn bị khóa đến hết ngày {user.NGAYMOKHOA:dd/MM/yyyy}";
+                                lblErrorUserName.ForeColor = Color.Red;
+                                txtPassWord.Enabled = false;
+                            });
+                            _lastValidatedUserName = currentUserName;
+                        }
                     }
                     else
                     {
-                        lblErrorUserName.Text = $"Tài khoản của bạn bị khóa đến hết ngày {user.NGAYMOKHOA:dd/MM/yyyy}";
-                        lblErrorUserName.ForeColor = Color.Red;
-                        txtPassWord.Enabled = false;
-
+                        UpdateUI(() =>
+                        {
+                            lblErrorUserName.Text = string.Empty;
+                        });
+                        _lastValidatedUserName = currentUserName;
                     }
                 }
-                else
-                {
-                    lblErrorUserName.Text = string.Empty;
-                }
-
             }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi một cách im lặng để không làm gián đoạn UX
+                System.Diagnostics.Debug.WriteLine($"Validation error: {ex.Message}");
+            }
+            finally
+            {
+                _isValidating = false;
+            }
+        }
+        
+        private void UpdateUI(Action action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
+        
+        // Giữ lại method cũ để tương thích với code hiện tại
+        private void validateUserName()
+        {
+            // Chuyển sang async version
+            _ = ValidateUserNameAsync();
         }
 
         private void validatePassWord()
@@ -269,6 +367,30 @@ namespace MiniStore
         private void videoView1_Click_1(object sender, EventArgs e)
         {
 
+        }
+        
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            // Giải phóng timer
+            if (_validationTimer != null)
+            {
+                _validationTimer.Stop();
+                _validationTimer.Dispose();
+            }
+            
+            // Giải phóng media player
+            if (_mediaPlayer != null)
+            {
+                _mediaPlayer.Stop();
+                _mediaPlayer.Dispose();
+            }
+            
+            if (_libVLC != null)
+            {
+                _libVLC.Dispose();
+            }
+            
+            base.OnFormClosed(e);
         }
     }
 }
