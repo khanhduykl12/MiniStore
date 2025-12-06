@@ -4,6 +4,8 @@ using Microsoft.VisualBasic.ApplicationServices;
 using MiniStore.Models;
 using MiniStore.User_Control;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 namespace MiniStore
 {
     public partial class FormLogin : Form
@@ -22,17 +24,131 @@ namespace MiniStore
             _validationTimer.Interval = 300; // 300ms debounce
             _validationTimer.Tick += async (s, e) =>
             {
-                _validationTimer.Stop();
-                if (!_isValidating)
+                // Kiểm tra xem form có đang đóng không
+                if (this.IsDisposed || this.Disposing)
                 {
-                    await ValidateUserNameAsync();
+                    _validationTimer.Stop();
+                    return;
+                }
+                
+                _validationTimer.Stop();
+                if (!_isValidating && !this.IsDisposed)
+                {
+                    try
+                    {
+                        await ValidateUserNameAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error in timer validation: {ex.Message}");
+                    }
                 }
             };
+            
+            // Đảm bảo form có thể nhận focus và đóng được
+            this.FormClosing += FormLogin_FormClosing;
+            this.Shown += FormLogin_Shown;
+            this.Activated += FormLogin_Activated;
+            this.VisibleChanged += FormLogin_VisibleChanged;
+        }
+        
+        private void FormLogin_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                // Khi form được hiển thị, đảm bảo nó hoạt động đúng
+                this.BeginInvoke(new Action(() =>
+                {
+                    // Đảm bảo videoView không chặn
+                    videoView1.SendToBack();
+                    SetVideoViewMouseEvents(false);
+                    
+                    this.Activate();
+                    this.BringToFront();
+                    this.Enabled = true;
+                    
+                    // Đảm bảo button đóng luôn ở trên cùng
+                    guna2ImageButton1.BringToFront();
+                    guna2ImageButton1.Enabled = true;
+                    guna2ImageButton1.Visible = true;
+                    guna2ImageButton1.Invalidate();
+                    guna2ImageButton1.Update();
+                    
+                    Application.DoEvents();
+                }));
+            }
+        }
+        
+        private void FormLogin_Activated(object sender, EventArgs e)
+        {
+            // Đảm bảo nút đóng luôn có thể click khi form được activate
+            videoView1.SendToBack();
+            SetVideoViewMouseEvents(false);
+            guna2ImageButton1.BringToFront();
+            guna2ImageButton1.Enabled = true;
+            guna2ImageButton1.Visible = true;
+            guna2ImageButton1.Invalidate();
+            guna2ImageButton1.Update();
+        }
+        
+        private void FormLogin_Shown(object sender, EventArgs e)
+        {
+            // Đảm bảo form được activate và focus
+            this.Activate();
+            this.BringToFront();
+            this.Focus();
+            // Đảm bảo videoView không chặn các control
+            videoView1.SendToBack();
+            SetVideoViewMouseEvents(false);
+            // Đảm bảo nút đóng luôn có thể click
+            guna2ImageButton1.BringToFront();
+            guna2ImageButton1.Enabled = true;
+            guna2ImageButton1.Visible = true;
+            guna2ImageButton1.Invalidate();
+            guna2ImageButton1.Update();
+        }
+        
+        private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Cho phép form đóng bình thường
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = false;
+            }
+        }
+        
+        protected override void SetVisibleCore(bool value)
+        {
+            base.SetVisibleCore(value);
+            if (value)
+            {
+                // Khi form được hiển thị, đảm bảo nó hoạt động đúng
+                this.BeginInvoke(new Action(() =>
+                {
+                    // Đảm bảo videoView không chặn
+                    videoView1.SendToBack();
+                    SetVideoViewMouseEvents(false);
+                    
+                    this.Activate();
+                    this.BringToFront();
+                    this.Enabled = true;
+                    
+                    // Đảm bảo button đóng luôn ở trên cùng
+                    guna2ImageButton1.BringToFront();
+                    guna2ImageButton1.Enabled = true;
+                    guna2ImageButton1.Visible = true;
+                    guna2ImageButton1.Invalidate();
+                    guna2ImageButton1.Update();
+                    
+                    Application.DoEvents();
+                }));
+            }
         }
         int count = 3;
-        private void guna2GradientButton1_Click(object sender, EventArgs e)
+        private async void guna2GradientButton1_Click(object sender, EventArgs e)
         {
-            validateUserName();
+            // Validate username khi click button đăng nhập
+            await ValidateUserNameAsync();
             validatePassWord();
             bool hasErrors = !string.IsNullOrWhiteSpace(lblErrorUserName.Text) ||
                      !string.IsNullOrWhiteSpace(lblErrorPassword.Text);
@@ -53,13 +169,67 @@ namespace MiniStore
                     return;
                 }
 
+                // Kiểm tra trạng thái tài khoản trước khi kiểm tra mật khẩu
+                if (user.TRANGTHAI == "Khóa vĩnh viễn")
+                {
+                    // Tài khoản bị khóa vĩnh viễn - không cho đăng nhập
+                    lblErrorUserName.Text = "Tài khoản của bạn đã bị khóa vĩnh viễn. Vui lòng liên hệ quản trị viên.";
+                    lblErrorUserName.ForeColor = Color.Red;
+                    txtPassWord.Enabled = false;
+                    return;
+                }
+                else if (user.TRANGTHAI == "Khóa")
+                {
+                    // Kiểm tra xem đã đến ngày mở khóa chưa
+                    if (user.NGAYKHOA.HasValue && user.NGAYMOKHOA.HasValue)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Now) < user.NGAYMOKHOA.Value)
+                        {
+                            // Tài khoản vẫn còn bị khóa
+                            lblErrorUserName.Text = $"Tài khoản của bạn bị khóa đến hết ngày {user.NGAYMOKHOA.Value:dd/MM/yyyy}";
+                            lblErrorUserName.ForeColor = Color.Red;
+                            txtPassWord.Enabled = false;
+                            return;
+                        }
+                        else
+                        {
+                            // Tự động mở khóa nếu đã hết hạn
+                            user.TRANGTHAI = "Hoạt động";
+                            user.NGAYKHOA = null;
+                            user.NGAYMOKHOA = null;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        // Tài khoản bị khóa nhưng không có ngày mở khóa
+                        lblErrorUserName.Text = "Tài khoản của bạn đang bị khóa. Vui lòng liên hệ quản trị viên.";
+                        lblErrorUserName.ForeColor = Color.Red;
+                        txtPassWord.Enabled = false;
+                        return;
+                    }
+                }
+
                 // Kiểm tra mật khẩu
                 if (user.PASSWORD != txtPassWord.Text)
                 {
+                    // Dừng validation timer trước khi hiển thị lỗi
+                    if (_validationTimer != null)
+                    {
+                        _validationTimer.Stop();
+                    }
+                    _isValidating = false;
+                    
                     lblErrorPassword.Text = $"password không khớp tài khoản sẽ bị khóa trong {count} lần nhập sai ";
                     lblErrorPassword.ForeColor = Color.Red;
                     lblQuenMatKhau.Text = "Bạn quên mật khẩu hả?";
                     lblQuenMatKhau.ForeColor = Color.Blue;
+                    
+                    // Đảm bảo button đóng vẫn hoạt động sau khi sai mật khẩu
+                    EnsureCloseButtonEnabled();
+                    
+                    // Force refresh UI để button có thể click được
+                    Application.DoEvents();
                     
                     if (count == 0)
                     {
@@ -68,6 +238,8 @@ namespace MiniStore
                         MessageBox.Show($"Tài khoản của bạn đã bị khóa cho đến hết ngày {user.NGAYMOKHOA.Value}", "Thông báo tài khoản", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         user.TRANGTHAI = "Khóa";
                         db.SaveChanges();
+                        EnsureCloseButtonEnabled();
+                        Application.DoEvents(); // Process messages sau MessageBox
                         return;
                     }
                     count--;
@@ -81,7 +253,53 @@ namespace MiniStore
                     UC_Product prod = new UC_Product(user.MAROLE);
                     this.Hide();
                     tc.ShowDialog();
+                    tc.Dispose(); // Giải phóng form TrangChu
+                    
+                    // Hiển thị lại form ngay lập tức
                     this.Show();
+                    this.WindowState = FormWindowState.Normal;
+                    this.Enabled = true;
+                    this.Visible = true;
+                    
+                    // Đảm bảo form được activate
+                    this.Activate();
+                    this.BringToFront();
+                    
+                    // Đảm bảo các control được enable và có thể tương tác
+                    this.Enabled = true;
+                    
+                    // Đảm bảo videoView không chặn các control (phải làm trước)
+                    videoView1.SendToBack();
+                    SetVideoViewMouseEvents(false);
+                    
+                    // Đảm bảo button đóng luôn ở trên cùng và hoạt động
+                    guna2ImageButton1.BringToFront();
+                    guna2ImageButton1.Enabled = true;
+                    guna2ImageButton1.Visible = true;
+                    guna2ImageButton1.Invalidate();
+                    guna2ImageButton1.Update();
+                    
+                    txtUserName.Enabled = true;
+                    txtPassWord.Enabled = true;
+                    btnRegisterForm.Enabled = true;
+                    guna2GradientButton1.Enabled = true;
+                    
+                    // Reset form về trạng thái ban đầu
+                    txtUserName.Text = string.Empty;
+                    txtPassWord.Text = string.Empty;
+                    lblErrorUserName.Text = string.Empty;
+                    lblErrorPassword.Text = string.Empty;
+                    lblQuenMatKhau.Text = string.Empty;
+                    count = 3; // Reset lại số lần nhập sai
+                    
+                    // Force refresh form
+                    this.Refresh();
+                    this.Update();
+                    Application.DoEvents(); // Process pending messages
+                    
+                    // Focus vào form và ô username
+                    this.Focus();
+                    txtUserName.Focus();
                 }
 
             }
@@ -94,12 +312,120 @@ namespace MiniStore
             FormRegister reg = new FormRegister();
             this.Hide();
             reg.ShowDialog();
+            // Đảm bảo form được hiển thị và nhận focus đúng cách
             this.Show();
+            this.Activate();
+            this.BringToFront();
+            this.Focus();
         }
 
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // EXIT NGAY LẬP TỨC - KHÔNG CHỜ ĐỢI, KHÔNG BLOCK
+            System.Diagnostics.Debug.WriteLine("guna2ImageButton1_Click called");
+            
+            // Disable button ngay
+            guna2ImageButton1.Enabled = false;
+            
+            // Environment.Exit(0) sẽ kill process ngay lập tức
+            // Không cần cleanup, không cần dừng operations
+            // Đây là cách nhanh nhất để thoát app
+            Environment.Exit(0);
+        }
+        
+        // Method để dừng tất cả operations
+        private void StopAllOperations()
+        {
+            try
+            {
+                // Dừng validation timer
+                if (_validationTimer != null)
+                {
+                    _validationTimer.Stop();
+                    _validationTimer.Tick -= null; // Remove event handlers
+                    _validationTimer.Dispose();
+                    _validationTimer = null;
+                }
+                
+                // Dừng validation flag
+                _isValidating = false;
+                
+                // Dừng video
+                if (_mediaPlayer != null)
+                {
+                    try
+                    {
+                        _mediaPlayer.Stop();
+                    }
+                    catch { }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in StopAllOperations: {ex.Message}");
+            }
+        }
+        
+        // Thêm handler cho MouseDown để đảm bảo nút luôn nhận được events
+        private void guna2ImageButton1_MouseDown(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("guna2ImageButton1_MouseDown called");
+            // Exit ngay lập tức
+            guna2ImageButton1.Enabled = false;
+            Environment.Exit(0);
+        }
+        
+        // Thêm handler cho MouseUp để đảm bảo button luôn hoạt động
+        private void guna2ImageButton1_MouseUp(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("guna2ImageButton1_MouseUp called");
+            // Exit ngay
+            guna2ImageButton1.Enabled = false;
+            Environment.Exit(0);
+        }
+        
+        // Method để đảm bảo button đóng luôn hoạt động
+        private void EnsureCloseButtonEnabled()
+        {
+            try
+            {
+                // Đảm bảo videoView không chặn
+                videoView1.SendToBack();
+                SetVideoViewMouseEvents(false);
+                
+                // Đảm bảo button ở trên cùng và enabled
+                guna2ImageButton1.BringToFront();
+                guna2ImageButton1.Enabled = true;
+                guna2ImageButton1.Visible = true;
+                guna2ImageButton1.Invalidate();
+                guna2ImageButton1.Update();
+                
+                // Đảm bảo form enabled
+                this.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in EnsureCloseButtonEnabled: {ex.Message}");
+            }
+        }
+        
+        // Method để disable mouse events của videoView nhưng vẫn cho phép phát video
+        private void SetVideoViewMouseEvents(bool enable)
+        {
+            try
+            {
+                // Sử dụng SetStyle để control mouse events
+                if (videoView1 != null)
+                {
+                    videoView1.TabStop = false;
+                    // VideoView vẫn có thể phát video nhưng không nhận mouse events
+                    // bằng cách đảm bảo nó luôn ở dưới các control khác
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in SetVideoViewMouseEvents: {ex.Message}");
+            }
         }
 
         private void lblQuenMatKhau_Click(object sender, EventArgs e)
@@ -107,7 +433,11 @@ namespace MiniStore
             PasswordForgot passwordForgot = new PasswordForgot();
             this.Hide();
             passwordForgot.ShowDialog();
+            // Đảm bảo form được hiển thị và nhận focus đúng cách
             this.Show();
+            this.Activate();
+            this.BringToFront();
+            this.Focus();
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
@@ -116,6 +446,24 @@ namespace MiniStore
             lblErrorPassword.Text = string.Empty;
             lblQuenMatKhau.Text = string.Empty;
 
+            // Đảm bảo videoView không chặn mouse events
+            SetVideoViewMouseEvents(false);
+            
+            // Đảm bảo nút đóng luôn nhận được events
+            guna2ImageButton1.MouseDown += guna2ImageButton1_MouseDown;
+            guna2ImageButton1.MouseUp += guna2ImageButton1_MouseUp;
+            guna2ImageButton1.MouseClick += (s, args) => 
+            {
+                System.Diagnostics.Debug.WriteLine("guna2ImageButton1_MouseClick called");
+                // Exit ngay lập tức - không chờ đợi
+                guna2ImageButton1.Enabled = false;
+                Environment.Exit(0);
+            };
+            
+            // Đảm bảo button ở trên cùng ngay từ đầu
+            guna2ImageButton1.BringToFront();
+            guna2ImageButton1.Enabled = true;
+            guna2ImageButton1.Visible = true;
 
             Core.Initialize();
 
@@ -125,6 +473,10 @@ namespace MiniStore
             videoView1.MediaPlayer = _mediaPlayer;
             videoView1.Dock = DockStyle.Fill;   // Quan trọng: Video phải fill toàn màn hình
             videoView1.SendToBack();            // Video nằm dưới panel login
+            // Đảm bảo videoView không chặn các control khác - chỉ disable mouse events
+            videoView1.TabStop = false;
+            // Không disable videoView vì cần phát video, nhưng đảm bảo nó không nhận mouse events
+            SetVideoViewMouseEvents(false);
 
             // Đường dẫn video từ thư mục Forms
             string videoPath = Path.Combine(Application.StartupPath, "..", "..", "..", "Forms", "videos", "mystore!(1).mp4");
@@ -152,24 +504,50 @@ namespace MiniStore
 
             if (File.Exists(fullPath))
             {
-                var media = new Media(_libVLC, fullPath, FromType.FromPath,
-                                      ":input-repeat=-1",
-                                      ":no-video-title-show");
-
-                _mediaPlayer.Media = media;
-                _mediaPlayer.Play();
-                _mediaPlayer.Mute = true;
-
-                // Đảm bảo video lặp lại khi kết thúc
-                _mediaPlayer.EndReached += (sender, e) =>
+                // Lưu đường dẫn video để dùng lại
+                string videoFilePath = fullPath;
+                
+                // Method để phát video (dùng lại khi cần lặp)
+                Action playVideo = () =>
                 {
-                    // Tạo media mới và phát lại
-                    var newMedia = new Media(_libVLC, fullPath, FromType.FromPath,
+                    try
+                    {
+                        // Tạo media mới mỗi lần để đảm bảo lặp lại đúng cách
+                        var media = new Media(_libVLC, videoFilePath, FromType.FromPath,
                                             ":input-repeat=-1",
                                             ":no-video-title-show");
-                    _mediaPlayer.Media = newMedia;
-                    _mediaPlayer.Play();
+                        
+                        _mediaPlayer.Media = media;
+                        _mediaPlayer.Mute = true;
+                        _mediaPlayer.Play();
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error playing video: {ex.Message}");
+                    }
                 };
+                
+                // Đảm bảo video lặp lại vô hạn khi kết thúc
+                _mediaPlayer.EndReached += (sender, e) =>
+                {
+                    System.Diagnostics.Debug.WriteLine("Video ended, replaying...");
+                    
+                    // Phải invoke trên UI thread
+                    if (this.InvokeRequired)
+                    {
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            playVideo();
+                        }));
+                    }
+                    else
+                    {
+                        playVideo();
+                    }
+                };
+                
+                // Bắt đầu phát video lần đầu
+                playVideo();
             }
             else
             {
@@ -185,10 +563,9 @@ namespace MiniStore
 
         private async void txtUserName_Leave(object sender, EventArgs e)
         {
+            // Không validate khi rời khỏi ô - chỉ validate khi click button đăng nhập
             // Dừng timer nếu đang chạy
             _validationTimer.Stop();
-            // Validate ngay lập tức khi rời khỏi ô
-            await ValidateUserNameAsync();
         }
 
         private void txtPassWord_TextChanged(object sender, EventArgs e)
@@ -203,9 +580,7 @@ namespace MiniStore
             // Xóa error message của userName khi có thay đổi
             lblErrorUserName.Text = string.Empty;
             
-            // Debounce validation - chỉ validate sau khi người dùng ngừng gõ 300ms
-            _validationTimer.Stop();
-            _validationTimer.Start();
+            // Không validate khi nhập - chỉ validate khi click button đăng nhập
         }
 
 
@@ -262,11 +637,21 @@ namespace MiniStore
                         });
                         _lastValidatedUserName = currentUserName;
                     }
+                    else if (user.TRANGTHAI == "Khóa vĩnh viễn")
+                    {
+                        UpdateUI(() =>
+                        {
+                            lblErrorUserName.Text = "Tài khoản của bạn đã bị khóa vĩnh viễn.";
+                            lblErrorUserName.ForeColor = Color.Red;
+                            txtPassWord.Enabled = false;
+                        });
+                        _lastValidatedUserName = currentUserName;
+                    }
                     else if (user.TRANGTHAI == "Khóa")
                     {
-                        if (user.NGAYKHOA.HasValue && DateOnly.FromDateTime(DateTime.Now) >= user.NGAYMOKHOA.Value)
+                        if (user.NGAYKHOA.HasValue && user.NGAYMOKHOA.HasValue && DateOnly.FromDateTime(DateTime.Now) >= user.NGAYMOKHOA.Value)
                         {
-                            // Mở khóa tài khoản
+                            // Mở khóa tài khoản tự động khi hết hạn
                             user.TRANGTHAI = "Hoạt động";
                             user.NGAYKHOA = null;
                             user.NGAYMOKHOA = null;
@@ -279,11 +664,21 @@ namespace MiniStore
                             });
                             _lastValidatedUserName = currentUserName;
                         }
+                        else if (user.NGAYMOKHOA.HasValue)
+                        {
+                            UpdateUI(() =>
+                            {
+                                lblErrorUserName.Text = $"Tài khoản của bạn bị khóa đến hết ngày {user.NGAYMOKHOA.Value:dd/MM/yyyy}";
+                                lblErrorUserName.ForeColor = Color.Red;
+                                txtPassWord.Enabled = false;
+                            });
+                            _lastValidatedUserName = currentUserName;
+                        }
                         else
                         {
                             UpdateUI(() =>
                             {
-                                lblErrorUserName.Text = $"Tài khoản của bạn bị khóa đến hết ngày {user.NGAYMOKHOA:dd/MM/yyyy}";
+                                lblErrorUserName.Text = "Tài khoản của bạn đang bị khóa. Vui lòng liên hệ quản trị viên.";
                                 lblErrorUserName.ForeColor = Color.Red;
                                 txtPassWord.Enabled = false;
                             });

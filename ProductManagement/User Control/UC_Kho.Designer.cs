@@ -28,16 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            btnBack = new Guna.UI2.WinForms.Guna2Button();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewKho = new Guna.UI2.WinForms.Guna2DataGridView();
             HinhColumn = new DataGridViewImageColumn();
             TenColumn = new DataGridViewTextBoxColumn();
@@ -52,25 +49,6 @@
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)DataGridViewKho).BeginInit();
             SuspendLayout();
-            // 
-            // btnBack
-            // 
-            btnBack.Animated = true;
-            btnBack.CustomizableEdges = customizableEdges1;
-            btnBack.DisabledState.BorderColor = Color.DarkGray;
-            btnBack.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnBack.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnBack.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnBack.FillColor = Color.FromArgb(6, 76, 80);
-            btnBack.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnBack.ForeColor = Color.White;
-            btnBack.Location = new Point(3, 884);
-            btnBack.Name = "btnBack";
-            btnBack.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btnBack.Size = new Size(120, 40);
-            btnBack.TabIndex = 0;
-            btnBack.Text = "Quay lại";
-            btnBack.Click += btnBack_Click;
             // 
             // DataGridViewKho
             // 
@@ -223,7 +201,7 @@
             // 
             // guna2Button1
             // 
-            guna2Button1.CustomizableEdges = customizableEdges3;
+            guna2Button1.CustomizableEdges = customizableEdges1;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -231,9 +209,9 @@
             guna2Button1.FillColor = Color.FromArgb(255, 204, 102);
             guna2Button1.Font = new Font("Segoe UI", 9F);
             guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(188, 868);
+            guna2Button1.Location = new Point(43, 839);
             guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2Button1.Size = new Size(225, 56);
             guna2Button1.TabIndex = 3;
             guna2Button1.Text = "Thêm sản phẩm";
@@ -246,7 +224,6 @@
             Controls.Add(guna2Button1);
             Controls.Add(guna2HtmlLabel1);
             Controls.Add(DataGridViewKho);
-            Controls.Add(btnBack);
             Name = "UC_Kho";
             Size = new Size(1345, 927);
             Load += UC_Kho_Load;
@@ -256,7 +233,6 @@
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2Button btnBack;
         private Guna.UI2.WinForms.Guna2DataGridView DataGridViewKho;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private DataGridViewImageColumn HinhColumn;

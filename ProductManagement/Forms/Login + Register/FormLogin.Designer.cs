@@ -179,7 +179,7 @@
             // lblErrorUserName
             // 
             lblErrorUserName.BackColor = Color.Transparent;
-            lblErrorUserName.Location = new Point(363, 165);
+            lblErrorUserName.Location = new Point(330, 156);
             lblErrorUserName.Name = "lblErrorUserName";
             lblErrorUserName.Size = new Size(129, 22);
             lblErrorUserName.TabIndex = 5;
@@ -194,6 +194,8 @@
             videoView1.Name = "videoView1";
             videoView1.Size = new Size(975, 549);
             videoView1.TabIndex = 13;
+            videoView1.TabStop = false; // Không cho phép focus
+            videoView1.Enabled = false; // Disable để không nhận mouse events
             videoView1.Text = "videoView1";
             videoView1.Click += videoView1_Click_1;
             // 
@@ -203,15 +205,18 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.White;
             ClientSize = new Size(975, 549);
+            // Thêm videoView1 TRƯỚC để nó nằm dưới các control khác
+            Controls.Add(videoView1);
+            // Sau đó thêm các control khác để chúng nằm trên videoView1
             Controls.Add(txtUserName);
             Controls.Add(lblQuenMatKhau);
-            Controls.Add(guna2ImageButton1);
             Controls.Add(lblErrorPassword);
             Controls.Add(txtPassWord);
             Controls.Add(lblErrorUserName);
             Controls.Add(guna2GradientButton1);
             Controls.Add(btnRegisterForm);
-            Controls.Add(videoView1);
+            // Thêm button đóng CUỐI CÙNG để đảm bảo nó luôn ở trên cùng
+            Controls.Add(guna2ImageButton1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;

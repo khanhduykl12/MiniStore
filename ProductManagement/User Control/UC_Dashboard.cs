@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniShop.User_Control;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,29 @@ namespace MiniStore.UC
 {
     public partial class UC_Dashboard : UserControl
     {
-        public UC_Dashboard()
+        public string userRole { get; set; }
+        public UC_Dashboard(string role)
         {
+
             InitializeComponent();
+            btnSetting.Visible= false;
+            userRole=role;
+            if (role == "ADMIN")
+            {
+                btnSetting.Visible = true;
+            }
+            else
+            {
+                btnNotification.Location = btnSetting.Location;
+            }
+
         }
 
+       
+
+        private void UC_Dashboard_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

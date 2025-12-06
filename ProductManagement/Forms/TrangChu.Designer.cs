@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrangChu));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -44,9 +44,12 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
             panel1 = new Panel();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            btnSettingListAcc = new Guna.UI2.WinForms.Guna2Button();
             btnExit = new Guna.UI2.WinForms.Guna2Button();
             btnStaff = new Guna.UI2.WinForms.Guna2Button();
             btnRevenue = new Guna.UI2.WinForms.Guna2Button();
@@ -77,6 +80,7 @@
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.BorderRadius = 40;
+            guna2CustomGradientPanel1.Controls.Add(btnSettingListAcc);
             guna2CustomGradientPanel1.Controls.Add(btnExit);
             guna2CustomGradientPanel1.Controls.Add(btnStaff);
             guna2CustomGradientPanel1.Controls.Add(btnRevenue);
@@ -85,7 +89,7 @@
             guna2CustomGradientPanel1.Controls.Add(pictureBox2);
             guna2CustomGradientPanel1.Controls.Add(btnHome);
             guna2CustomGradientPanel1.Controls.Add(imgSlide);
-            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges13;
+            guna2CustomGradientPanel1.CustomizableEdges = customizableEdges15;
             guna2Transition1.SetDecoration(guna2CustomGradientPanel1, Guna.UI2.AnimatorNS.DecorationType.None);
             guna2CustomGradientPanel1.FillColor = Color.FromArgb(53, 41, 123);
             guna2CustomGradientPanel1.FillColor2 = Color.FromArgb(53, 41, 123);
@@ -93,9 +97,39 @@
             guna2CustomGradientPanel1.FillColor4 = Color.FromArgb(53, 41, 123);
             guna2CustomGradientPanel1.Location = new Point(21, 12);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2CustomGradientPanel1.Size = new Size(130, 903);
             guna2CustomGradientPanel1.TabIndex = 0;
+            // 
+            // btnSettingListAcc
+            // 
+            btnSettingListAcc.BackColor = Color.Transparent;
+            btnSettingListAcc.BorderColor = Color.FromArgb(53, 41, 123);
+            btnSettingListAcc.BorderRadius = 35;
+            btnSettingListAcc.BorderThickness = 1;
+            btnSettingListAcc.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnSettingListAcc.CheckedState.BorderColor = Color.White;
+            btnSettingListAcc.CheckedState.FillColor = Color.White;
+            btnSettingListAcc.CheckedState.Image = (Image)resources.GetObject("resource.Image");
+            btnSettingListAcc.CustomizableEdges = customizableEdges1;
+            guna2Transition1.SetDecoration(btnSettingListAcc, Guna.UI2.AnimatorNS.DecorationType.None);
+            btnSettingListAcc.DisabledState.BorderColor = Color.DarkGray;
+            btnSettingListAcc.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnSettingListAcc.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnSettingListAcc.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnSettingListAcc.FillColor = Color.FromArgb(53, 41, 123);
+            btnSettingListAcc.Font = new Font("Segoe UI", 9F);
+            btnSettingListAcc.ForeColor = Color.White;
+            btnSettingListAcc.Image = (Image)resources.GetObject("btnSettingListAcc.Image");
+            btnSettingListAcc.ImageSize = new Size(37, 37);
+            btnSettingListAcc.Location = new Point(41, 699);
+            btnSettingListAcc.Name = "btnSettingListAcc";
+            btnSettingListAcc.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSettingListAcc.Size = new Size(83, 68);
+            btnSettingListAcc.TabIndex = 8;
+            btnSettingListAcc.UseTransparentBackground = true;
+            btnSettingListAcc.CheckedChanged += btnHome_CheckedChanged;
+            btnSettingListAcc.Click += btnSettingListAcc_Click;
             // 
             // btnExit
             // 
@@ -105,8 +139,8 @@
             btnExit.BorderThickness = 1;
             btnExit.CheckedState.BorderColor = Color.White;
             btnExit.CheckedState.FillColor = Color.White;
-            btnExit.CheckedState.Image = (Image)resources.GetObject("resource.Image");
-            btnExit.CustomizableEdges = customizableEdges1;
+            btnExit.CheckedState.Image = (Image)resources.GetObject("resource.Image1");
+            btnExit.CustomizableEdges = customizableEdges3;
             guna2Transition1.SetDecoration(btnExit, Guna.UI2.AnimatorNS.DecorationType.None);
             btnExit.DisabledState.BorderColor = Color.DarkGray;
             btnExit.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -119,7 +153,7 @@
             btnExit.ImageSize = new Size(37, 37);
             btnExit.Location = new Point(26, 802);
             btnExit.Name = "btnExit";
-            btnExit.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnExit.ShadowDecoration.CustomizableEdges = customizableEdges4;
             btnExit.Size = new Size(83, 68);
             btnExit.TabIndex = 7;
             btnExit.UseTransparentBackground = true;
@@ -134,8 +168,8 @@
             btnStaff.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnStaff.CheckedState.BorderColor = Color.White;
             btnStaff.CheckedState.FillColor = Color.White;
-            btnStaff.CheckedState.Image = (Image)resources.GetObject("resource.Image1");
-            btnStaff.CustomizableEdges = customizableEdges3;
+            btnStaff.CheckedState.Image = (Image)resources.GetObject("resource.Image2");
+            btnStaff.CustomizableEdges = customizableEdges5;
             guna2Transition1.SetDecoration(btnStaff, Guna.UI2.AnimatorNS.DecorationType.None);
             btnStaff.DisabledState.BorderColor = Color.DarkGray;
             btnStaff.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -146,9 +180,9 @@
             btnStaff.ForeColor = Color.White;
             btnStaff.Image = (Image)resources.GetObject("btnStaff.Image");
             btnStaff.ImageSize = new Size(37, 37);
-            btnStaff.Location = new Point(47, 474);
+            btnStaff.Location = new Point(47, 489);
             btnStaff.Name = "btnStaff";
-            btnStaff.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnStaff.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnStaff.Size = new Size(83, 68);
             btnStaff.TabIndex = 6;
             btnStaff.UseTransparentBackground = true;
@@ -163,8 +197,8 @@
             btnRevenue.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnRevenue.CheckedState.BorderColor = Color.White;
             btnRevenue.CheckedState.FillColor = Color.White;
-            btnRevenue.CheckedState.Image = (Image)resources.GetObject("resource.Image2");
-            btnRevenue.CustomizableEdges = customizableEdges5;
+            btnRevenue.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
+            btnRevenue.CustomizableEdges = customizableEdges7;
             guna2Transition1.SetDecoration(btnRevenue, Guna.UI2.AnimatorNS.DecorationType.None);
             btnRevenue.DisabledState.BorderColor = Color.DarkGray;
             btnRevenue.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -175,14 +209,14 @@
             btnRevenue.ForeColor = Color.White;
             btnRevenue.Image = (Image)resources.GetObject("btnRevenue.Image");
             btnRevenue.ImageSize = new Size(37, 37);
-            btnRevenue.Location = new Point(47, 567);
+            btnRevenue.Location = new Point(47, 594);
             btnRevenue.Name = "btnRevenue";
-            btnRevenue.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnRevenue.ShadowDecoration.CustomizableEdges = customizableEdges8;
             btnRevenue.Size = new Size(83, 68);
             btnRevenue.TabIndex = 5;
             btnRevenue.UseTransparentBackground = true;
             btnRevenue.CheckedChanged += btnHome_CheckedChanged;
-            btnRevenue.Click += btnRevenue_Click;
+            btnRevenue.Click += btnRevenue_Click_1;
             // 
             // btnBill
             // 
@@ -193,8 +227,8 @@
             btnBill.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnBill.CheckedState.BorderColor = Color.White;
             btnBill.CheckedState.FillColor = Color.White;
-            btnBill.CheckedState.Image = (Image)resources.GetObject("resource.Image3");
-            btnBill.CustomizableEdges = customizableEdges7;
+            btnBill.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
+            btnBill.CustomizableEdges = customizableEdges9;
             guna2Transition1.SetDecoration(btnBill, Guna.UI2.AnimatorNS.DecorationType.None);
             btnBill.DisabledState.BorderColor = Color.DarkGray;
             btnBill.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -205,9 +239,9 @@
             btnBill.ForeColor = Color.White;
             btnBill.Image = (Image)resources.GetObject("btnBill.Image");
             btnBill.ImageSize = new Size(37, 37);
-            btnBill.Location = new Point(41, 378);
+            btnBill.Location = new Point(41, 384);
             btnBill.Name = "btnBill";
-            btnBill.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnBill.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnBill.Size = new Size(83, 68);
             btnBill.TabIndex = 4;
             btnBill.UseTransparentBackground = true;
@@ -222,8 +256,8 @@
             btnProduct.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             btnProduct.CheckedState.BorderColor = Color.White;
             btnProduct.CheckedState.FillColor = Color.White;
-            btnProduct.CheckedState.Image = (Image)resources.GetObject("resource.Image4");
-            btnProduct.CustomizableEdges = customizableEdges9;
+            btnProduct.CheckedState.Image = (Image)resources.GetObject("resource.Image5");
+            btnProduct.CustomizableEdges = customizableEdges11;
             guna2Transition1.SetDecoration(btnProduct, Guna.UI2.AnimatorNS.DecorationType.None);
             btnProduct.DisabledState.BorderColor = Color.DarkGray;
             btnProduct.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -234,9 +268,9 @@
             btnProduct.ForeColor = Color.White;
             btnProduct.Image = (Image)resources.GetObject("btnProduct.Image");
             btnProduct.ImageSize = new Size(37, 37);
-            btnProduct.Location = new Point(41, 276);
+            btnProduct.Location = new Point(41, 279);
             btnProduct.Name = "btnProduct";
-            btnProduct.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            btnProduct.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnProduct.Size = new Size(83, 68);
             btnProduct.TabIndex = 3;
             btnProduct.UseTransparentBackground = true;
@@ -265,8 +299,8 @@
             btnHome.Checked = true;
             btnHome.CheckedState.BorderColor = Color.White;
             btnHome.CheckedState.FillColor = Color.White;
-            btnHome.CheckedState.Image = (Image)resources.GetObject("resource.Image5");
-            btnHome.CustomizableEdges = customizableEdges11;
+            btnHome.CheckedState.Image = (Image)resources.GetObject("resource.Image6");
+            btnHome.CustomizableEdges = customizableEdges13;
             guna2Transition1.SetDecoration(btnHome, Guna.UI2.AnimatorNS.DecorationType.None);
             btnHome.DisabledState.BorderColor = Color.DarkGray;
             btnHome.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -279,7 +313,7 @@
             btnHome.ImageSize = new Size(37, 37);
             btnHome.Location = new Point(41, 174);
             btnHome.Name = "btnHome";
-            btnHome.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnHome.ShadowDecoration.CustomizableEdges = customizableEdges14;
             btnHome.Size = new Size(83, 68);
             btnHome.TabIndex = 0;
             btnHome.UseTransparentBackground = true;
@@ -305,6 +339,7 @@
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(1345, 927);
             panelContainer.TabIndex = 1;
+            panelContainer.Paint += panelContainer_Paint;
             // 
             // guna2Elipse1
             // 
@@ -367,5 +402,6 @@
         private Guna.UI2.WinForms.Guna2Button btnBill;
         private Guna.UI2.WinForms.Guna2Button btnExit;
         private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
+        private Guna.UI2.WinForms.Guna2Button btnSettingListAcc;
     }
 }
