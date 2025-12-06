@@ -25,14 +25,15 @@ namespace MiniStore
         private void btnRegisterForm_Click(object sender, EventArgs e)
         {
             validateEmail();
-            bool hasErrors = string.IsNullOrWhiteSpace(txtEmail.Text);
+            bool hasErrors = string.IsNullOrWhiteSpace(txtEmail.Text) || 
+                            !string.IsNullOrWhiteSpace(lblErrorEmail.Text);
             if (hasErrors)
             {
                 MessageBox.Show("Vui lòng kiểm tra lại các thông tin đã nhập!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             string otp = generateOtp();
-            Session.Email = txtEmail.Text;
+            Session.Email = txtEmail.Text.Trim();
             Session.OTP = otp;
             Session.Expiry = DateTime.Now.AddMinutes(5);
             try
@@ -47,7 +48,7 @@ namespace MiniStore
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Gửi Emaill thất bại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gửi Email thất bại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
@@ -80,7 +81,9 @@ namespace MiniStore
             {
                 lblErrorEmail.Text = "Vui lòng nhập email!";
                 lblErrorEmail.ForeColor = Color.Red;
+                return; // Dừng lại nếu email rỗng, không kiểm tra database
             }
+            
             using (var db = new MiniStoreContext())
             {
                 var userEmail = db.TAIKHOANs.Where(UserEmail => UserEmail.EMAIL == txtEmail.Text.Trim()).FirstOrDefault();
@@ -102,20 +105,53 @@ namespace MiniStore
         }
         private void sendVerifyCode(string email, string otp)
         {
+            // LƯU Ý: Để sử dụng Gmail SMTP, bạn cần:
+            // 1. Bật 2-Step Verification cho tài khoản Gmail
+            // 2. Tạo App Password tại: https://myaccount.google.com/apppasswords
+            // 3. Sử dụng App Password (16 ký tự, không có dấu cách) thay vì mật khẩu thông thường
+            
             string appEmail = "lamthuan271019@gmail.com";
-            string appPassword = "puhz emgf wkym gmkj";
+            string appPassword = "puhzemgfwkymgmkj"; // Loại bỏ dấu cách trong App Password
+            
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(appEmail);
+            mail.From = new MailAddress(appEmail, "MiniStore - Hệ thống quản lý");
             mail.To.Add(email);
-            mail.Subject = "Mã xác thực ";
-            mail.Body = $"Xin chào!\n\nMã xác thực của bạn là: {otp}\nMã này có hiệu lực trong 5 phút.";
+            mail.Subject = "Mã xác thực đặt lại mật khẩu";
+            mail.Body = $"Xin chào!\n\nMã xác thực của bạn là: {otp}\nMã này có hiệu lực trong 5 phút.\n\nVui lòng không chia sẻ mã này với bất kỳ ai.\n\nTrân trọng,\nĐội ngũ MiniStore";
+            mail.IsBodyHtml = false;
+            mail.Priority = MailPriority.Normal;
 
-            //conect to simple mail transfer protocol
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new NetworkCredential(appEmail, appPassword);
-            smtp.EnableSsl = true;
-            smtp.Send(mail);
-
+            // Thử gửi với port 587 (TLS) trước
+            try
+            {
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(appEmail, appPassword);
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Timeout = 30000; // 30 giây timeout
+                
+                smtp.Send(mail);
+                smtp.Dispose();
+            }
+            catch
+            {
+                // Nếu port 587 thất bại, thử port 465 (SSL)
+                SmtpClient smtp465 = new SmtpClient("smtp.gmail.com", 465);
+                smtp465.UseDefaultCredentials = false;
+                smtp465.Credentials = new NetworkCredential(appEmail, appPassword);
+                smtp465.EnableSsl = true;
+                smtp465.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp465.Timeout = 30000;
+                
+                smtp465.Send(mail);
+                smtp465.Dispose();
+            }
+            finally
+            {
+                // Giải phóng tài nguyên
+                mail.Dispose();
+            }
         }
 
     }

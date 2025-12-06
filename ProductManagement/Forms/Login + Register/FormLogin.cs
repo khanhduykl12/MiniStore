@@ -31,33 +31,36 @@ namespace MiniStore
             using (var db = new MiniStoreContext())
             {
                 var user = db.TAIKHOANs.Where(username => username.USERNAME == txtUserName.Text).FirstOrDefault();
-                user.NGAYKHOA = DateOnly.FromDateTime(DateTime.Now.Date);
-                user.NGAYMOKHOA = user.NGAYKHOA.Value.AddDays(1);
+                
                 if (user == null)
                 {
                     lblErrorUserName.Text = "Tài khoản không tồn tại";
                     lblErrorUserName.ForeColor = Color.Red;
                     return;
                 }
-                else
-                {
 
-                    if (user.PASSWORD != txtPassWord.Text)
+                // Kiểm tra mật khẩu
+                if (user.PASSWORD != txtPassWord.Text)
+                {
+                    lblErrorPassword.Text = $"password không khớp tài khoản sẽ bị khóa trong {count} lần nhập sai ";
+                    lblErrorPassword.ForeColor = Color.Red;
+                    lblQuenMatKhau.Text = "Bạn quên mật khẩu hả?";
+                    lblQuenMatKhau.ForeColor = Color.Blue;
+                    
+                    if (count == 0)
                     {
-                        lblErrorPassword.Text = $"password không khớp tài khoản sẽ bị khóa trong {count} lần nhập sai ";
-                        lblErrorPassword.ForeColor = Color.Red;
-                        lblQuenMatKhau.Text = "Bạn quên mật khẩu hả?";
-                        lblQuenMatKhau.ForeColor = Color.Blue;
-                        if (count == 0)
-                        {
-                            MessageBox.Show($"Tài khoản của bạn đã bị khóa cho đến hết ngày {user.NGAYMOKHOA.Value}", "Thông báo tài khoản", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            user.TRANGTHAI = "Khóa";
-                            db.SaveChanges();
-                            return;
-                        }
-                        count--;
+                        user.NGAYKHOA = DateOnly.FromDateTime(DateTime.Now.Date);
+                        user.NGAYMOKHOA = user.NGAYKHOA.Value.AddDays(1);
+                        MessageBox.Show($"Tài khoản của bạn đã bị khóa cho đến hết ngày {user.NGAYMOKHOA.Value}", "Thông báo tài khoản", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        user.TRANGTHAI = "Khóa";
+                        db.SaveChanges();
+                        return;
                     }
+                    count--;
+                    return; // Quan trọng: return ngay khi password sai để không mở form TrangChu
                 }
+
+                // Chỉ mở TrangChu khi password đúng
                 if (user.MAROLE == "ADMIN" || user.MAROLE == "NV" || user.MAROLE == "KH")
                 {
                     TrangChu tc = new TrangChu(user.MAROLE);
@@ -65,7 +68,6 @@ namespace MiniStore
                     this.Hide();
                     tc.ShowDialog();
                     this.Show();
-
                 }
 
             }

@@ -24,17 +24,33 @@ namespace MiniStore
 
         private void btnRegisterForm_Click(object sender, EventArgs e)
         {
+            ValidatePassword(); // Kiểm tra mật khẩu hợp lệ
+            
             string newPass = txtPassword.Text.Trim();
             string xacThucPass = txtXacThucPassword.Text.Trim();
+            
+            // Kiểm tra rỗng
             if (string.IsNullOrWhiteSpace(newPass) || string.IsNullOrWhiteSpace(xacThucPass))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            
+            // Kiểm tra mật khẩu có hợp lệ không (theo các điều kiện trong ValidatePassword)
+            if (!string.IsNullOrWhiteSpace(lblErrorPass.Text))
+            {
+                MessageBox.Show("Vui lòng kiểm tra lại mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            // Kiểm tra mật khẩu khớp
             if (newPass != xacThucPass)
             {
                 lblErrorXacThucPass.Text = "Mật khẩu không khớp!";
                 lblErrorXacThucPass.ForeColor = Color.Red;
+                return;
             }
+            
             using (var db = new MiniStoreContext())
             {
                 var user = db.TAIKHOANs.FirstOrDefault(u => u.EMAIL == Session.Email);
