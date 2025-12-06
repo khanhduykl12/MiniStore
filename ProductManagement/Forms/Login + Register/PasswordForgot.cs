@@ -111,46 +111,109 @@ namespace MiniStore
             // 3. Sử dụng App Password (16 ký tự, không có dấu cách) thay vì mật khẩu thông thường
             
             string appEmail = "lamthuan271019@gmail.com";
-            string appPassword = "puhzemgfwkymgmkj"; // Loại bỏ dấu cách trong App Password
+            string appPassword = "emxp ylnx utye anlg"; // Loại bỏ dấu cách trong App Password
             
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(appEmail, "MiniStore - Hệ thống quản lý");
-            mail.To.Add(email);
-            mail.Subject = "Mã xác thực đặt lại mật khẩu";
-            mail.Body = $"Xin chào!\n\nMã xác thực của bạn là: {otp}\nMã này có hiệu lực trong 5 phút.\n\nVui lòng không chia sẻ mã này với bất kỳ ai.\n\nTrân trọng,\nĐội ngũ MiniStore";
-            mail.IsBodyHtml = false;
-            mail.Priority = MailPriority.Normal;
+            // Cấu hình bảo mật TLS/SSL
+            System.Net.ServicePointManager.SecurityProtocol = 
+                System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls13;
+            
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(appEmail, "MiniStore - Hệ thống quản lý");
+                mail.To.Add(email);
+                mail.Subject = "Mã xác thực đặt lại mật khẩu";
+                mail.Body = $"Xin chào!\n\nMã xác thực của bạn là: {otp}\nMã này có hiệu lực trong 5 phút.\n\nVui lòng không chia sẻ mã này với bất kỳ ai.\n\nTrân trọng,\nĐội ngũ MiniStore";
+                mail.IsBodyHtml = false;
+                mail.Priority = MailPriority.Normal;
 
-            // Thử gửi với port 587 (TLS) trước
-            try
-            {
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(appEmail, appPassword);
-                smtp.EnableSsl = true;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Timeout = 30000; // 30 giây timeout
-                
-                smtp.Send(mail);
-                smtp.Dispose();
-            }
-            catch
-            {
-                // Nếu port 587 thất bại, thử port 465 (SSL)
-                SmtpClient smtp465 = new SmtpClient("smtp.gmail.com", 465);
-                smtp465.UseDefaultCredentials = false;
-                smtp465.Credentials = new NetworkCredential(appEmail, appPassword);
-                smtp465.EnableSsl = true;
-                smtp465.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp465.Timeout = 30000;
-                
-                smtp465.Send(mail);
-                smtp465.Dispose();
-            }
-            finally
-            {
-                // Giải phóng tài nguyên
-                mail.Dispose();
+                bool emailSent = false;
+                Exception lastException = null;
+                string errorDetails = "";
+
+                // Thử gửi với port 587 (TLS) trước
+                try
+                {
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential(appEmail, appPassword);
+                        smtp.EnableSsl = true;
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.Timeout = 60000; // Tăng timeout lên 60 giây
+                        
+                        smtp.Send(mail);
+                        emailSent = true;
+                    }
+                }
+                catch (SmtpException smtpEx)
+                {
+                    lastException = smtpEx;
+                    errorDetails = $"SMTP Error: {smtpEx.StatusCode} - {smtpEx.Message}";
+                    
+                    // Nếu port 587 thất bại, thử port 465 (SSL)
+                    try
+                    {
+                        using (SmtpClient smtp465 = new SmtpClient("smtp.gmail.com", 465))
+                        {
+                            smtp465.UseDefaultCredentials = false;
+                            smtp465.Credentials = new NetworkCredential(appEmail, appPassword);
+                            smtp465.EnableSsl = true;
+                            smtp465.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp465.Timeout = 60000;
+                            
+                            smtp465.Send(mail);
+                            emailSent = true;
+                        }
+                    }
+                    catch (Exception ex465)
+                    {
+                        lastException = ex465;
+                        errorDetails += $"\nPort 465 Error: {ex465.Message}";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                    errorDetails = $"General Error: {ex.Message}";
+                    
+                    // Thử port 465 như fallback
+                    try
+                    {
+                        using (SmtpClient smtp465 = new SmtpClient("smtp.gmail.com", 465))
+                        {
+                            smtp465.UseDefaultCredentials = false;
+                            smtp465.Credentials = new NetworkCredential(appEmail, appPassword);
+                            smtp465.EnableSsl = true;
+                            smtp465.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp465.Timeout = 60000;
+                            
+                            smtp465.Send(mail);
+                            emailSent = true;
+                        }
+                    }
+                    catch (Exception ex465)
+                    {
+                        lastException = ex465;
+                        errorDetails += $"\nPort 465 Error: {ex465.Message}";
+                    }
+                }
+
+                // Nếu cả hai cách đều thất bại, throw exception với thông tin chi tiết
+                if (!emailSent)
+                {
+                    string fullError = $"Không thể gửi email.\n\n" +
+                                     $"Chi tiết lỗi: {errorDetails}\n\n" +
+                                     $"Nguyên nhân có thể:\n" +
+                                     $"1. App Password không đúng hoặc đã hết hạn\n" +
+                                     $"2. Chưa bật 2-Step Verification\n" +
+                                     $"3. Tài khoản Gmail bị hạn chế\n\n" +
+                                     $"Vui lòng:\n" +
+                                     $"1. Kiểm tra và tạo App Password mới tại: https://myaccount.google.com/apppasswords\n" +
+                                     $"2. Đảm bảo đã bật 2-Step Verification\n" +
+                                     $"3. Cập nhật App Password trong code (dòng 114)";
+                    
+                    throw new Exception(fullError);
+                }
             }
         }
 

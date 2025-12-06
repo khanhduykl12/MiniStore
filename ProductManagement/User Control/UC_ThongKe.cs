@@ -168,14 +168,15 @@ namespace MiniShop.User_Control
         {
             isDateSelected = true;
             validateTuNgay();
+            // Chỉ kiểm tra ngày "Từ" không được lớn hơn ngày "Đến"
             if (dateTimePickerTuNgay.Value > dateTimePickerDenNgay.Value)
             {
-                MessageBox.Show("Không được chọn ngày tương lai ở mục từ ngày",
+                MessageBox.Show("Ngày 'Từ' không được lớn hơn ngày 'Đến'!",
                                 "Lỗi ngày tháng",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
 
-                // Reset về Đến ngày
+                // Reset về ngày "Đến"
                 dateTimePickerTuNgay.Value = dateTimePickerDenNgay.Value;
             }
         }
@@ -192,14 +193,15 @@ namespace MiniShop.User_Control
         {
             isDateSelected = true;
             validateDenNgay();
+            // Chỉ kiểm tra ngày "Đến" không được nhỏ hơn ngày "Từ"
             if (dateTimePickerDenNgay.Value < dateTimePickerTuNgay.Value)
             {
-                MessageBox.Show("Không được chọn ngày của quá khứ ở mục đến ngày!",
+                MessageBox.Show("Ngày 'Đến' không được nhỏ hơn ngày 'Từ'!",
                                 "Lỗi ngày tháng",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
 
-                // Reset về Đến ngày
+                // Reset về ngày "Từ"
                 dateTimePickerDenNgay.Value = dateTimePickerTuNgay.Value;
             }
         }
