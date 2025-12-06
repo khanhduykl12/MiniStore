@@ -13,7 +13,7 @@ namespace MiniStore
         {
             InitializeComponent();
             userRole = role;
-            btnRevenue.Visible = (role == "ADMIN");
+            btnRevenue.Visible = (role == "ADMIN" || role == "NV");
 
             UC_Dashboard uC_ = new UC_Dashboard();
             AddUserControl(uC_);
@@ -51,7 +51,7 @@ namespace MiniStore
         }
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            UC_Product uC_ = new UC_Product();
+            UC_Product uC_ = new UC_Product(userRole);
             AddUserControl(uC_);
         }
 
@@ -62,7 +62,7 @@ namespace MiniStore
 
         private void btnRevenue_Click(object sender, EventArgs e)
         {
-            UC_ThongKe uc=new UC_ThongKe();
+            UC_ThongKe uc = new UC_ThongKe();
             AddUserControl(uc);
         }
     }

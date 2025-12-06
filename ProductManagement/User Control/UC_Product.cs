@@ -6,6 +6,7 @@ using MiniStore.User_Control._UC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,11 +22,12 @@ namespace MiniStore.User_Control
         private const int _pageSize = 60;
         private bool _isLoading = false;
         private List<SANPHAM> _filtered = new();
-
-        public UC_Product()
+        public string userRole { get; set; }
+        public UC_Product(string role)
         {
             InitializeComponent();
-
+            userRole = role;
+            btnKho.Visible = (role == "ADMIN" || role == "NV");
             EnableDoubleBuffer(this);
             EnableDoubleBuffer(flpProduct);
 
