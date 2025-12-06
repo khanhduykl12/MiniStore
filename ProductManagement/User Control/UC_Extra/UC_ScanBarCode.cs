@@ -35,6 +35,9 @@ namespace MiniShop.User_Control.UC_Extra
         public UC_ScanBarCode()
         {
             InitializeComponent();
+            this.Load += UC_ScanBarCode_Load;
+            btnStart.Click += btnStart_Click;
+            btnSave.Click += btnSave_Click;
         }
 
         private void UC_ScanBarCode_Load(object sender, EventArgs e)
@@ -69,12 +72,25 @@ namespace MiniShop.User_Control.UC_Extra
             {
                 Bitmap frame = (Bitmap)eventArgs.Frame.Clone();
 
-                // show hình lên PictureBox
-                picCamera.Image = frame;
+   
+                if (picCamera.InvokeRequired)
+                {
+                    picCamera.BeginInvoke(new Action(() =>
+                    {
+                        picCamera.Image?.Dispose();               
+                        picCamera.Image = (Bitmap)frame.Clone(); 
+                    }));
+                }
+                else
+                {
+                    picCamera.Image?.Dispose();
+                    picCamera.Image = (Bitmap)frame.Clone();
+                }
 
                 if (_decoded) return;
 
-                var reader = new BarcodeReader();
+                // Đọc barcode
+                var reader = new BarcodeReader();  
                 var result = reader.Decode(frame);
                 if (result != null)
                 {
@@ -89,10 +105,10 @@ namespace MiniShop.User_Control.UC_Extra
             }
             catch
             {
-                // ignore lỗi frame
+                
             }
-
         }
+
 
         private void btnStop_Click(object sender, EventArgs e)
         {
