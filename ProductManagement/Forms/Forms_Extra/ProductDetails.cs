@@ -14,6 +14,7 @@ namespace MiniStore.Forms.Forms_Extra
         private List<SANPHAM> fillsp = new();
         private string _MaSP;
         private string imageFile;
+        private int _availableOnShelf;
         public ProductDetails(string MaSP)
         {
             InitializeComponent();
@@ -146,6 +147,35 @@ namespace MiniStore.Forms.Forms_Extra
             CartService.AddItem(item);
             MessageBox.Show("Đã thêm sản phẩm vào giỏ !!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+        }
+
+        private async void numSoLuong_Click(object sender, EventArgs e)
+        {
+            var sp = await db.SANPHAMs
+                .AsNoTracking()
+                .Where(x => x.MASP == _MaSP)
+                .Select(x => new
+                {
+                    x.MALOAINavigation.TENLOAI,
+                    x.TENSP,
+                    x.DVT,
+                    x.GIABAN,
+                    SOLUONG_TRENKE = x.HANGTRUNGBAY != null ? x.HANGTRUNGBAY.SOLUONG_TRENKE : 0,
+                    x.HINH
+                }).FirstOrDefaultAsync();
+            _availableOnShelf = Convert.ToInt32(sp.SOLUONG_TRENKE);
+            numSoLuong.Maximum = _availableOnShelf +1;
+            if (numSoLuong.Value == numSoLuong.Maximum)
+            {
+                MessageBox.Show("Số lượng bạn chọn đã đạt tối đa số lượng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnAddCard.Enabled = false;
+                btnBuy.Enabled = false;
+            }
+            else
+            {
+                btnAddCard.Enabled = true;
+                btnBuy.Enabled = true;
+            }
         }
     }
 }

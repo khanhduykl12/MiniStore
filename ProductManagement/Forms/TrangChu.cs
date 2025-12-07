@@ -16,6 +16,7 @@ namespace MiniStore
             btnRevenue.Visible = (role == "ADMIN" || role == "NV");
 
             UC_Dashboard uC_ = new UC_Dashboard();
+
             AddUserControl(uC_);
             this.AutoScaleMode = AutoScaleMode.Dpi;
         }
