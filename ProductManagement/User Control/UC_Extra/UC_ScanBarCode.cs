@@ -1,5 +1,6 @@
 ﻿using AForge.Video.DirectShow;
 using MiniStore.Models;
+using MiniStore.Class;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace MiniShop.User_Control.UC_Extra
         private bool _decoded = false;
         private string _lastBarcode = string.Empty;
         private readonly MiniStoreContext db = new MiniStoreContext();
+
         public class ProductScannedEventArgs : EventArgs
         {
             public string MaSP { get; set; }
@@ -31,7 +33,9 @@ namespace MiniShop.User_Control.UC_Extra
             public string? DVT { get; set; }
             public string? Hinh { get; set; }
         }
+
         public event EventHandler<ProductScannedEventArgs> ProductScanned;
+
         public UC_ScanBarCode()
         {
             InitializeComponent();
@@ -68,57 +72,92 @@ namespace MiniShop.User_Control.UC_Extra
 
         private void VideoDevice_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
+            Bitmap frameForDecode = null;
             try
             {
-                Bitmap frame = (Bitmap)eventArgs.Frame.Clone();
+                // Clone incoming buffer once to own a safe copy
+                frameForDecode = (Bitmap)eventArgs.Frame.Clone();
 
-   
+                // Create a separate bitmap instance for display (so decode and UI use independent bitmaps)
+                Bitmap displayBmp = new Bitmap(frameForDecode);
+
+                // Safely update UI picture box with the display copy
                 if (picCamera.InvokeRequired)
                 {
                     picCamera.BeginInvoke(new Action(() =>
                     {
-                        picCamera.Image?.Dispose();               
-                        picCamera.Image = (Bitmap)frame.Clone(); 
+                        try
+                        {
+                            picCamera.Image?.Dispose();
+                            picCamera.Image = displayBmp;
+                        }
+                        catch
+                        {
+                            // If assignment fails, dispose the display bitmap to avoid leak
+                            try { displayBmp.Dispose(); } catch { /* ignore */ }
+                        }
                     }));
                 }
                 else
                 {
                     picCamera.Image?.Dispose();
-                    picCamera.Image = (Bitmap)frame.Clone();
+                    picCamera.Image = displayBmp;
                 }
 
+                // If already decoded, skip decoding
                 if (_decoded) return;
 
-                // Đọc barcode
-                var reader = new BarcodeReader();  
-                var result = reader.Decode(frame);
+                // Decode barcode from our decode-safe clone
+                var reader = new BarcodeReader();
+                var result = reader.Decode(frameForDecode);
                 if (result != null)
                 {
                     _decoded = true;
                     _lastBarcode = result.Text;
 
-                    txtBarCode.Invoke(new MethodInvoker(() =>
+                    // update text box on UI thread
+                    if (txtBarCode.InvokeRequired)
+                    {
+                        txtBarCode.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            txtBarCode.Text = _lastBarcode;
+                        }));
+                    }
+                    else
                     {
                         txtBarCode.Text = _lastBarcode;
-                    }));
+                    }
                 }
             }
             catch
             {
-                
+                // swallow frame errors to keep scanner running
+            }
+            finally
+            {
+                // Always free the decode clone; UI owns displayBmp so don't touch it here
+                frameForDecode?.Dispose();
             }
         }
-
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             StopCamera();
         }
+
         private void StopCamera()
         {
             if (_videoDevice != null && _videoDevice.IsRunning)
             {
-                _videoDevice.SignalToStop();
+                try
+                {
+                    _videoDevice.SignalToStop();
+                    _videoDevice.WaitForStop();
+                }
+                catch
+                {
+                    // ignore stop errors
+                }
                 _videoDevice.NewFrame -= VideoDevice_NewFrame;
             }
         }
@@ -132,30 +171,66 @@ namespace MiniShop.User_Control.UC_Extra
                 return;
             }
 
-            // tìm sản phẩm theo BARCODE
-            var sp = db.SANPHAMs.FirstOrDefault(x => x.BARCODE == _lastBarcode);
+            // tìm sản phẩm theo BARCODE, kèm HANGTRUNGBAY/SANPHAM để biết tồn
+            var sp = db.SANPHAMs
+                       .Where(x => x.BARCODE == _lastBarcode)
+                       .Select(x => new
+                       {
+                           x.MASP,
+                           x.TENSP,
+                           GiaBan = x.GIABAN ?? 0m,
+                           x.DVT,
+                           x.HINH,
+                           SoLuongTrenKe = x.HANGTRUNGBAY != null ? x.HANGTRUNGBAY.SOLUONG_TRENKE : 0,
+                           TonKho = x.SOLUONG
+                       })
+                       .FirstOrDefault();
+
             if (sp == null)
             {
                 MessageBox.Show("Không tìm thấy sản phẩm với barcode này.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // allow next scans
+                _decoded = false;
+                _lastBarcode = string.Empty;
+                txtBarCode.Text = "";
                 return;
             }
 
-            // Bắn event cho Form cha (ShoppingCartStaff)
+            // determine available on shelf (prefer HANGTRUNGBAY), fallback to SANPHAM.SOLUONG
+            int available = sp.SoLuongTrenKe > 0 ? sp.SoLuongTrenKe : (int)(sp.TonKho);
+
+            // consider current quantity already in cart
+            int currentlyInCart = CartService.Items.FirstOrDefault(i => i.MaSP == sp.MASP)?.SoLuong ?? 0;
+
+            if (available - currentlyInCart <= 0)
+            {
+                MessageBox.Show($"Không đủ hàng trên kệ để thêm sản phẩm \"{sp.TENSP}\". Số lượng trên kệ: {available}, đã có trong giỏ: {currentlyInCart}",
+                    "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // allow next scans
+                _decoded = false;
+                _lastBarcode = string.Empty;
+                txtBarCode.Text = "";
+                return;
+            }
+
+            // Bắn event cho Form cha (ShoppingCartStaff) với thông tin sản phẩm
             ProductScanned?.Invoke(this, new ProductScannedEventArgs
             {
                 MaSP = sp.MASP,
                 TenSP = sp.TENSP,
-                GiaBan = sp.GIABAN ?? 0,
+                GiaBan = sp.GiaBan,
                 DVT = sp.DVT,
                 Hinh = sp.HINH
             });
 
-            // Sau khi lưu xong có thể clear & cho quét tiếp
+            // Sau khi lưu xong cho phép quét tiếp
             _decoded = false;
             _lastBarcode = string.Empty;
             txtBarCode.Text = "";
         }
+
         public void CloseScanner()
         {
             StopCamera();
@@ -163,6 +238,7 @@ namespace MiniShop.User_Control.UC_Extra
             _lastBarcode = string.Empty;
             txtBarCode.Text = "";
         }
+
         protected override void OnHandleDestroyed(EventArgs e)
         {
             StopCamera();

@@ -110,7 +110,7 @@
             // guna2Separator2
             // 
             guna2Separator2.FillThickness = 2;
-            guna2Separator2.Location = new Point(18, 358);
+            guna2Separator2.Location = new Point(18, 364);
             guna2Separator2.Name = "guna2Separator2";
             guna2Separator2.Size = new Size(363, 12);
             guna2Separator2.TabIndex = 33;
@@ -118,7 +118,7 @@
             // btnStop
             // 
             btnStop.BackColor = Color.Transparent;
-            btnStop.BorderRadius = 18;
+            btnStop.BorderRadius = 15;
             btnStop.Cursor = Cursors.Hand;
             btnStop.CustomizableEdges = customizableEdges3;
             btnStop.DisabledState.BorderColor = Color.DarkGray;
@@ -128,10 +128,10 @@
             btnStop.FillColor = Color.FromArgb(255, 128, 128);
             btnStop.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStop.ForeColor = Color.Black;
-            btnStop.Location = new Point(231, 317);
+            btnStop.Location = new Point(231, 332);
             btnStop.Name = "btnStop";
             btnStop.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnStop.Size = new Size(105, 41);
+            btnStop.Size = new Size(96, 31);
             btnStop.TabIndex = 32;
             btnStop.Text = "Dừng";
             btnStop.Click += btnStop_Click;
@@ -139,7 +139,7 @@
             // btnStart
             // 
             btnStart.BackColor = Color.Transparent;
-            btnStart.BorderRadius = 18;
+            btnStart.BorderRadius = 15;
             btnStart.Cursor = Cursors.Hand;
             btnStart.CustomizableEdges = customizableEdges5;
             btnStart.DisabledState.BorderColor = Color.DarkGray;
@@ -149,10 +149,10 @@
             btnStart.FillColor = Color.ForestGreen;
             btnStart.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStart.ForeColor = Color.White;
-            btnStart.Location = new Point(61, 317);
+            btnStart.Location = new Point(61, 332);
             btnStart.Name = "btnStart";
             btnStart.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnStart.Size = new Size(105, 41);
+            btnStart.Size = new Size(93, 31);
             btnStart.TabIndex = 31;
             btnStart.Text = "Bắt Đầu";
             btnStart.Click += btnStart_Click;
@@ -160,16 +160,16 @@
             // guna2Separator1
             // 
             guna2Separator1.FillThickness = 2;
-            guna2Separator1.Location = new Point(18, 39);
+            guna2Separator1.Location = new Point(18, 38);
             guna2Separator1.Name = "guna2Separator1";
             guna2Separator1.Size = new Size(363, 12);
             guna2Separator1.TabIndex = 3;
             // 
             // picCamera
             // 
-            picCamera.Location = new Point(18, 53);
+            picCamera.Location = new Point(18, 44);
             picCamera.Name = "picCamera";
-            picCamera.Size = new Size(363, 258);
+            picCamera.Size = new Size(363, 282);
             picCamera.TabIndex = 2;
             picCamera.TabStop = false;
             // 
