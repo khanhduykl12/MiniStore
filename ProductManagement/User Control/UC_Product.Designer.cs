@@ -115,10 +115,11 @@
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             label3 = new Label();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             flpProduct = new FlowLayoutPanel();
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
+            btnFillPrice = new Guna.UI2.WinForms.Guna2Button();
+            label10 = new Label();
             guna2CustomGradientPanel1.SuspendLayout();
             menuOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -199,13 +200,13 @@
             menuOption.RenderStyle.SelectionForeColor = Color.White;
             menuOption.RenderStyle.SeparatorColor = Color.Gainsboro;
             menuOption.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            menuOption.Size = new Size(215, 84);
+            menuOption.Size = new Size(189, 56);
             // 
             // addProduct
             // 
             addProduct.Image = (Image)resources.GetObject("addProduct.Image");
             addProduct.Name = "addProduct";
-            addProduct.Size = new Size(214, 26);
+            addProduct.Size = new Size(188, 26);
             addProduct.Text = "Thêm Sản Phẩm";
             addProduct.Click += addProduct_Click;
             // 
@@ -213,7 +214,7 @@
             // 
             removeProduct.Image = (Image)resources.GetObject("removeProduct.Image");
             removeProduct.Name = "removeProduct";
-            removeProduct.Size = new Size(214, 26);
+            removeProduct.Size = new Size(188, 26);
             removeProduct.Text = "Xóa Sản Phẩm";
             // 
             // btnShopCard
@@ -379,16 +380,16 @@
             guna2CustomGradientPanel2.Location = new Point(45, 398);
             guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             guna2CustomGradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            guna2CustomGradientPanel2.Size = new Size(1114, 100);
+            guna2CustomGradientPanel2.Size = new Size(1089, 100);
             guna2CustomGradientPanel2.TabIndex = 26;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(73, 3);
+            label9.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.Location = new Point(76, 5);
             label9.Name = "label9";
-            label9.Size = new Size(113, 36);
+            label9.Size = new Size(143, 46);
             label9.TabIndex = 36;
             label9.Text = "Danh Sách \r\nLoại Sản Phẩm";
             label9.TextAlign = ContentAlignment.TopCenter;
@@ -785,29 +786,6 @@
             guna2Button4.TabIndex = 27;
             guna2Button4.UseTransparentBackground = true;
             // 
-            // guna2ComboBox1
-            // 
-            guna2ComboBox1.BackColor = Color.Transparent;
-            guna2ComboBox1.BorderColor = Color.FromArgb(11, 107, 58);
-            guna2ComboBox1.BorderRadius = 16;
-            guna2ComboBox1.CustomizableEdges = customizableEdges47;
-            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.FocusedState.FillColor = Color.FromArgb(9, 92, 50);
-            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox1.ForeColor = Color.FromArgb(11, 107, 58);
-            guna2ComboBox1.HoverState.FillColor = Color.FromArgb(9, 92, 50);
-            guna2ComboBox1.ItemHeight = 30;
-            guna2ComboBox1.Items.AddRange(new object[] { "Tất Cả Loại Hàng" });
-            guna2ComboBox1.Location = new Point(1189, 452);
-            guna2ComboBox1.Name = "guna2ComboBox1";
-            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges48;
-            guna2ComboBox1.Size = new Size(106, 36);
-            guna2ComboBox1.TabIndex = 37;
-            guna2ComboBox1.Tag = "";
-            // 
             // guna2Separator1
             // 
             guna2Separator1.FillThickness = 2;
@@ -834,16 +812,46 @@
             guna2Separator2.Size = new Size(1250, 12);
             guna2Separator2.TabIndex = 40;
             // 
+            // btnFillPrice
+            // 
+            btnFillPrice.CustomizableEdges = customizableEdges47;
+            btnFillPrice.DisabledState.BorderColor = Color.DarkGray;
+            btnFillPrice.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnFillPrice.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnFillPrice.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnFillPrice.FillColor = Color.Transparent;
+            btnFillPrice.Font = new Font("Segoe UI", 9F);
+            btnFillPrice.ForeColor = Color.White;
+            btnFillPrice.Image = (Image)resources.GetObject("btnFillPrice.Image");
+            btnFillPrice.ImageSize = new Size(63, 63);
+            btnFillPrice.Location = new Point(1192, 436);
+            btnFillPrice.Name = "btnFillPrice";
+            btnFillPrice.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            btnFillPrice.Size = new Size(63, 56);
+            btnFillPrice.TabIndex = 41;
+            btnFillPrice.Click += btnFillPrice_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Cambria", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(1166, 413);
+            label10.Name = "label10";
+            label10.Size = new Size(109, 20);
+            label10.TabIndex = 42;
+            label10.Text = "Lọc Theo Giá";
+            // 
             // UC_Product
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(label10);
+            Controls.Add(btnFillPrice);
             Controls.Add(guna2Separator2);
             Controls.Add(flpProduct);
             Controls.Add(guna2Separator1);
-            Controls.Add(guna2ComboBox1);
             Controls.Add(guna2Panel2);
             Controls.Add(guna2CustomGradientPanel2);
             Controls.Add(guna2PictureBox1);
@@ -875,6 +883,7 @@
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -910,7 +919,6 @@
         private Label label7;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
         private Label label9;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
         private FlowLayoutPanel flpProduct;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;
@@ -920,5 +928,8 @@
         private BindingSource lOAISANPHAMBindingSource;
         private Guna.UI2.WinForms.Guna2Button btnKho;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2Button btnFillPrice;
+        private Label label10;
     }
+
 }

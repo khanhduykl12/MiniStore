@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZXing;
+using ZXing.Common;
+using System.Drawing.Imaging;
+using ZXing.Windows.Compatibility;
 
 namespace MiniStore.User_Control
 {
@@ -122,7 +126,7 @@ namespace MiniStore.User_Control
 
         }
 
-      
+
         private void LoadDanhSachSanPham()
         {
             using (var db = new MiniStoreContext())
@@ -163,6 +167,48 @@ namespace MiniStore.User_Control
         private void DataGridViewKho_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnAddImageBar_Click(object sender, EventArgs e)
+        {
+            string folder = Path.Combine(Application.StartupPath, "Barcodes");
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            using (var db = new MiniStoreContext())
+            {
+                var list = db.SANPHAMs.ToList();
+
+                foreach (var sp in list)
+                {
+                    if (string.IsNullOrEmpty(sp.BARCODE))
+                        continue;
+
+                    string filePath = Path.Combine(folder, $"{sp.BARCODE}.png");
+
+                    // Generate image
+                    var writer = new BarcodeWriter
+                    {
+                        Format = BarcodeFormat.CODE_128,
+                        Options = new EncodingOptions
+                        {
+                            Width = 400,
+                            Height = 150,
+                            Margin = 1,
+                            PureBarcode = false
+                        }
+                    };
+
+                    Bitmap bmp = writer.Write(sp.BARCODE);
+                    bmp.Save(filePath, ImageFormat.Png);
+
+                    sp.BARCODE_IMAGE = filePath;
+                }
+
+                db.SaveChanges();
+            }
+
+            MessageBox.Show("Đã tạo xong toàn bộ ảnh barcode!", "Done");
         }
     }
 }

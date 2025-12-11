@@ -1,4 +1,7 @@
-﻿using MiniStore.Models;
+﻿using MiniShop.Forms.Forms_Extra;
+using MiniStore.Class;
+using MiniStore.Forms.Forms_Extra;
+using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,8 +93,65 @@ namespace MiniStore.User_Control.UC_Extra
         {
             MessageBox.Show("Đơn hàng của bạn sẽ được giao trong vài giờ tới,vui lòng chú ý điện thoại!!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             using (var db = new MiniStoreContext())
+            using (var tran = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var item in CartService.Items)
+                    {
+                        // item.MaSP, item.SoLuong lấy từ CartItem
+                        var hangTrenKe = db.HANGTRUNGBAYs
+                                           .SingleOrDefault(x => x.MASP == item.MaSP);
+
+                        if (hangTrenKe == null)
+                        {
+                            MessageBox.Show(
+                                $"Sản phẩm {item.TenSP} chưa được đưa lên kệ.",
+                                "Lỗi",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            tran.Rollback();
+                            return;
+                        }
+
+                        if (hangTrenKe.SOLUONG_TRENKE < item.SoLuong)
+                        {
+                            MessageBox.Show(
+                                $"Số lượng trên kệ của {item.TenSP} không đủ.\n" +
+                                $"Còn: {hangTrenKe.SOLUONG_TRENKE}, khách mua: {item.SoLuong}.",
+                                "Lỗi",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            tran.Rollback();
+                            return;
+                        }
+
+                        // Trừ số lượng trên kệ
+                        hangTrenKe.SOLUONG_TRENKE -= item.SoLuong;
+                    }
+
+                    db.SaveChanges();
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show("Có lỗi khi cập nhật số lượng: " + ex.Message,
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            CartService.Clear();
+            var parentForm = this.FindForm();
+            if (parentForm is ShoppingCartStaff staffForm)
             {
                 
+                staffForm.Close();
+            }
+            else if (parentForm is ShoppingCart cartForm)
+            {
+               
+                cartForm.Close();
             }
         }
     }

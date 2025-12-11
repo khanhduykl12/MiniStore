@@ -241,6 +241,7 @@
             btnBack.Size = new Size(105, 50);
             btnBack.TabIndex = 30;
             btnBack.Text = "Trở Về";
+            btnBack.Click += btnBack_Click_1;
             // 
             // btnHuy
             // 
@@ -261,6 +262,7 @@
             btnHuy.Size = new Size(133, 50);
             btnHuy.TabIndex = 31;
             btnHuy.Text = "Hủy Đơn Hàng";
+            btnHuy.Click += btnHuy_Click_1;
             // 
             // panelLeft
             // 
@@ -296,7 +298,7 @@
             guna2Panel4.Location = new Point(0, 172);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2Panel4.Size = new Size(403, 256);
+            guna2Panel4.Size = new Size(415, 256);
             guna2Panel4.TabIndex = 37;
             // 
             // radBank
@@ -405,6 +407,7 @@
             btnDatHang.Size = new Size(367, 52);
             btnDatHang.TabIndex = 34;
             btnDatHang.Text = "Đặt Hàng";
+            btnDatHang.Click += btnDatHang_Click_1;
             // 
             // guna2Separator4
             // 
@@ -428,7 +431,7 @@
             guna2Panel3.Location = new Point(0, 0);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges32;
-            guna2Panel3.Size = new Size(403, 166);
+            guna2Panel3.Size = new Size(415, 166);
             guna2Panel3.TabIndex = 39;
             // 
             // label2
@@ -500,9 +503,9 @@
             // 
             panelRight.Controls.Add(guna2Panel4);
             panelRight.Controls.Add(guna2Panel3);
-            panelRight.Location = new Point(705, 270);
+            panelRight.Location = new Point(695, 270);
             panelRight.Name = "panelRight";
-            panelRight.Size = new Size(403, 428);
+            panelRight.Size = new Size(415, 428);
             panelRight.TabIndex = 39;
             // 
             // guna2Separator3
@@ -574,7 +577,7 @@
             lblProductSum.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblProductSum.BackColor = Color.Transparent;
             lblProductSum.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblProductSum.Location = new Point(272, 51);
+            lblProductSum.Location = new Point(284, 51);
             lblProductSum.Name = "lblProductSum";
             lblProductSum.RightToLeft = RightToLeft.No;
             lblProductSum.Size = new Size(112, 20);
@@ -587,7 +590,7 @@
             lblTransport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblTransport.BackColor = Color.Transparent;
             lblTransport.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTransport.Location = new Point(272, 92);
+            lblTransport.Location = new Point(284, 92);
             lblTransport.Name = "lblTransport";
             lblTransport.RightToLeft = RightToLeft.No;
             lblTransport.Size = new Size(112, 20);
@@ -600,7 +603,7 @@
             lblDiscount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblDiscount.BackColor = Color.Transparent;
             lblDiscount.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDiscount.Location = new Point(272, 133);
+            lblDiscount.Location = new Point(284, 133);
             lblDiscount.Name = "lblDiscount";
             lblDiscount.RightToLeft = RightToLeft.No;
             lblDiscount.Size = new Size(112, 20);
@@ -613,7 +616,7 @@
             lblTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblTotal.BackColor = Color.Transparent;
             lblTotal.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotal.Location = new Point(256, 170);
+            lblTotal.Location = new Point(268, 170);
             lblTotal.Name = "lblTotal";
             lblTotal.RightToLeft = RightToLeft.No;
             lblTotal.Size = new Size(128, 25);
@@ -637,10 +640,10 @@
             guna2Panel2.Controls.Add(guna2Separator3);
             guna2Panel2.CustomizableEdges = customizableEdges33;
             guna2Panel2.FillColor = Color.White;
-            guna2Panel2.Location = new Point(705, 36);
+            guna2Panel2.Location = new Point(695, 36);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges34;
-            guna2Panel2.Size = new Size(403, 228);
+            guna2Panel2.Size = new Size(415, 228);
             guna2Panel2.TabIndex = 38;
             // 
             // ShoppingCartStaff

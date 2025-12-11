@@ -14,6 +14,7 @@ namespace MiniStore.Forms.Forms_Extra
         private List<SANPHAM> fillsp = new();
         private string _MaSP;
         private string imageFile;
+        private int _availableOnShelf;
         public ProductDetails(string MaSP)
         {
             InitializeComponent();
@@ -113,8 +114,47 @@ namespace MiniStore.Forms.Forms_Extra
                 LoaiHang = sp.TENLOAI ?? "";
                 SoLuongTrenKe = sp.SOLUONG_TRENKE;
                 ImageFile = sp.HINH;
+
+                // Initialize numeric control according to available quantity
+                _availableOnShelf = Convert.ToInt32(sp.SOLUONG_TRENKE);
+                ConfigureQuantityControl();
             }
 
+        }
+
+        private void ConfigureQuantityControl()
+        {
+            // If no stock on shelf, disable selection and buttons
+            if (_availableOnShelf <= 0)
+            {
+                numSoLuong.Minimum = 0;
+                numSoLuong.Maximum = 0;
+                numSoLuong.Value = 0;
+                numSoLuong.Enabled = false;
+                btnAddCard.Enabled = false;
+                btnBuy.Enabled = false;
+            }
+            else
+            {
+                // Allow selecting from 1 .. available
+                numSoLuong.Minimum = 1;
+                numSoLuong.Maximum = _availableOnShelf;
+                // ensure current value is within bounds
+                if (numSoLuong.Value < numSoLuong.Minimum)
+                    numSoLuong.Value = numSoLuong.Minimum;
+                if (numSoLuong.Value > numSoLuong.Maximum)
+                    numSoLuong.Value = numSoLuong.Maximum;
+
+                numSoLuong.Enabled = true;
+                btnAddCard.Enabled = true;
+                btnBuy.Enabled = true;
+
+                // If already at maximum, warn user (non-blocking)
+                if (numSoLuong.Value == numSoLuong.Maximum)
+                {
+                    MessageBox.Show("Số lượng bạn chọn đã đạt tối đa số lượng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -145,6 +185,63 @@ namespace MiniStore.Forms.Forms_Extra
             };
             CartService.AddItem(item);
             MessageBox.Show("Đã thêm sản phẩm vào giỏ !!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
+
+        private async void numSoLuong_Click(object sender, EventArgs e)
+        {
+            var sp = await db.SANPHAMs
+                .AsNoTracking()
+                .Where(x => x.MASP == _MaSP)
+                .Select(x => new
+                {
+                    SOLUONG_TRENKE = x.HANGTRUNGBAY != null ? x.HANGTRUNGBAY.SOLUONG_TRENKE : 0,
+                }).FirstOrDefaultAsync();
+
+            _availableOnShelf = sp?.SOLUONG_TRENKE ?? 0;
+
+            ConfigureQuantityControl();
+        }
+
+        private void numSoLuong_ValueChanged(object sender, EventArgs e)
+        {
+            if (_availableOnShelf <= 0)
+            {
+                numSoLuong.Value = 0;
+                btnAddCard.Enabled = false;
+                btnBuy.Enabled = false;
+                return;
+            }
+
+            if (numSoLuong.Value > numSoLuong.Maximum)
+                numSoLuong.Value = numSoLuong.Maximum;
+
+            if (numSoLuong.Value < numSoLuong.Minimum)
+                numSoLuong.Value = numSoLuong.Minimum;
+
+            btnAddCard.Enabled = numSoLuong.Value > 0;
+            btnBuy.Enabled = numSoLuong.Value > 0;
+
+            if (numSoLuong.Value == numSoLuong.Maximum)
+            {
+                MessageBox.Show("Số lượng bạn chọn đã đạt tối đa số lượng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnBuy_Click(object sender, EventArgs e)
+        {
+            if (_availableOnShelf <= 0)
+            {
+                MessageBox.Show("Sản phẩm đã hết hàng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var gia = decimal.TryParse(lblGia.Tag?.ToString(), out var v) ? v : 0m;
+            var soluong = (int)numSoLuong.Value;
+        }
+
+        private void btnExit_Click_1(object sender, EventArgs e)
+        {
             this.Close();
         }
     }
