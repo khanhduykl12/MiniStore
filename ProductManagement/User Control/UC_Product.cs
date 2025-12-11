@@ -188,5 +188,15 @@ namespace MiniStore.User_Control
             AddProductShelves ps = new AddProductShelves();
             ps.Show();
         }
+
+        private void guna2ButtonPriceFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFillPrice_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

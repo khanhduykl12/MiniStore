@@ -114,8 +114,47 @@ namespace MiniStore.Forms.Forms_Extra
                 LoaiHang = sp.TENLOAI ?? "";
                 SoLuongTrenKe = sp.SOLUONG_TRENKE;
                 ImageFile = sp.HINH;
+
+                // Initialize numeric control according to available quantity
+                _availableOnShelf = Convert.ToInt32(sp.SOLUONG_TRENKE);
+                ConfigureQuantityControl();
             }
 
+        }
+
+        private void ConfigureQuantityControl()
+        {
+            // If no stock on shelf, disable selection and buttons
+            if (_availableOnShelf <= 0)
+            {
+                numSoLuong.Minimum = 0;
+                numSoLuong.Maximum = 0;
+                numSoLuong.Value = 0;
+                numSoLuong.Enabled = false;
+                btnAddCard.Enabled = false;
+                btnBuy.Enabled = false;
+            }
+            else
+            {
+                // Allow selecting from 1 .. available
+                numSoLuong.Minimum = 1;
+                numSoLuong.Maximum = _availableOnShelf;
+                // ensure current value is within bounds
+                if (numSoLuong.Value < numSoLuong.Minimum)
+                    numSoLuong.Value = numSoLuong.Minimum;
+                if (numSoLuong.Value > numSoLuong.Maximum)
+                    numSoLuong.Value = numSoLuong.Maximum;
+
+                numSoLuong.Enabled = true;
+                btnAddCard.Enabled = true;
+                btnBuy.Enabled = true;
+
+                // If already at maximum, warn user (non-blocking)
+                if (numSoLuong.Value == numSoLuong.Maximum)
+                {
+                    MessageBox.Show("Số lượng bạn chọn đã đạt tối đa số lượng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -156,26 +195,54 @@ namespace MiniStore.Forms.Forms_Extra
                 .Where(x => x.MASP == _MaSP)
                 .Select(x => new
                 {
-                    x.MALOAINavigation.TENLOAI,
-                    x.TENSP,
-                    x.DVT,
-                    x.GIABAN,
                     SOLUONG_TRENKE = x.HANGTRUNGBAY != null ? x.HANGTRUNGBAY.SOLUONG_TRENKE : 0,
-                    x.HINH
                 }).FirstOrDefaultAsync();
-            _availableOnShelf = Convert.ToInt32(sp.SOLUONG_TRENKE);
-            numSoLuong.Maximum = _availableOnShelf +1;
+
+            _availableOnShelf = sp?.SOLUONG_TRENKE ?? 0;
+
+            ConfigureQuantityControl();
+        }
+
+        private void numSoLuong_ValueChanged(object sender, EventArgs e)
+        {
+            if (_availableOnShelf <= 0)
+            {
+                numSoLuong.Value = 0;
+                btnAddCard.Enabled = false;
+                btnBuy.Enabled = false;
+                return;
+            }
+
+            if (numSoLuong.Value > numSoLuong.Maximum)
+                numSoLuong.Value = numSoLuong.Maximum;
+
+            if (numSoLuong.Value < numSoLuong.Minimum)
+                numSoLuong.Value = numSoLuong.Minimum;
+
+            btnAddCard.Enabled = numSoLuong.Value > 0;
+            btnBuy.Enabled = numSoLuong.Value > 0;
+
             if (numSoLuong.Value == numSoLuong.Maximum)
             {
                 MessageBox.Show("Số lượng bạn chọn đã đạt tối đa số lượng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnAddCard.Enabled = false;
-                btnBuy.Enabled = false;
             }
-            else
+        }
+
+        private void btnBuy_Click(object sender, EventArgs e)
+        {
+            if (_availableOnShelf <= 0)
             {
-                btnAddCard.Enabled = true;
-                btnBuy.Enabled = true;
+                MessageBox.Show("Sản phẩm đã hết hàng trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            var gia = decimal.TryParse(lblGia.Tag?.ToString(), out var v) ? v : 0m;
+            var soluong = (int)numSoLuong.Value;
+        }
+
+        private void btnExit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

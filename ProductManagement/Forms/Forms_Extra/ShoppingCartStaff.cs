@@ -1,5 +1,6 @@
 ﻿using MiniShop.User_Control.UC_Extra;
 using MiniStore.Class;
+using MiniStore.Models;
 using MiniStore.User_Control.UC_Extra;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,30 @@ namespace MiniShop.Forms.Forms_Extra
         private UserControl _shippingOverlay;
         private UserControl _ScanbarcodeOverplay;
         private Control _cartView;
-        public ShoppingCartStaff()
+        private MiniStoreContext db = new MiniStoreContext();
+        private readonly string _userRole;
+
+        public ShoppingCartStaff() : this(UserSession.Role) { }
+
+        public ShoppingCartStaff(string role)
         {
             InitializeComponent();
             _cartView = panelCartView;
+            _userRole = role;
+
+            // disable scan button for customers
+            btnScanBarCode.Enabled = !(role == "KH");
         }
         private void ShoppingCartStaff_Load(object sender, EventArgs e)
         {
             LoadCart();
             UpdateSum();
+
+            // hide delete buttons and other admin options if role is KH
+            if (_userRole == "KH")
+            {
+               
+            }
         }
         private void LoadCart()
         {
@@ -40,6 +56,7 @@ namespace MiniShop.Forms.Forms_Extra
                     Width = flpCart.ClientSize.Width - 30
                 };
                 cart.BlindDuLieu(item);
+               
                 flpCart.Controls.Add(cart);
             }
             flpCart.ResumeLayout();
@@ -130,12 +147,104 @@ namespace MiniShop.Forms.Forms_Extra
 
         private void btnScanBarCode_Click(object sender, EventArgs e)
         {
+            if (_userRole == "KH") return; // ensure customers cannot open scanner
+
+            // If a scan overlay already exists, close and remove it first to avoid duplicate handlers
+            if (_ScanbarcodeOverplay is UC_ScanBarCode existingScan)
+            {
+                try { existingScan.CloseScanner(); } catch { }
+                panelRight.Controls.Remove(_ScanbarcodeOverplay);
+                _ScanbarcodeOverplay = null;
+            }
+
             var uc = new UC_ScanBarCode();
+            // subscribe only to ProductScanned (product info) to prevent duplicate addition
             uc.ProductScanned += OnProductScanned;
             AddUCScan(uc);
         }
+        private void Scan_OnBarcodeScanned(string barcode)
+        {
+            // This method no longer used; keep for backward compatibility if needed
+            // Tìm sản phẩm theo barcode
+            var sp = db.SANPHAMs.FirstOrDefault(x => x.BARCODE == barcode);
+
+            if (sp == null)
+            {
+                MessageBox.Show("Barcode không hợp lệ!");
+                return;
+            }
+
+            // Thêm vào CartService (shared cart) respecting available on-shelf quantity
+            var availableOnShelf = db.HANGTRUNGBAYs.Where(h => h.MASP == sp.MASP).Select(h => (int?)h.SOLUONG_TRENKE).FirstOrDefault() ?? sp.SOLUONG;
+            var existing = CartService.Items.FirstOrDefault(i => i.MaSP == sp.MASP);
+            if (existing != null)
+            {
+                if (existing.SoLuong + 1 > availableOnShelf)
+                {
+                    MessageBox.Show($"Không đủ hàng trên kệ để thêm sản phẩm \"{sp.TENSP}\".", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                existing.SoLuong += 1;
+            }
+            else
+            {
+                if (availableOnShelf <= 0)
+                {
+                    MessageBox.Show($"Sản phẩm \"{sp.TENSP}\" đã hết trên kệ.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                CartService.AddItem(new CartItem
+                {
+                    MaSP = sp.MASP,
+                    TenSP = sp.TENSP,
+                    Gia = sp.GIABAN ?? 0m,
+                    SoLuong = 1,
+                    DVT = sp.DVT,
+                    Hinh = sp.HINH
+                });
+            }
+
+            // Refresh UI
+            LoadCart();
+            UpdateSum();
+
+            // close and remove scan overlay
+            if (_ScanbarcodeOverplay is UC_ScanBarCode scan)
+            {
+                try { scan.CloseScanner(); } catch { }
+            }
+            if (_ScanbarcodeOverplay != null)
+            {
+                panelRight.Controls.Remove(_ScanbarcodeOverplay);
+                _ScanbarcodeOverplay = null;
+            }
+        }
+        private void AddToCart(string masp)
+        {
+            // Backward compatibility: add to shared CartService then refresh
+            var sp = db.SANPHAMs.Find(masp);
+            if (sp == null) return;
+
+            var existing = CartService.Items.FirstOrDefault(i => i.MaSP == masp);
+            if (existing != null)
+                existing.SoLuong += 1;
+            else
+                CartService.AddItem(new CartItem { MaSP = sp.MASP, TenSP = sp.TENSP, Gia = sp.GIABAN ?? 0m, SoLuong = 1, DVT = sp.DVT, Hinh = sp.HINH });
+
+            LoadCart();
+            UpdateSum();
+        }
         private void OnProductScanned(object sender, UC_ScanBarCode.ProductScannedEventArgs e)
         {
+            // Only accept events from the currently displayed scanner overlay
+            if (!(_ScanbarcodeOverplay is UC_ScanBarCode current) || !ReferenceEquals(sender, current))
+            {
+                return; // ignore events from previous/unknown instances
+            }
+
+            if (e == null || string.IsNullOrWhiteSpace(e.MaSP))
+                return;
+
             // Tìm trong giỏ đã có chưa
             var existing = CartService.Items.FirstOrDefault(x => x.MaSP == e.MaSP);
             if (existing != null)
@@ -161,7 +270,7 @@ namespace MiniShop.Forms.Forms_Extra
             // ẩn overlay sau khi lưu (nếu muốn quét nhiều lần thì có thể bỏ đoạn này)
             if (_ScanbarcodeOverplay is UC_ScanBarCode scan)
             {
-                scan.CloseScanner();
+                try { scan.CloseScanner(); } catch { }
             }
             if (_ScanbarcodeOverplay != null)
             {

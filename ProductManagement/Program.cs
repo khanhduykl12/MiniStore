@@ -1,4 +1,4 @@
-using MiniShop.Forms.Forms_Extra;
+﻿using MiniShop.Forms.Forms_Extra;
 
 namespace MiniStore
 {
@@ -20,11 +20,11 @@ namespace MiniStore
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                Application.Run(new TrangChu("ADMIN"));
+                Application.Run(new TrangChu("KH"));
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "L?i");
+                MessageBox.Show(ex.ToString(), "Lỗi");
             }
         }
 

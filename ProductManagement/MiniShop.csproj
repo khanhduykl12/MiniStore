@@ -41,7 +41,8 @@
     <None Remove="ImagesProduct\XucXich.png" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- Only include COMReference on full framework builds -->
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <COMReference Include="WMPLib">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -174,5 +175,14 @@
     <PackageReference Include="ZXing.Net" Version="0.16.11" />
     <PackageReference Include="QuestPDF" Version="2024.10.2" />
     <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Update the implicitly included resx to set a unique resource name -->
+    <EmbeddedResource Update="User Control\UC_Extra\UC_ShopPCart.resx">
+      <WithCulture>false</WithCulture>
+      <LogicalName>MiniStore.User_Control.UC_Extra.UC_ShopPCart.resources</LogicalName>
+      <ManifestResourceName>MiniStore.User_Control.UC_Extra.UC_ShopPCart.resources</ManifestResourceName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

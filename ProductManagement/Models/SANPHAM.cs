@@ -42,6 +42,9 @@ public partial class SANPHAM
     [Unicode(false)]
     public string? BARCODE { get; set; }
 
+    [StringLength(255)]
+    public string? BARCODE_IMAGE { get; set; }
+
     [StringLength(100)]
     public string? GHICHU { get; set; }
 

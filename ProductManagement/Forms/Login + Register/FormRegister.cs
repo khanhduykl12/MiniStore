@@ -122,7 +122,6 @@ namespace MiniStore
                     GioiTinh = gioiTinh,
                     SDT = sodienthoai,
                     DIACHI = txtAddress.Text,
-                    MAROLE = role,
                     LUONG = luong,
                     CHUCVU = chucVu,
                     DIEMTICHLUY = 0
