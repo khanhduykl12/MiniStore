@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +27,12 @@ namespace MiniStore.User_Control
         private bool _isDisposed;
         private readonly SemaphoreSlim _filterSemaphore = new SemaphoreSlim(1, 1);
         public string userRole { get; set; }
+        
+        // Live search properties
+        private CancellationTokenSource _searchCts;
+        private System.Windows.Forms.Timer _searchDebounceTimer;
+        private const int _searchDebounceMs = 300;
+        private readonly Dictionary<string, Image> _searchImageCache = new();
         public UC_Product(string role)
         {
             InitializeComponent();
@@ -36,7 +43,59 @@ namespace MiniStore.User_Control
 
             flpProduct.Scroll += FlpProduct_Scroll;
 
+            // Initialize search dropdown
+            InitializeSearchDropdown();
+            
+            // Initialize debounce timer
+            _searchDebounceTimer = new System.Windows.Forms.Timer();
+            _searchDebounceTimer.Interval = _searchDebounceMs;
+            _searchDebounceTimer.Tick += SearchDebounceTimer_Tick;
+
             this.Disposed += (s, e) => DisposeResources();
+        }
+
+        private void InitializeSearchDropdown()
+        {
+            // Setup dropdown panel
+            pnlSearchResults.Visible = false;
+            pnlSearchResults.BringToFront();
+            
+            // Setup listbox
+            lstSearchResults.DrawMode = DrawMode.OwnerDrawFixed;
+            lstSearchResults.ItemHeight = 80;
+            lstSearchResults.DrawItem += LstSearchResults_DrawItem;
+            lstSearchResults.MouseClick += LstSearchResults_MouseClick;
+            lstSearchResults.KeyDown += LstSearchResults_KeyDown;
+            
+            // Hide dropdown when clicking outside
+            this.MouseDown += (s, e) => 
+            {
+                if (pnlSearchResults.Visible && !pnlSearchResults.Bounds.Contains(e.Location))
+                {
+                    HideSearchDropdown();
+                }
+            };
+            
+            txtSearch.Leave += (s, e) => 
+            {
+                // Delay hiding to allow listbox click
+                System.Threading.Tasks.Task.Delay(200).ContinueWith(_ =>
+                {
+                    if (this.InvokeRequired)
+                        this.Invoke(new Action(() => 
+                        {
+                            var mousePos = this.PointToClient(Control.MousePosition);
+                            if (!pnlSearchResults.Bounds.Contains(mousePos) && !txtSearch.Bounds.Contains(mousePos))
+                                HideSearchDropdown();
+                        }));
+                    else
+                    {
+                        var mousePos = this.PointToClient(Control.MousePosition);
+                        if (!pnlSearchResults.Bounds.Contains(mousePos) && !txtSearch.Bounds.Contains(mousePos))
+                            HideSearchDropdown();
+                    }
+                });
+            };
         }
 
         private void EnableDoubleBuffer(Control c)
@@ -127,9 +186,17 @@ namespace MiniStore.User_Control
 
                 _page = 0;
 
-                flpProduct.SuspendLayout();
-                flpProduct.Controls.Clear();
-                flpProduct.ResumeLayout();
+                if (_isDisposed || this.IsDisposed) return;
+                try
+                {
+                    flpProduct.SuspendLayout();
+                    flpProduct.Controls.Clear();
+                    flpProduct.ResumeLayout();
+                }
+                catch (ObjectDisposedException)
+                {
+                    return;
+                }
 
                 await LoadNextPageAsync(ct);
             }
@@ -158,7 +225,7 @@ namespace MiniStore.User_Control
 
         private async Task LoadNextPageAsync(CancellationToken ct = default)
         {
-            if (_isLoading || _isDisposed || ct.IsCancellationRequested) return;
+            if (_isLoading || _isDisposed || ct.IsCancellationRequested || this.IsDisposed) return;
 
             var skip = _page * _pageSize;
             if (skip >= _filtered.Count) return;
@@ -166,29 +233,38 @@ namespace MiniStore.User_Control
             _isLoading = true;
             try
             {
-                if (ct.IsCancellationRequested || _isDisposed) return;
+                if (ct.IsCancellationRequested || _isDisposed || this.IsDisposed) return;
 
                 var chunk = _filtered.Skip(skip).Take(_pageSize).ToList();
                 _page++;
 
-                flpProduct.SuspendLayout();
-                foreach (var sp in chunk)
+                if (_isDisposed || this.IsDisposed) return;
+
+                try
                 {
-                    if (ct.IsCancellationRequested || _isDisposed) break;
-
-                    var card = new UC_ProductCart
+                    flpProduct.SuspendLayout();
+                    foreach (var sp in chunk)
                     {
-                        MaSP = sp.MASP,
-                        Title = sp.TENSP,
-                        Price = (decimal)(sp.GIABAN ?? 0),
-                        ImageFile = sp.HINH
-                    };
+                        if (ct.IsCancellationRequested || _isDisposed || this.IsDisposed) break;
 
-                    card.ProductClicked += Card_ProductClicked;
+                        var card = new UC_ProductCart
+                        {
+                            MaSP = sp.MASP,
+                            Title = sp.TENSP,
+                            Price = (decimal)(sp.GIABAN ?? 0),
+                            ImageFile = sp.HINH
+                        };
 
-                    flpProduct.Controls.Add(card);
+                        card.ProductClicked += Card_ProductClicked;
+
+                        flpProduct.Controls.Add(card);
+                    }
+                    flpProduct.ResumeLayout();
                 }
-                flpProduct.ResumeLayout();
+                catch (ObjectDisposedException)
+                {
+                    return;
+                }
             }
             finally
             {
@@ -270,26 +346,280 @@ namespace MiniStore.User_Control
 
         private void btnFillPrice_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void DisposeResources()
         {
             if (_isDisposed) return;
             _isDisposed = true;
-            
+
             try
             {
                 _loadCts?.Cancel();
                 _loadCts?.Dispose();
             }
             catch { }
-            
+
+            try
+            {
+                _searchCts?.Cancel();
+                _searchCts?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                _searchDebounceTimer?.Stop();
+                _searchDebounceTimer?.Dispose();
+            }
+            catch { }
+
             try
             {
                 _filterSemaphore?.Dispose();
             }
             catch { }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text?.Trim() ?? "";
+            
+            if (string.IsNullOrEmpty(searchText))
+            {
+                HideSearchDropdown();
+                return;
+            }
+
+            // Reset debounce timer
+            _searchDebounceTimer.Stop();
+            _searchDebounceTimer.Start();
+        }
+
+        private void SearchDebounceTimer_Tick(object sender, EventArgs e)
+        {
+            _searchDebounceTimer.Stop();
+            _ = PerformSearchAsync(txtSearch.Text?.Trim() ?? "");
+        }
+
+        private async System.Threading.Tasks.Task PerformSearchAsync(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                HideSearchDropdown();
+                return;
+            }
+
+            // Cancel previous search
+            _searchCts?.Cancel();
+            _searchCts?.Dispose();
+            _searchCts = new CancellationTokenSource();
+            var ct = _searchCts.Token;
+
+            try
+            {
+                await using var db = new MiniStoreContext();
+                
+                // Search in product name (case-insensitive)
+                var results = await db.SANPHAMs
+                    .AsNoTracking()
+                    .Where(sp => sp.TENSP != null && sp.TENSP.Contains(searchText))
+                    .OrderBy(sp => sp.TENSP)
+                    .Take(10) // Limit to 10 results for dropdown
+                    .ToListAsync(ct);
+
+                if (ct.IsCancellationRequested || _isDisposed) return;
+
+                // Update UI on main thread
+                if (this.InvokeRequired)
+                {
+                    if (!this.IsDisposed && !_isDisposed)
+                    {
+                        try
+                        {
+                            this.Invoke(new Action(() => UpdateSearchResults(results, searchText)));
+                        }
+                        catch (ObjectDisposedException) { }
+                    }
+                }
+                else
+                {
+                    if (!this.IsDisposed && !_isDisposed)
+                        UpdateSearchResults(results, searchText);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                // Search was cancelled, ignore
+            }
+            catch (Exception ex)
+            {
+                // Log error if needed
+                System.Diagnostics.Debug.WriteLine($"Search error: {ex.Message}");
+            }
+        }
+
+        private void UpdateSearchResults(List<SANPHAM> results, string searchText)
+        {
+            if (_isDisposed || this.IsDisposed) return;
+
+            if (results == null || results.Count == 0)
+            {
+                HideSearchDropdown();
+                return;
+            }
+
+            try
+            {
+                lstSearchResults.Items.Clear();
+                foreach (var product in results)
+                {
+                    lstSearchResults.Items.Add(product);
+                }
+
+                // Position dropdown below search box
+                var searchLocation = txtSearch.PointToScreen(Point.Empty);
+                var parentLocation = this.PointToClient(searchLocation);
+                
+                pnlSearchResults.Location = new Point(
+                    parentLocation.X,
+                    parentLocation.Y + txtSearch.Height + 2
+                );
+                pnlSearchResults.Width = txtSearch.Width;
+                pnlSearchResults.Height = Math.Min(results.Count * 60 + 10, 300); // Max height 300px
+                
+                pnlSearchResults.Visible = true;
+                pnlSearchResults.BringToFront();
+            }
+            catch (ObjectDisposedException)
+            {
+                // Control disposed while updating
+            }
+        }
+
+        private void HideSearchDropdown()
+        {
+            if (_isDisposed || this.IsDisposed) return;
+
+            try
+            {
+                pnlSearchResults.Visible = false;
+            }
+            catch (ObjectDisposedException)
+            {
+                // Control disposed, ignore
+            }
+        }
+
+        private void LstSearchResults_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || e.Index >= lstSearchResults.Items.Count)
+                return;
+
+            e.DrawBackground();
+
+            if (lstSearchResults.Items[e.Index] is SANPHAM product)
+            {
+                // Highlight selected item
+                if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(230, 230, 250)), e.Bounds);
+                }
+
+                // Image area
+                var imgRect = new Rectangle(e.Bounds.X + 8, e.Bounds.Y + 8, 56, 56);
+                var img = GetProductThumb(product.HINH);
+                if (img != null)
+                {
+                    e.Graphics.DrawImage(img, imgRect);
+                }
+                else
+                {
+                    // Placeholder
+                    using var pen = new Pen(Color.Silver);
+                    e.Graphics.DrawRectangle(pen, imgRect);
+                }
+
+                // Text area
+                var textRect = new Rectangle(imgRect.Right + 10, e.Bounds.Y + 8, e.Bounds.Width - imgRect.Width - 24, e.Bounds.Height - 16);
+                var name = product.TENSP ?? "";
+                const int maxChars = 40;
+                if (name.Length > maxChars)
+                    name = name.Substring(0, maxChars - 3) + "...";
+
+                using var nameFont = new Font("Segoe UI", 10F, FontStyle.Bold);
+                using var infoFont = new Font("Segoe UI", 9F, FontStyle.Regular);
+
+                var nameRect = new Rectangle(textRect.X, textRect.Y, textRect.Width, 24);
+                e.Graphics.DrawString(name, nameFont, Brushes.Black, nameRect);
+
+                string priceText = product.GIABAN.HasValue ? $"{product.GIABAN.Value:N0} ₫" : "";
+                string dvt = !string.IsNullOrWhiteSpace(product.DVT) ? $" / {product.DVT}" : "";
+                var infoText = $"{priceText}{dvt}";
+
+                var infoRect = new Rectangle(textRect.X, textRect.Y + 28, textRect.Width, 20);
+                e.Graphics.DrawString(infoText, infoFont, Brushes.DimGray, infoRect);
+            }
+
+            e.DrawFocusRectangle();
+        }
+
+        private void LstSearchResults_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lstSearchResults.SelectedItem is SANPHAM selectedProduct)
+            {
+                SelectProduct(selectedProduct);
+            }
+        }
+
+        private void LstSearchResults_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && lstSearchResults.SelectedItem is SANPHAM selectedProduct)
+            {
+                SelectProduct(selectedProduct);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                HideSearchDropdown();
+                txtSearch.Focus();
+                e.Handled = true;
+            }
+        }
+
+        private void SelectProduct(SANPHAM product)
+        {
+            HideSearchDropdown();
+            txtSearch.Text = product.TENSP ?? "";
+            
+            // Open product details
+            using var frm = new ProductDetails(product.MASP);
+            frm.ShowDialog();
+        }
+
+        private Image GetProductThumb(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName)) return null;
+
+            if (_searchImageCache.TryGetValue(fileName, out var cached))
+                return cached;
+
+            try
+            {
+                var path = Path.Combine(Application.StartupPath, "ImagesProduct", fileName);
+                if (!File.Exists(path)) return null;
+
+                // Load a small copy to avoid locking the file
+                using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var bmp = new Bitmap(fs);
+                _searchImageCache[fileName] = bmp;
+                return bmp;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

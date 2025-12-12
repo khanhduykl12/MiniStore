@@ -78,6 +78,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             btnKho = new Guna.UI2.WinForms.Guna2Button();
             menuOption = new Guna.UI2.WinForms.Guna2ContextMenuStrip();
@@ -85,7 +87,7 @@
             removeProduct = new ToolStripMenuItem();
             btnShopCard = new Guna.UI2.WinForms.Guna2Button();
             pictureBox1 = new PictureBox();
-            guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             label1 = new Label();
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             btnOption = new Guna.UI2.WinForms.Guna2Button();
@@ -120,10 +122,13 @@
             guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
             btnFillPrice = new Guna.UI2.WinForms.Guna2Button();
             label10 = new Label();
+            pnlSearchResults = new Guna.UI2.WinForms.Guna2Panel();
+            lstSearchResults = new ListBox();
             guna2CustomGradientPanel1.SuspendLayout();
             menuOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
+            pnlSearchResults.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             guna2Panel7.SuspendLayout();
             guna2Panel6.SuspendLayout();
@@ -141,7 +146,7 @@
             guna2CustomGradientPanel1.Controls.Add(btnKho);
             guna2CustomGradientPanel1.Controls.Add(btnShopCard);
             guna2CustomGradientPanel1.Controls.Add(pictureBox1);
-            guna2CustomGradientPanel1.Controls.Add(guna2TextBox1);
+            guna2CustomGradientPanel1.Controls.Add(txtSearch);
             guna2CustomGradientPanel1.Controls.Add(label1);
             guna2CustomGradientPanel1.Controls.Add(guna2Button1);
             guna2CustomGradientPanel1.Controls.Add(btnOption);
@@ -255,36 +260,37 @@
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
             // 
-            // guna2TextBox1
+            // txtSearch
             // 
-            guna2TextBox1.Animated = true;
-            guna2TextBox1.AutoRoundedCorners = true;
-            guna2TextBox1.BackColor = Color.Transparent;
-            guna2TextBox1.BorderColor = Color.White;
-            guna2TextBox1.BorderRadius = 23;
-            guna2TextBox1.BorderThickness = 0;
-            guna2TextBox1.CustomizableEdges = customizableEdges5;
-            guna2TextBox1.DefaultText = "";
-            guna2TextBox1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            guna2TextBox1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            guna2TextBox1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            guna2TextBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            guna2TextBox1.ForeColor = Color.Black;
-            guna2TextBox1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2TextBox1.IconRight = (Image)resources.GetObject("guna2TextBox1.IconRight");
-            guna2TextBox1.IconRightOffset = new Point(10, 0);
-            guna2TextBox1.Location = new Point(363, 9);
-            guna2TextBox1.Margin = new Padding(4, 5, 4, 5);
-            guna2TextBox1.Name = "guna2TextBox1";
-            guna2TextBox1.PlaceholderForeColor = Color.Gray;
-            guna2TextBox1.PlaceholderText = "Tìm kiếm sản phẩm";
-            guna2TextBox1.SelectedText = "";
-            guna2TextBox1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2TextBox1.Size = new Size(447, 48);
-            guna2TextBox1.TabIndex = 6;
-            guna2TextBox1.TextOffset = new Point(10, 0);
+            txtSearch.Animated = true;
+            txtSearch.AutoRoundedCorners = true;
+            txtSearch.BackColor = Color.Transparent;
+            txtSearch.BorderColor = Color.White;
+            txtSearch.BorderRadius = 23;
+            txtSearch.BorderThickness = 0;
+            txtSearch.CustomizableEdges = customizableEdges5;
+            txtSearch.DefaultText = "";
+            txtSearch.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            txtSearch.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            txtSearch.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearch.ForeColor = Color.Black;
+            txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.IconRight = (Image)resources.GetObject("txtSearch.IconRight");
+            txtSearch.IconRightOffset = new Point(10, 0);
+            txtSearch.Location = new Point(363, 9);
+            txtSearch.Margin = new Padding(4, 5, 4, 5);
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderForeColor = Color.Gray;
+            txtSearch.PlaceholderText = "Tìm kiếm sản phẩm";
+            txtSearch.SelectedText = "";
+            txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtSearch.Size = new Size(447, 48);
+            txtSearch.TabIndex = 6;
+            txtSearch.TextOffset = new Point(10, 0);
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // label1
             // 
@@ -841,12 +847,44 @@
             label10.TabIndex = 42;
             label10.Text = "Lọc Theo Giá";
             // 
+            // pnlSearchResults
+            // 
+            pnlSearchResults.BackColor = Color.White;
+            pnlSearchResults.BorderColor = Color.FromArgb(200, 200, 200);
+            pnlSearchResults.BorderRadius = 8;
+            pnlSearchResults.BorderThickness = 1;
+            pnlSearchResults.Controls.Add(lstSearchResults);
+            pnlSearchResults.CustomizableEdges = customizableEdges49;
+            pnlSearchResults.Location = new Point(363, 57);
+            pnlSearchResults.Name = "pnlSearchResults";
+            pnlSearchResults.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            pnlSearchResults.ShadowDecoration.Enabled = true;
+            pnlSearchResults.ShadowDecoration.Shadow = new Padding(0, 0, 0, 5);
+            pnlSearchResults.Size = new Size(447, 200);
+            pnlSearchResults.TabIndex = 43;
+            pnlSearchResults.Visible = false;
+            // 
+            // lstSearchResults
+            // 
+            lstSearchResults.BackColor = Color.White;
+            lstSearchResults.BorderStyle = BorderStyle.None;
+            lstSearchResults.Dock = DockStyle.Fill;
+            lstSearchResults.Font = new Font("Segoe UI", 9F);
+            lstSearchResults.FormattingEnabled = true;
+            lstSearchResults.IntegralHeight = false;
+            lstSearchResults.ItemHeight = 60;
+            lstSearchResults.Location = new Point(0, 0);
+            lstSearchResults.Name = "lstSearchResults";
+            lstSearchResults.Size = new Size(447, 200);
+            lstSearchResults.TabIndex = 0;
+            // 
             // UC_Product
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(pnlSearchResults);
             Controls.Add(label10);
             Controls.Add(btnFillPrice);
             Controls.Add(guna2Separator2);
@@ -865,6 +903,7 @@
             menuOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
+            pnlSearchResults.ResumeLayout(false);
             guna2CustomGradientPanel2.ResumeLayout(false);
             guna2CustomGradientPanel2.PerformLayout();
             guna2Panel7.ResumeLayout(false);
@@ -927,9 +966,11 @@
         private ToolStripMenuItem removeProduct;
         private BindingSource lOAISANPHAMBindingSource;
         private Guna.UI2.WinForms.Guna2Button btnKho;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2Button btnFillPrice;
         private Label label10;
+        private Guna.UI2.WinForms.Guna2Panel pnlSearchResults;
+        private ListBox lstSearchResults;
     }
 
 }
