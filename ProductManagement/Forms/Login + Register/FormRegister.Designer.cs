@@ -88,7 +88,7 @@
             // lblErrorEmail
             // 
             lblErrorEmail.BackColor = Color.Transparent;
-            lblErrorEmail.Location = new Point(146, 206);
+            lblErrorEmail.Location = new Point(57, 206);
             lblErrorEmail.Name = "lblErrorEmail";
             lblErrorEmail.Size = new Size(129, 22);
             lblErrorEmail.TabIndex = 13;
@@ -142,7 +142,7 @@
             txtEmail.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtEmail.Font = new Font("Segoe UI", 9F);
             txtEmail.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtEmail.Location = new Point(144, 235);
+            txtEmail.Location = new Point(55, 235);
             txtEmail.Margin = new Padding(3, 4, 3, 4);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "Địa chỉ Email";
@@ -162,7 +162,7 @@
             txtName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtName.Font = new Font("Segoe UI", 9F);
             txtName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtName.Location = new Point(144, 130);
+            txtName.Location = new Point(55, 130);
             txtName.Margin = new Padding(3, 4, 3, 4);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "Họ và tên";
@@ -192,7 +192,7 @@
             // lblErrorSDT
             // 
             lblErrorSDT.BackColor = Color.Transparent;
-            lblErrorSDT.Location = new Point(148, 302);
+            lblErrorSDT.Location = new Point(59, 302);
             lblErrorSDT.Name = "lblErrorSDT";
             lblErrorSDT.Size = new Size(129, 22);
             lblErrorSDT.TabIndex = 20;
@@ -209,7 +209,7 @@
             txtPhone.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPhone.Font = new Font("Segoe UI", 9F);
             txtPhone.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhone.Location = new Point(144, 331);
+            txtPhone.Location = new Point(55, 331);
             txtPhone.Margin = new Padding(3, 4, 3, 4);
             txtPhone.Name = "txtPhone";
             txtPhone.PlaceholderText = "Số điện thoại";
@@ -221,7 +221,7 @@
             // lblErrorXacNhanPass
             // 
             lblErrorXacNhanPass.BackColor = Color.Transparent;
-            lblErrorXacNhanPass.Location = new Point(408, 302);
+            lblErrorXacNhanPass.Location = new Point(371, 302);
             lblErrorXacNhanPass.Name = "lblErrorXacNhanPass";
             lblErrorXacNhanPass.Size = new Size(129, 22);
             lblErrorXacNhanPass.TabIndex = 28;
@@ -238,7 +238,7 @@
             txtXacNhanPass.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtXacNhanPass.Font = new Font("Segoe UI", 9F);
             txtXacNhanPass.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtXacNhanPass.Location = new Point(406, 331);
+            txtXacNhanPass.Location = new Point(369, 331);
             txtXacNhanPass.Margin = new Padding(3, 4, 3, 4);
             txtXacNhanPass.Name = "txtXacNhanPass";
             txtXacNhanPass.PasswordChar = '*';
@@ -251,7 +251,7 @@
             // lblErrorPassword
             // 
             lblErrorPassword.BackColor = Color.Transparent;
-            lblErrorPassword.Location = new Point(410, 206);
+            lblErrorPassword.Location = new Point(373, 206);
             lblErrorPassword.Name = "lblErrorPassword";
             lblErrorPassword.Size = new Size(129, 22);
             lblErrorPassword.TabIndex = 26;
@@ -260,7 +260,7 @@
             // lblErrorUserName
             // 
             lblErrorUserName.BackColor = Color.Transparent;
-            lblErrorUserName.Location = new Point(406, 101);
+            lblErrorUserName.Location = new Point(369, 101);
             lblErrorUserName.Name = "lblErrorUserName";
             lblErrorUserName.Size = new Size(129, 22);
             lblErrorUserName.TabIndex = 25;
@@ -277,7 +277,7 @@
             txtPassWord.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPassWord.Font = new Font("Segoe UI", 9F);
             txtPassWord.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPassWord.Location = new Point(408, 235);
+            txtPassWord.Location = new Point(371, 235);
             txtPassWord.Margin = new Padding(3, 4, 3, 4);
             txtPassWord.Name = "txtPassWord";
             txtPassWord.PasswordChar = '*';
@@ -298,7 +298,7 @@
             txtUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtUserName.Font = new Font("Segoe UI", 9F);
             txtUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtUserName.Location = new Point(404, 130);
+            txtUserName.Location = new Point(367, 130);
             txtUserName.Margin = new Padding(3, 4, 3, 4);
             txtUserName.Name = "txtUserName";
             txtUserName.PlaceholderText = "UserName";
@@ -357,7 +357,7 @@
             // lblErrorName
             // 
             lblErrorName.BackColor = Color.Transparent;
-            lblErrorName.Location = new Point(146, 101);
+            lblErrorName.Location = new Point(57, 101);
             lblErrorName.Name = "lblErrorName";
             lblErrorName.Size = new Size(129, 22);
             lblErrorName.TabIndex = 31;

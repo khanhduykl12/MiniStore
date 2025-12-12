@@ -29,15 +29,15 @@ namespace MiniStore
 
         private void FormRegister_Load(object sender, EventArgs e)
         {
-            lblErrorEmail.Text = string.Empty;
-            lblErrorPassword.Text = string.Empty;
-            lblErrorXacNhanPass.Text = string.Empty;
-            lblErrorEmail.Text = string.Empty;
-            lblErrorGender.Text = string.Empty;
-            lblErrorNgayThangNamSinh.Text = string.Empty;
-            lblErrorSDT.Text = string.Empty;
-            lblErrorUserName.Text = string.Empty;
-            lblErrorName.Text = string.Empty;
+            lblErrorEmail.Text = "Địa chỉ Email:";
+            lblErrorPassword.Text = "Mật khẩu:";
+            lblErrorXacNhanPass.Text = "Xác nhận mật khẩu:";
+            lblErrorGender.Text = "Giới tính:";
+            lblErrorNgayThangNamSinh.Text = "Ngày tháng năm sinh";
+            lblErrorSDT.Text = "Số điện thoại";
+            lblErrorUserName.Text = "Tên đăng nhập";
+            lblErrorName.Text = "Họ và tên";
+            lblErrorAddress.Text = "Địa chỉ";
         }
 
         private void btnRegisterForm_Click(object sender, EventArgs e)
@@ -345,16 +345,25 @@ namespace MiniStore
             {
                 lblErrorNgayThangNamSinh.Text = "Bạn chưa chọn ngày tháng năm sinh kìa";
                 lblErrorNgayThangNamSinh.ForeColor = Color.Red;
+                return;
             }
             else
             {
+                if (guna2DateTimePicker1.Value.Date > DateTime.Now.Date)
+                {
+                    lblErrorNgayThangNamSinh.Text = $"Bạn không được chọn ngày ở tương lai";
+                    lblErrorNgayThangNamSinh.ForeColor=Color.Red;
+                    return;
+                }
+
                 int age = DateTime.Now.Year - guna2DateTimePicker1.Value.Year;
                 if (age > 100)
                 {
                     lblErrorNgayThangNamSinh.Text = $"Bạn có chọn lộn không bạn: {age} à";
                     lblErrorNgayThangNamSinh.ForeColor = Color.Red;
+                    return;
                 }
-                else
+                else 
                 {
                     lblErrorNgayThangNamSinh.Text = string.Empty;
                 }
