@@ -62,13 +62,13 @@
             guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtBarcode = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            txtMaNhaCC = new Guna.UI2.WinForms.Guna2TextBox();
+            cboMaNhaCC = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtSoluong = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtGiaBan = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            txtDVT = new Guna.UI2.WinForms.Guna2TextBox();
+            cboDVT = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -76,7 +76,7 @@
             guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             txtMaSP = new Guna.UI2.WinForms.Guna2TextBox();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            txtMaLoai = new Guna.UI2.WinForms.Guna2TextBox();
+            cboMaLoai = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)pbox).BeginInit();
             SuspendLayout();
@@ -206,25 +206,22 @@
             guna2HtmlLabel10.TabIndex = 42;
             guna2HtmlLabel10.Text = "Barcode";
             // 
-            // txtMaNhaCC
+            // cboMaNhaCC
             // 
-            txtMaNhaCC.CustomizableEdges = customizableEdges13;
-            txtMaNhaCC.DefaultText = "";
-            txtMaNhaCC.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtMaNhaCC.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtMaNhaCC.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtMaNhaCC.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtMaNhaCC.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaNhaCC.Font = new Font("Segoe UI", 9F);
-            txtMaNhaCC.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaNhaCC.Location = new Point(881, 195);
-            txtMaNhaCC.Margin = new Padding(3, 4, 3, 4);
-            txtMaNhaCC.Name = "txtMaNhaCC";
-            txtMaNhaCC.PlaceholderText = "";
-            txtMaNhaCC.SelectedText = "";
-            txtMaNhaCC.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            txtMaNhaCC.Size = new Size(244, 35);
-            txtMaNhaCC.TabIndex = 41;
+            cboMaNhaCC.BackColor = Color.Transparent;
+            cboMaNhaCC.CustomizableEdges = customizableEdges13;
+            cboMaNhaCC.DrawMode = DrawMode.OwnerDrawFixed;
+            cboMaNhaCC.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboMaNhaCC.FocusedColor = Color.FromArgb(94, 148, 255);
+            cboMaNhaCC.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cboMaNhaCC.Font = new Font("Segoe UI", 9F);
+            cboMaNhaCC.ForeColor = Color.FromArgb(68, 88, 112);
+            cboMaNhaCC.ItemHeight = 30;
+            cboMaNhaCC.Location = new Point(881, 195);
+            cboMaNhaCC.Name = "cboMaNhaCC";
+            cboMaNhaCC.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            cboMaNhaCC.Size = new Size(244, 36);
+            cboMaNhaCC.TabIndex = 41;
             // 
             // guna2HtmlLabel11
             // 
@@ -293,25 +290,22 @@
             guna2HtmlLabel6.TabIndex = 36;
             guna2HtmlLabel6.Text = "Giá bán";
             // 
-            // txtDVT
+            // cboDVT
             // 
-            txtDVT.CustomizableEdges = customizableEdges19;
-            txtDVT.DefaultText = "";
-            txtDVT.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtDVT.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtDVT.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtDVT.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtDVT.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDVT.Font = new Font("Segoe UI", 9F);
-            txtDVT.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtDVT.Location = new Point(496, 282);
-            txtDVT.Margin = new Padding(3, 4, 3, 4);
-            txtDVT.Name = "txtDVT";
-            txtDVT.PlaceholderText = "";
-            txtDVT.SelectedText = "";
-            txtDVT.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            txtDVT.Size = new Size(244, 35);
-            txtDVT.TabIndex = 35;
+            cboDVT.BackColor = Color.Transparent;
+            cboDVT.CustomizableEdges = customizableEdges19;
+            cboDVT.DrawMode = DrawMode.OwnerDrawFixed;
+            cboDVT.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboDVT.FocusedColor = Color.FromArgb(94, 148, 255);
+            cboDVT.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cboDVT.Font = new Font("Segoe UI", 9F);
+            cboDVT.ForeColor = Color.FromArgb(68, 88, 112);
+            cboDVT.ItemHeight = 30;
+            cboDVT.Location = new Point(496, 282);
+            cboDVT.Name = "cboDVT";
+            cboDVT.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            cboDVT.Size = new Size(244, 36);
+            cboDVT.TabIndex = 35;
             // 
             // guna2HtmlLabel7
             // 
@@ -398,25 +392,22 @@
             guna2HtmlLabel2.TabIndex = 28;
             guna2HtmlLabel2.Text = "Mã sản phẩm";
             // 
-            // txtMaLoai
+            // cboMaLoai
             // 
-            txtMaLoai.CustomizableEdges = customizableEdges25;
-            txtMaLoai.DefaultText = "";
-            txtMaLoai.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            txtMaLoai.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            txtMaLoai.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            txtMaLoai.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            txtMaLoai.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaLoai.Font = new Font("Segoe UI", 9F);
-            txtMaLoai.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtMaLoai.Location = new Point(124, 195);
-            txtMaLoai.Margin = new Padding(3, 4, 3, 4);
-            txtMaLoai.Name = "txtMaLoai";
-            txtMaLoai.PlaceholderText = "";
-            txtMaLoai.SelectedText = "";
-            txtMaLoai.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            txtMaLoai.Size = new Size(244, 35);
-            txtMaLoai.TabIndex = 27;
+            cboMaLoai.BackColor = Color.Transparent;
+            cboMaLoai.CustomizableEdges = customizableEdges25;
+            cboMaLoai.DrawMode = DrawMode.OwnerDrawFixed;
+            cboMaLoai.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboMaLoai.FocusedColor = Color.FromArgb(94, 148, 255);
+            cboMaLoai.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            cboMaLoai.Font = new Font("Segoe UI", 9F);
+            cboMaLoai.ForeColor = Color.FromArgb(68, 88, 112);
+            cboMaLoai.ItemHeight = 30;
+            cboMaLoai.Location = new Point(124, 195);
+            cboMaLoai.Name = "cboMaLoai";
+            cboMaLoai.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            cboMaLoai.Size = new Size(244, 36);
+            cboMaLoai.TabIndex = 27;
             // 
             // guna2HtmlLabel1
             // 
@@ -439,13 +430,13 @@
             Controls.Add(guna2HtmlLabel9);
             Controls.Add(txtBarcode);
             Controls.Add(guna2HtmlLabel10);
-            Controls.Add(txtMaNhaCC);
+            Controls.Add(cboMaNhaCC);
             Controls.Add(guna2HtmlLabel11);
             Controls.Add(txtSoluong);
             Controls.Add(guna2HtmlLabel5);
             Controls.Add(txtGiaBan);
             Controls.Add(guna2HtmlLabel6);
-            Controls.Add(txtDVT);
+            Controls.Add(cboDVT);
             Controls.Add(guna2HtmlLabel7);
             Controls.Add(guna2HtmlLabel8);
             Controls.Add(guna2HtmlLabel3);
@@ -453,7 +444,7 @@
             Controls.Add(guna2HtmlLabel4);
             Controls.Add(txtMaSP);
             Controls.Add(guna2HtmlLabel2);
-            Controls.Add(txtMaLoai);
+            Controls.Add(cboMaLoai);
             Controls.Add(guna2HtmlLabel1);
             Name = "UC_NhapSanPham";
             Size = new Size(1345, 927);
@@ -472,13 +463,13 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
         private Guna.UI2.WinForms.Guna2TextBox txtBarcode;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel10;
-        private Guna.UI2.WinForms.Guna2TextBox txtMaNhaCC;
+        private Guna.UI2.WinForms.Guna2ComboBox cboMaNhaCC;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
         private Guna.UI2.WinForms.Guna2TextBox txtSoluong;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2TextBox txtGiaBan;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
-        private Guna.UI2.WinForms.Guna2TextBox txtDVT;
+        private Guna.UI2.WinForms.Guna2ComboBox cboDVT;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
@@ -486,7 +477,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2TextBox txtMaSP;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2TextBox txtMaLoai;
+        private Guna.UI2.WinForms.Guna2ComboBox cboMaLoai;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

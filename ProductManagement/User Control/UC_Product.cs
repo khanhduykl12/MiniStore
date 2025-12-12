@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,12 +17,14 @@ namespace MiniStore.User_Control
 {
     public partial class UC_Product : UserControl
     {
-        private readonly MiniStoreContext db = new MiniStoreContext();
 
         private int _page = 0;
         private const int _pageSize = 60;
         private bool _isLoading = false;
         private List<SANPHAM> _filtered = new();
+        private CancellationTokenSource _loadCts = new();
+        private bool _isDisposed;
+        private readonly SemaphoreSlim _filterSemaphore = new SemaphoreSlim(1, 1);
         public string userRole { get; set; }
         public UC_Product(string role)
         {
@@ -33,7 +36,7 @@ namespace MiniStore.User_Control
 
             flpProduct.Scroll += FlpProduct_Scroll;
 
-            this.Disposed += (s, e) => db.Dispose();
+            this.Disposed += (s, e) => DisposeResources();
         }
 
         private void EnableDoubleBuffer(Control c)
@@ -46,6 +49,8 @@ namespace MiniStore.User_Control
 
         private async void UC_Product_Load(object sender, EventArgs e)
         {
+            await using var db = new MiniStoreContext();
+
             var loais = await db.LOAISANPHAMs.AsNoTracking().ToListAsync();
             loais.Insert(0, new LOAISANPHAM { MALOAI = "ALL", TENLOAI = "Tất Cả Loại Hàng" });
 
@@ -65,30 +70,95 @@ namespace MiniStore.User_Control
 
         private async Task ApplyFilterAndResetAsync()
         {
-            var selected = cboAllCate.SelectedItem as LOAISANPHAM;
-            string maloai = selected?.MALOAI ?? "ALL";
+            if (_isDisposed) return;
 
-            IQueryable<SANPHAM> q = db.SANPHAMs.AsNoTracking();
+            // Cancel previous operation before starting new one
+            try
+            {
+                _loadCts?.Cancel();
+            }
+            catch { }
 
-            if (!string.IsNullOrEmpty(maloai) && maloai != "ALL")
-                q = q.Where(x => x.MALOAI == maloai);
+            try
+            {
+                _loadCts?.Dispose();
+            }
+            catch { }
 
-            _filtered = await q
-                .OrderBy(x => x.TENSP)
-                .ToListAsync();
+            _loadCts = new CancellationTokenSource();
+            var ct = _loadCts.Token;
 
-            _page = 0;
+            // Use semaphore to prevent concurrent execution
+            try
+            {
+                await _filterSemaphore.WaitAsync(ct);
+            }
+            catch (ObjectDisposedException)
+            {
+                // Semaphore was disposed, return immediately
+                return;
+            }
+            catch (OperationCanceledException)
+            {
+                // Operation was canceled
+                return;
+            }
 
-            flpProduct.SuspendLayout();
-            flpProduct.Controls.Clear();
-            flpProduct.ResumeLayout();
+            try
+            {
+                // Check again after acquiring semaphore
+                if (_isDisposed || ct.IsCancellationRequested) return;
 
-            await LoadNextPageAsync();
+                await using var db = new MiniStoreContext();
+
+                var selected = cboAllCate.SelectedItem as LOAISANPHAM;
+                string maloai = selected?.MALOAI ?? "ALL";
+
+                IQueryable<SANPHAM> q = db.SANPHAMs.AsNoTracking();
+
+                if (!string.IsNullOrEmpty(maloai) && maloai != "ALL")
+                    q = q.Where(x => x.MALOAI == maloai);
+
+                _filtered = await q
+                    .OrderBy(x => x.TENSP)
+                    .ToListAsync(ct);
+
+                if (ct.IsCancellationRequested || _isDisposed) return;
+
+                _page = 0;
+
+                flpProduct.SuspendLayout();
+                flpProduct.Controls.Clear();
+                flpProduct.ResumeLayout();
+
+                await LoadNextPageAsync(ct);
+            }
+            catch (OperationCanceledException)
+            {
+                // Task was canceled, this is expected when user changes filter quickly
+                // Just return silently
+                return;
+            }
+            finally
+            {
+                // Only release if semaphore hasn't been disposed
+                if (!_isDisposed)
+                {
+                    try
+                    {
+                        _filterSemaphore.Release();
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        // Semaphore was disposed, ignore
+                    }
+                }
+            }
         }
 
-        private async Task LoadNextPageAsync()
+        private async Task LoadNextPageAsync(CancellationToken ct = default)
         {
-            if (_isLoading) return;
+            if (_isLoading || _isDisposed || ct.IsCancellationRequested) return;
 
             var skip = _page * _pageSize;
             if (skip >= _filtered.Count) return;
@@ -96,12 +166,16 @@ namespace MiniStore.User_Control
             _isLoading = true;
             try
             {
+                if (ct.IsCancellationRequested || _isDisposed) return;
+
                 var chunk = _filtered.Skip(skip).Take(_pageSize).ToList();
                 _page++;
 
                 flpProduct.SuspendLayout();
                 foreach (var sp in chunk)
                 {
+                    if (ct.IsCancellationRequested || _isDisposed) break;
+
                     var card = new UC_ProductCart
                     {
                         MaSP = sp.MASP,
@@ -128,7 +202,7 @@ namespace MiniStore.User_Control
                             - (-flpProduct.AutoScrollPosition.Y + flpProduct.ClientSize.Height);
 
             if (remaining < 400)
-                await LoadNextPageAsync();
+                await LoadNextPageAsync(_loadCts.Token);
         }
 
         public async Task ReloadAllAsync()
@@ -197,6 +271,25 @@ namespace MiniStore.User_Control
         private void btnFillPrice_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void DisposeResources()
+        {
+            if (_isDisposed) return;
+            _isDisposed = true;
+            
+            try
+            {
+                _loadCts?.Cancel();
+                _loadCts?.Dispose();
+            }
+            catch { }
+            
+            try
+            {
+                _filterSemaphore?.Dispose();
+            }
+            catch { }
         }
     }
 }

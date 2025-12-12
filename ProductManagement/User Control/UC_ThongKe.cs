@@ -44,6 +44,9 @@ namespace MiniShop.User_Control
 
             using (var db = new MiniStoreContext())
             {
+                // Xóa các hóa đơn không có chi tiết trước khi lọc
+                db.DeleteEmptyInvoices();
+                
                 var query = db.HDBANs.Include(h => h.CHITIETHDBANs).Where(h => h.NGAYLAP >= tuNgay && h.NGAYLAP <= denNgay).ToList();
                 if (hasLap && hasProduct)
                 {
@@ -229,6 +232,8 @@ namespace MiniShop.User_Control
             btnExportReport.Enabled = false;
             using (var db = new MiniStoreContext())
             {
+                // Xóa các hóa đơn không có chi tiết khi load form
+                db.DeleteEmptyInvoices();
 
                 var dataNguoiLap = db.HDBANs.Select(u => u.NGUOILAP_ID).Distinct().ToList();
                 var list = db.NGUOIDUNGs.Where(u => dataNguoiLap.Contains(u.ID)).Select(u => new
@@ -392,6 +397,9 @@ namespace MiniShop.User_Control
             // 4) Load lại datasource
             using (var db = new MiniStoreContext())
             {
+                // Xóa các hóa đơn không có chi tiết khi reset
+                db.DeleteEmptyInvoices();
+                
                 var dataNguoiLap = db.HDBANs.Select(u => u.NGUOILAP_ID).Distinct().ToList();
                 var list = db.NGUOIDUNGs
                     .Where(u => dataNguoiLap.Contains(u.ID))

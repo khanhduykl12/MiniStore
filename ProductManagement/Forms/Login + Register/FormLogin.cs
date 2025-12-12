@@ -6,6 +6,7 @@ using MiniStore.User_Control;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using MiniStore.Class;
 namespace MiniStore
 {
     public partial class FormLogin : Form
@@ -219,12 +220,18 @@ namespace MiniStore
                         _validationTimer.Stop();
                     }
                     _isValidating = false;
-                    
-                    lblErrorPassword.Text = $"password không khớp tài khoản sẽ bị khóa trong {count} lần nhập sai ";
-                    lblErrorPassword.ForeColor = Color.Red;
-                    lblQuenMatKhau.Text = "Bạn quên mật khẩu hả?";
-                    lblQuenMatKhau.ForeColor = Color.Blue;
-                    
+
+                    if (count == 0)
+                    {
+                        lblErrorPassword.Text = $"Tài khỏa của bạn đã bị khóa";
+                    } else
+                    {
+                        lblErrorPassword.Text = $"password không khớp tài khoản sẽ bị khóa trong {count} lần nhập sai ";
+                        lblErrorPassword.ForeColor = Color.Red;
+                        lblQuenMatKhau.Text = "Bạn quên mật khẩu hả?";
+                        lblQuenMatKhau.ForeColor = Color.Blue;
+                    }
+
                     // Đảm bảo button đóng vẫn hoạt động sau khi sai mật khẩu
                     EnsureCloseButtonEnabled();
                     
@@ -249,17 +256,26 @@ namespace MiniStore
                 // Chỉ mở TrangChu khi password đúng
                 if (user.MAROLE == "ADMIN" || user.MAROLE == "NV" || user.MAROLE == "KH")
                 {
+                    // Lưu session đăng nhập
+                    UserSession.Role = user.MAROLE ?? string.Empty;
+                    UserSession.Username = user.USERNAME ?? string.Empty;
+                    var hoten = db.NGUOIDUNGs.FirstOrDefault(n => n.USERNAME == user.USERNAME)?.HOTEN;
+                    UserSession.FullName = !string.IsNullOrWhiteSpace(hoten) ? hoten : user.USERNAME;
+
                     TrangChu tc = new TrangChu(user.MAROLE);
                     UC_Product prod = new UC_Product(user.MAROLE);
                     this.Hide();
                     tc.ShowDialog();
                     tc.Dispose(); // Giải phóng form TrangChu
                     
-                    // Hiển thị lại form ngay lập tức
-                    this.Show();
-                    this.WindowState = FormWindowState.Normal;
-                    this.Enabled = true;
-                    this.Visible = true;
+                    // Chỉ hiển thị lại form nếu chưa được hiển thị (tránh hiển thị cả hai form)
+                    if (!this.Visible)
+                    {
+                        this.Show();
+                        this.WindowState = FormWindowState.Normal;
+                        this.Enabled = true;
+                        this.Visible = true;
+                    }
                     
                     // Đảm bảo form được activate
                     this.Activate();
