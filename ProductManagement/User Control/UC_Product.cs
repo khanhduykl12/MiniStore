@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using MiniShop.Forms.Forms_Extra;
 using MiniStore.Forms.Forms_Extra;
 using MiniStore.Models;
@@ -204,6 +205,11 @@ namespace MiniStore.User_Control
             {
                 // Task was canceled, this is expected when user changes filter quickly
                 // Just return silently
+                return;
+            }
+            catch (SqlException) when (ct.IsCancellationRequested)
+            {
+                // SQL exception due to cancellation, ignore
                 return;
             }
             finally
@@ -452,6 +458,10 @@ namespace MiniStore.User_Control
             catch (OperationCanceledException)
             {
                 // Search was cancelled, ignore
+            }
+            catch (SqlException) when (ct.IsCancellationRequested)
+            {
+                // SQL exception due to cancellation, ignore
             }
             catch (Exception ex)
             {

@@ -19,20 +19,20 @@ namespace MiniStore
         {
             InitializeComponent();
             userRole = role;
-            btnStaff.Visible = false;
+           
             btnRevenue.Visible = false;
             btnSettingListAcc.Visible = false;
 
             if (role == "ADMIN")
             {
-                btnStaff.Visible = true;
+                
                 btnRevenue.Visible = true;
                 btnSettingListAcc.Visible = true;
             }
             else if (role == "NV")
             {
                 btnRevenue.Visible = true;
-                btnRevenue.Location = btnStaff.Location;
+                
             }
 
             EnableDoubleBufferingForContainer();
