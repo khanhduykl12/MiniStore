@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MiniStore.Models;
 
 [Table("TAIKHOAN")]
-[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF724AE6EA57A", IsUnique = true)]
+[Index("EMAIL", Name = "UQ__TAIKHOAN__161CF724D4A947AF", IsUnique = true)]
 public partial class TAIKHOAN
 {
     [Key]

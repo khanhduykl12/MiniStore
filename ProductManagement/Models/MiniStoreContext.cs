@@ -22,6 +22,8 @@ public partial class MiniStoreContext : DbContext
 
     public virtual DbSet<CONGNO> CONGNOs { get; set; }
 
+    public virtual DbSet<DONHANG_LOG> DONHANG_LOGs { get; set; }
+
     public virtual DbSet<HANGTRUNGBAY> HANGTRUNGBAYs { get; set; }
 
     public virtual DbSet<HDBAN> HDBANs { get; set; }
@@ -64,7 +66,11 @@ public partial class MiniStoreContext : DbContext
     {
         modelBuilder.Entity<CHITIETHDBAN>(entity =>
         {
-            entity.ToTable("CHITIETHDBAN", tb => tb.HasTrigger("TRG_DeleteEmptyInvoice"));
+            entity.ToTable("CHITIETHDBAN", tb =>
+                {
+                    tb.HasTrigger("TRG_DeleteEmptyInvoice");
+                    tb.HasTrigger("trg_Update_SoLuongBan");
+                });
 
             entity.Property(e => e.THANHTIEN).HasComputedColumnSql("([SOLUONG]*[DONGIA])", true);
 
@@ -79,6 +85,8 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<CHITIETHDNHAP>(entity =>
         {
+            entity.ToTable("CHITIETHDNHAP", tb => tb.HasTrigger("trg_Update_SoLuongNhap"));
+
             entity.Property(e => e.THANHTIENN).HasComputedColumnSql("([SOLUONGTN]*[DONGIANHAP])", true);
 
             entity.HasOne(d => d.MAHDNHAPNavigation).WithMany(p => p.CHITIETHDNHAPs)
@@ -105,30 +113,40 @@ public partial class MiniStoreContext : DbContext
                 .HasConstraintName("FK_CONGNO_NHACUNGCAP");
         });
 
+        modelBuilder.Entity<DONHANG_LOG>(entity =>
+        {
+            entity.HasKey(e => e.ID).HasName("PK__DONHANG___3214EC27DFC9F4EE");
+
+            entity.Property(e => e.CREATED_AT).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.TRANGTHAI).HasDefaultValue("Cho_xu_ly");
+        });
+
         modelBuilder.Entity<HANGTRUNGBAY>(entity =>
         {
-            entity.HasKey(e => e.MASP).HasName("PK__HANGTRUN__60228A321E5600DD");
+            entity.HasKey(e => e.MASP).HasName("PK__HANGTRUN__60228A32F76184A6");
+
+            entity.ToTable("HANGTRUNGBAY", tb => tb.HasTrigger("trg_Update_Kho_From_Ke"));
 
             entity.Property(e => e.TRANGTHAI).HasDefaultValue("Đang bán");
 
             entity.HasOne(d => d.MASPNavigation).WithOne(p => p.HANGTRUNGBAY)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HANGTRUNGB__MASP__192BAC54");
+                .HasConstraintName("FK__HANGTRUNGB__MASP__00200768");
         });
 
         modelBuilder.Entity<HDBAN>(entity =>
         {
-            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CEDC2C0030");
+            entity.HasKey(e => e.MAHD).HasName("PK__HDBAN__603F20CED18950D4");
 
             entity.ToTable("HDBAN", tb => tb.HasTrigger("TRG_DeleteEmptyInvoice_AfterInsert"));
 
             entity.HasOne(d => d.NGUOILAP).WithMany(p => p.HDBANNGUOILAPs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HDBAN__NGUOILAP___73FA27A5");
+                .HasConstraintName("FK__HDBAN__NGUOILAP___5AEE82B9");
 
             entity.HasOne(d => d.NGUOIMUA).WithMany(p => p.HDBANNGUOIMUAs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__HDBAN__NGUOIMUA___74EE4BDE");
+                .HasConstraintName("FK__HDBAN__NGUOIMUA___5BE2A6F2");
         });
 
         modelBuilder.Entity<HDNHAP>(entity =>
@@ -142,7 +160,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<LogCTHDNhap>(entity =>
         {
-            entity.HasKey(e => e.LogID).HasName("PK__LogCTHDN__5E5499A8DAF9FF75");
+            entity.HasKey(e => e.LogID).HasName("PK__LogCTHDN__5E5499A8B74185F3");
 
             entity.Property(e => e.LoggedAt).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.THANHTIENN).HasComputedColumnSql("([SOLUONGTN]*[DONGIANHAP])", true);
@@ -150,7 +168,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<NGUOIDUNG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC27405FD515");
+            entity.HasKey(e => e.ID).HasName("PK__NGUOIDUN__3214EC2746617FBF");
 
             entity.HasOne(d => d.MAROLENavigation).WithMany(p => p.NGUOIDUNGs).HasConstraintName("FK_NGUOIDUNG_VAITRO");
 
@@ -159,7 +177,7 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<OTP_LOG>(entity =>
         {
-            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC276B579FBC");
+            entity.HasKey(e => e.ID).HasName("PK__OTP_LOG__3214EC2781E5D052");
 
             entity.Property(e => e.CREATE_AT).HasDefaultValueSql("(getdate())");
 
@@ -170,6 +188,8 @@ public partial class MiniStoreContext : DbContext
 
         modelBuilder.Entity<PHIEUTHANHTOAN>(entity =>
         {
+            entity.ToTable("PHIEUTHANHTOAN", tb => tb.HasTrigger("trg_UpdateCongNo_AfterPTT"));
+
             entity.Property(e => e.NGAYTRA).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.MACONGNONavigation).WithMany(p => p.PHIEUTHANHTOANs)
@@ -180,6 +200,8 @@ public partial class MiniStoreContext : DbContext
         modelBuilder.Entity<SANPHAM>(entity =>
         {
             entity.HasKey(e => e.MASP).HasName("PK_MASP");
+
+            entity.ToTable("SANPHAM", tb => tb.HasTrigger("trg_DeleteSanPham_KeepKe"));
 
             entity.HasOne(d => d.MALOAINavigation).WithMany(p => p.SANPHAMs)
                 .OnDelete(DeleteBehavior.ClientSetNull)
