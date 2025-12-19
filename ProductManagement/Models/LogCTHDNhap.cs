@@ -13,11 +13,9 @@ public partial class LogCTHDNhap
     public int LogID { get; set; }
 
     [StringLength(50)]
-    [Unicode(false)]
     public string? MAHDNHAP { get; set; }
 
     [StringLength(50)]
-    [Unicode(false)]
     public string? MASP { get; set; }
 
     public int? SOLUONGTN { get; set; }
@@ -25,16 +23,11 @@ public partial class LogCTHDNhap
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? DONGIANHAP { get; set; }
 
-    [Column(TypeName = "decimal(29, 2)")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal? THANHTIENN { get; set; }
 
-    [StringLength(255)]
     public string? GHICHU { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? LoggedAt { get; set; }
-
-    [StringLength(50)]
-    [Unicode(false)]
-    public string? NGUOINHAP { get; set; }
 }

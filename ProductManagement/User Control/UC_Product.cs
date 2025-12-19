@@ -57,18 +57,15 @@ namespace MiniStore.User_Control
 
         private void InitializeSearchDropdown()
         {
-            // Setup dropdown panel
             pnlSearchResults.Visible = false;
             pnlSearchResults.BringToFront();
             
-            // Setup listbox
             lstSearchResults.DrawMode = DrawMode.OwnerDrawFixed;
             lstSearchResults.ItemHeight = 80;
             lstSearchResults.DrawItem += LstSearchResults_DrawItem;
             lstSearchResults.MouseClick += LstSearchResults_MouseClick;
             lstSearchResults.KeyDown += LstSearchResults_KeyDown;
             
-            // Hide dropdown when clicking outside
             this.MouseDown += (s, e) => 
             {
                 if (pnlSearchResults.Visible && !pnlSearchResults.Bounds.Contains(e.Location))
@@ -316,27 +313,7 @@ namespace MiniStore.User_Control
 
         private void btnKho_Click(object sender, EventArgs e)
         {
-            var parent = this.Parent;
-            if (parent == null) return;
-
-            this.Visible = false;
-
-            var ucKho = new UC_Kho
-            {
-                Dock = DockStyle.Fill,
-                Tag = this
-            };
-
-
-            ucKho.Disposed += (s, ev) =>
-            {
-                if (this.IsDisposed) return;
-                this.Visible = true;
-                this.BringToFront();
-            };
-
-            parent.Controls.Add(ucKho);
-            ucKho.BringToFront();
+            
         }
 
         private void addProduct_Click(object sender, EventArgs e)

@@ -128,7 +128,6 @@
             menuOption.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
-            pnlSearchResults.SuspendLayout();
             guna2CustomGradientPanel2.SuspendLayout();
             guna2Panel7.SuspendLayout();
             guna2Panel6.SuspendLayout();
@@ -138,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)lOAISANPHAMBindingSource).BeginInit();
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
+            pnlSearchResults.SuspendLayout();
             SuspendLayout();
             // 
             // guna2CustomGradientPanel1
@@ -849,7 +849,7 @@
             // 
             // pnlSearchResults
             // 
-            pnlSearchResults.BackColor = Color.White;
+            pnlSearchResults.BackColor = Color.Transparent;
             pnlSearchResults.BorderColor = Color.FromArgb(200, 200, 200);
             pnlSearchResults.BorderRadius = 8;
             pnlSearchResults.BorderThickness = 1;
@@ -872,7 +872,6 @@
             lstSearchResults.Font = new Font("Segoe UI", 9F);
             lstSearchResults.FormattingEnabled = true;
             lstSearchResults.IntegralHeight = false;
-            lstSearchResults.ItemHeight = 60;
             lstSearchResults.Location = new Point(0, 0);
             lstSearchResults.Name = "lstSearchResults";
             lstSearchResults.Size = new Size(447, 200);
@@ -903,7 +902,6 @@
             menuOption.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
-            pnlSearchResults.ResumeLayout(false);
             guna2CustomGradientPanel2.ResumeLayout(false);
             guna2CustomGradientPanel2.PerformLayout();
             guna2Panel7.ResumeLayout(false);
@@ -921,6 +919,7 @@
             guna2Panel1.PerformLayout();
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
+            pnlSearchResults.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }

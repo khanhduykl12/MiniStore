@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MiniStore.Models;
 
 [Table("NGUOIDUNG")]
-[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12E3152E86B", IsUnique = true)]
+[Index("USERNAME", Name = "UQ__NGUOIDUN__B15BE12E467646F1", IsUnique = true)]
 public partial class NGUOIDUNG
 {
     [Key]
@@ -15,7 +15,7 @@ public partial class NGUOIDUNG
 
     [StringLength(20)]
     [Unicode(false)]
-    public string? USERNAME { get; set; }
+    public string USERNAME { get; set; } = null!;
 
     [StringLength(30)]
     public string HOTEN { get; set; } = null!;
@@ -40,8 +40,8 @@ public partial class NGUOIDUNG
 
     public int? DIEMTICHLUY { get; set; }
 
-    [StringLength(10)]
-    public string? MAROLE { get; set; }
+    [InverseProperty("MANVNavigation")]
+    public virtual ICollection<CHAMCONG> CHAMCONGs { get; set; } = new List<CHAMCONG>();
 
     [InverseProperty("NGUOILAP")]
     public virtual ICollection<HDBAN> HDBANNGUOILAPs { get; set; } = new List<HDBAN>();
@@ -49,11 +49,13 @@ public partial class NGUOIDUNG
     [InverseProperty("NGUOIMUA")]
     public virtual ICollection<HDBAN> HDBANNGUOIMUAs { get; set; } = new List<HDBAN>();
 
-    [ForeignKey("MAROLE")]
-    [InverseProperty("NGUOIDUNGs")]
-    public virtual VAITRO? MAROLENavigation { get; set; }
+    [InverseProperty("USERNAMENavigation")]
+    public virtual ICollection<HDNHAP> HDNHAPs { get; set; } = new List<HDNHAP>();
+
+    [InverseProperty("NGUOIDUNG")]
+    public virtual ICollection<LICHLAM> LICHLAMs { get; set; } = new List<LICHLAM>();
 
     [ForeignKey("USERNAME")]
     [InverseProperty("NGUOIDUNG")]
-    public virtual TAIKHOAN? USERNAMENavigation { get; set; }
+    public virtual TAIKHOAN USERNAMENavigation { get; set; } = null!;
 }

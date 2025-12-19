@@ -16,9 +16,6 @@ public partial class HANGTRUNGBAY
 
     public int SOLUONG_TRENKE { get; set; }
 
-    [StringLength(20)]
-    public string? TRANGTHAI { get; set; }
-
     [ForeignKey("MASP")]
     [InverseProperty("HANGTRUNGBAY")]
     public virtual SANPHAM MASPNavigation { get; set; } = null!;

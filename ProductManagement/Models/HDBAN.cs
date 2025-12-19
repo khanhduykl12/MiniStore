@@ -14,7 +14,7 @@ public partial class HDBAN
     [Unicode(false)]
     public string MAHD { get; set; } = null!;
 
-    public DateOnly NGAYLAP { get; set; }
+    public DateTime NGAYLAP { get; set; }
 
     public int NGUOILAP_ID { get; set; }
 

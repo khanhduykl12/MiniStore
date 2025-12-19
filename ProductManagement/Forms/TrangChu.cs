@@ -161,7 +161,7 @@ namespace MiniStore
 
         private void btnRevenue_Click_1(object sender, EventArgs e)
         {
-            ShowControl("revenue", () => new UC_ThongKe());
+            
         }
     }
 }

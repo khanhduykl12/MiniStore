@@ -41,7 +41,6 @@ namespace MiniStore.User_Control.UC_Extra
             cboQuan.SelectedIndexChanged += (_, __) => AddPhuong();
             cboQuan.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPhuong.DropDownStyle = ComboBoxStyle.DropDownList;
-
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -88,70 +87,103 @@ namespace MiniStore.User_Control.UC_Extra
         {
 
         }
+        private string GenerateMAHD(MiniStoreContext db)
+        {
+            string today = DateTime.Now.ToString("yyMMdd"); // 251219
+            string prefix = "HD" + today;
+
+            // Lấy số HD hôm nay
+            int countToday = db.HDBANs
+                .Count(x => x.MAHD.StartsWith(prefix));
+
+            // tăng số thứ tự
+            int stt = countToday + 1;
+
+            // HD25121901
+            return prefix + stt.ToString("D2");
+        }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Đơn hàng của bạn sẽ được giao trong vài giờ tới,vui lòng chú ý điện thoại!!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             using (var db = new MiniStoreContext())
             using (var tran = db.Database.BeginTransaction())
             {
                 try
                 {
+                    string mahd = GenerateMAHD(db);
+
+
+                    // 2️⃣ Insert HDBAN
+                    var hd = new HDBAN
+                    {
+                        MAHD = mahd,
+                        NGAYLAP = DateTime.Now,
+                        NGUOILAP_ID = 2,
+                        NGUOIMUA_ID = 6,
+                        GHICHU = "TEST"
+                    };
+
+
+                    db.HDBANs.Add(hd);
+                    db.SaveChanges();
+                    MessageBox.Show(
+                        "MAHD trong DB: " +
+                        db.HDBANs.Any(x => x.MAHD == hd.MAHD)
+                    );
+
+                    // 3️⃣ Duyệt giỏ hàng
                     foreach (var item in CartService.Items)
                     {
-                        // item.MaSP, item.SoLuong lấy từ CartItem
+                        // kiểm tra tồn trên kệ
                         var hangTrenKe = db.HANGTRUNGBAYs
                                            .SingleOrDefault(x => x.MASP == item.MaSP);
 
                         if (hangTrenKe == null)
-                        {
-                            MessageBox.Show(
-                                $"Sản phẩm {item.TenSP} chưa được đưa lên kệ.",
-                                "Lỗi",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                            tran.Rollback();
-                            return;
-                        }
+                            throw new Exception($"Sản phẩm {item.TenSP} chưa có trên kệ.");
 
                         if (hangTrenKe.SOLUONG_TRENKE < item.SoLuong)
-                        {
-                            MessageBox.Show(
-                                $"Số lượng trên kệ của {item.TenSP} không đủ.\n" +
-                                $"Còn: {hangTrenKe.SOLUONG_TRENKE}, khách mua: {item.SoLuong}.",
-                                "Lỗi",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                            tran.Rollback();
-                            return;
-                        }
+                            throw new Exception($"Không đủ hàng cho {item.TenSP}");
 
-                        // Trừ số lượng trên kệ
+                        var ct = new CHITIETHDBAN
+                        {
+                            MAHD = hd.MAHD,          
+                            MASP = item.MaSP,
+                            SOLUONG = item.SoLuong,
+                            DONGIA = item.Gia,
+                            THANHTIEN = item.SoLuong * item.Gia,
+                            MAHDNavigation = hd     
+                        };
+
+
+                        db.CHITIETHDBANs.Add(ct);
+
+                        // 5️⃣ Trừ số lượng trên kệ
                         hangTrenKe.SOLUONG_TRENKE -= item.SoLuong;
                     }
 
+                    // 6️⃣ Lưu & commit
                     db.SaveChanges();
                     tran.Commit();
+
+                    MessageBox.Show("Đặt hàng thành công!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    CartService.Clear();
+
+                    // đóng form
+                    FindForm()?.Close();
                 }
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    MessageBox.Show("Có lỗi khi cập nhật số lượng: " + ex.Message,
-                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+
+                    MessageBox.Show(
+                        ex.Message + "\n\nINNER:\n" + ex.InnerException?.Message,
+                        "Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                 }
-            }
-            CartService.Clear();
-            var parentForm = this.FindForm();
-            if (parentForm is ShoppingCartStaff staffForm)
-            {
-                
-                staffForm.Close();
-            }
-            else if (parentForm is ShoppingCart cartForm)
-            {
-               
-                cartForm.Close();
             }
         }
     }

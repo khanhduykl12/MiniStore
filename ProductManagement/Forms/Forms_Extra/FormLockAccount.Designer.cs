@@ -22,155 +22,155 @@ namespace MiniShop.Forms_Extra
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.rdbTemporary = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.rdbPermanent = new Guna.UI2.WinForms.Guna2RadioButton();
-            this.numDays = new Guna.UI2.WinForms.Guna2NumericUpDown();
-            this.lblDays = new System.Windows.Forms.Label();
-            this.btnConfirm = new Guna.UI2.WinForms.Guna2Button();
-            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numDays)).BeginInit();
-            this.SuspendLayout();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            lblTitle = new Label();
+            rdbTemporary = new Guna.UI2.WinForms.Guna2RadioButton();
+            rdbPermanent = new Guna.UI2.WinForms.Guna2RadioButton();
+            numDays = new Guna.UI2.WinForms.Guna2NumericUpDown();
+            lblDays = new Label();
+            btnConfirm = new Guna.UI2.WinForms.Guna2Button();
+            btnCancel = new Guna.UI2.WinForms.Guna2Button();
+            ((System.ComponentModel.ISupportInitialize)numDays).BeginInit();
+            SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Inter", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(20, 20);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(300, 28);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Chọn loại khóa tài khoản";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold);
+            lblTitle.Location = new Point(20, 20);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(299, 29);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Chọn loại khóa tài khoản";
             // 
             // rdbTemporary
             // 
-            this.rdbTemporary.AutoSize = true;
-            this.rdbTemporary.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdbTemporary.CheckedState.BorderThickness = 0;
-            this.rdbTemporary.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdbTemporary.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.rdbTemporary.Font = new System.Drawing.Font("Inter", 12F);
-            this.rdbTemporary.Location = new System.Drawing.Point(25, 70);
-            this.rdbTemporary.Name = "rdbTemporary";
-            this.rdbTemporary.Size = new System.Drawing.Size(152, 28);
-            this.rdbTemporary.TabIndex = 1;
-            this.rdbTemporary.Text = "Khóa tạm thời";
-            this.rdbTemporary.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.rdbTemporary.UncheckedState.BorderThickness = 2;
-            this.rdbTemporary.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.rdbTemporary.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            this.rdbTemporary.CheckedChanged += new System.EventHandler(this.rdbTemporary_CheckedChanged);
+            rdbTemporary.AutoSize = true;
+            rdbTemporary.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            rdbTemporary.CheckedState.BorderThickness = 0;
+            rdbTemporary.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            rdbTemporary.CheckedState.InnerColor = Color.White;
+            rdbTemporary.Font = new Font("Microsoft Sans Serif", 12F);
+            rdbTemporary.Location = new Point(25, 70);
+            rdbTemporary.Name = "rdbTemporary";
+            rdbTemporary.Size = new Size(153, 29);
+            rdbTemporary.TabIndex = 1;
+            rdbTemporary.Text = "Khóa tạm thời";
+            rdbTemporary.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            rdbTemporary.UncheckedState.BorderThickness = 2;
+            rdbTemporary.UncheckedState.FillColor = Color.Transparent;
+            rdbTemporary.UncheckedState.InnerColor = Color.Transparent;
+            rdbTemporary.CheckedChanged += rdbTemporary_CheckedChanged;
             // 
             // rdbPermanent
             // 
-            this.rdbPermanent.AutoSize = true;
-            this.rdbPermanent.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdbPermanent.CheckedState.BorderThickness = 0;
-            this.rdbPermanent.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.rdbPermanent.CheckedState.InnerColor = System.Drawing.Color.White;
-            this.rdbPermanent.Font = new System.Drawing.Font("Inter", 12F);
-            this.rdbPermanent.Location = new System.Drawing.Point(25, 120);
-            this.rdbPermanent.Name = "rdbPermanent";
-            this.rdbPermanent.Size = new System.Drawing.Size(160, 28);
-            this.rdbPermanent.TabIndex = 2;
-            this.rdbPermanent.Text = "Khóa vĩnh viễn";
-            this.rdbPermanent.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.rdbPermanent.UncheckedState.BorderThickness = 2;
-            this.rdbPermanent.UncheckedState.FillColor = System.Drawing.Color.Transparent;
-            this.rdbPermanent.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
-            this.rdbPermanent.CheckedChanged += new System.EventHandler(this.rdbPermanent_CheckedChanged);
+            rdbPermanent.AutoSize = true;
+            rdbPermanent.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            rdbPermanent.CheckedState.BorderThickness = 0;
+            rdbPermanent.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            rdbPermanent.CheckedState.InnerColor = Color.White;
+            rdbPermanent.Font = new Font("Microsoft Sans Serif", 12F);
+            rdbPermanent.Location = new Point(25, 120);
+            rdbPermanent.Name = "rdbPermanent";
+            rdbPermanent.Size = new Size(162, 29);
+            rdbPermanent.TabIndex = 2;
+            rdbPermanent.Text = "Khóa vĩnh viễn";
+            rdbPermanent.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            rdbPermanent.UncheckedState.BorderThickness = 2;
+            rdbPermanent.UncheckedState.FillColor = Color.Transparent;
+            rdbPermanent.UncheckedState.InnerColor = Color.Transparent;
+            rdbPermanent.CheckedChanged += rdbPermanent_CheckedChanged;
             // 
             // numDays
             // 
-            this.numDays.BackColor = System.Drawing.Color.Transparent;
-            this.numDays.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.numDays.Font = new System.Drawing.Font("Inter", 12F);
-            this.numDays.Location = new System.Drawing.Point(200, 70);
-            this.numDays.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
-            this.numDays.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numDays.Name = "numDays";
-            this.numDays.Size = new System.Drawing.Size(100, 36);
-            this.numDays.TabIndex = 3;
-            this.numDays.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numDays.BackColor = Color.Transparent;
+            numDays.Cursor = Cursors.IBeam;
+            numDays.CustomizableEdges = customizableEdges1;
+            numDays.Font = new Font("Microsoft Sans Serif", 12F);
+            numDays.Location = new Point(200, 70);
+            numDays.Margin = new Padding(3, 4, 3, 4);
+            numDays.Maximum = new decimal(new int[] { 365, 0, 0, 0 });
+            numDays.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numDays.Name = "numDays";
+            numDays.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            numDays.Size = new Size(100, 36);
+            numDays.TabIndex = 3;
+            numDays.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblDays
             // 
-            this.lblDays.AutoSize = true;
-            this.lblDays.Font = new System.Drawing.Font("Inter", 10F);
-            this.lblDays.Location = new System.Drawing.Point(310, 78);
-            this.lblDays.Name = "lblDays";
-            this.lblDays.Size = new System.Drawing.Size(50, 20);
-            this.lblDays.TabIndex = 4;
-            this.lblDays.Text = "ngày";
+            lblDays.AutoSize = true;
+            lblDays.Font = new Font("Microsoft Sans Serif", 10F);
+            lblDays.Location = new Point(310, 78);
+            lblDays.Name = "lblDays";
+            lblDays.Size = new Size(44, 20);
+            lblDays.TabIndex = 4;
+            lblDays.Text = "ngày";
             // 
             // btnConfirm
             // 
-            this.btnConfirm.BorderRadius = 8;
-            this.btnConfirm.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnConfirm.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnConfirm.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnConfirm.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnConfirm.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.btnConfirm.Font = new System.Drawing.Font("Inter", 12F, System.Drawing.FontStyle.Bold);
-            this.btnConfirm.ForeColor = System.Drawing.Color.White;
-            this.btnConfirm.Location = new System.Drawing.Point(200, 180);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(120, 40);
-            this.btnConfirm.TabIndex = 5;
-            this.btnConfirm.Text = "Xác nhận";
-            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            btnConfirm.BorderRadius = 8;
+            btnConfirm.CustomizableEdges = customizableEdges3;
+            btnConfirm.DisabledState.BorderColor = Color.DarkGray;
+            btnConfirm.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnConfirm.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnConfirm.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnConfirm.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnConfirm.ForeColor = Color.White;
+            btnConfirm.Location = new Point(200, 180);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnConfirm.Size = new Size(139, 40);
+            btnConfirm.TabIndex = 5;
+            btnConfirm.Text = "Xác nhận";
+            btnConfirm.Click += btnConfirm_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.BorderRadius = 8;
-            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.btnCancel.Font = new System.Drawing.Font("Inter", 12F, System.Drawing.FontStyle.Bold);
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(50, 180);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(120, 40);
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "Hủy";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            btnCancel.BorderRadius = 8;
+            btnCancel.CustomizableEdges = customizableEdges5;
+            btnCancel.DisabledState.BorderColor = Color.DarkGray;
+            btnCancel.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnCancel.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnCancel.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnCancel.FillColor = Color.FromArgb(220, 53, 69);
+            btnCancel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(50, 180);
+            btnCancel.Name = "btnCancel";
+            btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnCancel.Size = new Size(120, 40);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "Hủy";
+            btnCancel.Click += btnCancel_Click;
             // 
             // FormLockAccount
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 250);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnConfirm);
-            this.Controls.Add(this.lblDays);
-            this.Controls.Add(this.numDays);
-            this.Controls.Add(this.rdbPermanent);
-            this.Controls.Add(this.rdbTemporary);
-            this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormLockAccount";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Khóa tài khoản";
-            this.Load += new System.EventHandler(this.FormLockAccount_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numDays)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(400, 250);
+            Controls.Add(btnCancel);
+            Controls.Add(btnConfirm);
+            Controls.Add(lblDays);
+            Controls.Add(numDays);
+            Controls.Add(rdbPermanent);
+            Controls.Add(rdbTemporary);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FormLockAccount";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Khóa tài khoản";
+            Load += FormLockAccount_Load;
+            ((System.ComponentModel.ISupportInitialize)numDays).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
